@@ -1,15 +1,19 @@
 @extends('layouts.app')
 @section('title', 'Perfil')
 @section('main')
+    <h2 class="my-6 text-2xl font-semibold text-gray-700 dark:text-gray-200">Perfil</h2>
     <div class="flex items-center min-h-screen p-6 bg-gray-50 dark:bg-gray-900">
         <div class="flex-1 h-full max-w-4xl mx-auto overflow-hidden bg-white rounded-lg shadow-xl dark:bg-gray-800">
             <div class="flex flex-col overflow-y-auto md:flex-row">
                 <div class="h-32 md:h-auto md:w-1/2">
-                    <img src="https://source.unsplash.com/MP0IUfwrn0A" alt="Office" class="object-cover w-full h-full" aria-hidden="true" />
+                    <img src="https://source.unsplash.com/MP0IUfwrn0A" alt="⚠️ Error de carga" class="object-cover w-full h-full" aria-hidden="true" />
                 </div>
                 <div class="flex items-center justify-center p-6 sm:p-12 md:w-1/2">
                     <div class="w-full">
-                        <h1 class="mb-4 text-xl text-center font-semibold text-gray-700 dark:text-gray-200">Perfil</h1>
+                        <h1 class="flex mb-4 text-xl justify-center font-semibold text-gray-700 dark:text-gray-200">
+                            Perfil
+                            <span class="w-4 h-4 bg-green-600 rounded-full ml-2"></span>
+                        </h1>
                         <span class="text-gray-500 text-sm">Datos personales</span>
                         <hr class="mb-4 border-gray-300 dark:border-gray-500" />
                         <label class="block text-sm">

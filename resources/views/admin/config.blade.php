@@ -1,11 +1,12 @@
 @extends('layouts.app')
 @section('title', 'Configuraciones')
 @section('main')
+    <h2 class="my-6 text-2xl font-semibold text-gray-700 dark:text-gray-200">Configuraciones</h2>
     <div class="flex items-center min-h-screen p-6 bg-gray-50 dark:bg-gray-900">
         <div class="flex-1 h-full max-w-4xl mx-auto overflow-hidden bg-white rounded-lg shadow-xl dark:bg-gray-800">
             <div class="flex flex-col overflow-y-auto md:flex-row">
                 <div class="h-32 relative md:h-auto md:w-1/2" x-data="profile()">
-                    <img x-bind:src="profile_source" alt="Office" class="object-cover w-full h-full" aria-hidden="true" />
+                    <img x-bind:src="profileSource" alt="⚠️ Error de carga" class="object-cover w-full h-full" aria-hidden="true" />
                     <div class="absolute top-0 left-0">
                         <div class="w-16 h-16 rounded-full m-4 bg-white text-purple-800 dark:bg-gray-800 dark:text-white dark:text-purple-400">
                             <label for="profile" class="flex justify-center h-full items-center">
@@ -13,7 +14,7 @@
                                     <path d="M480-260q75 0 127.5-52.5T660-440q0-75-52.5-127.5T480-620q-75 0-127.5 52.5T300-440q0 75 52.5 127.5T480-260Zm0-80q-42 0-71-29t-29-71q0-42 29-71t71-29q42 0 71 29t29 71q0 42-29 71t-71 29ZM160-120q-33 0-56.5-23.5T80-200v-480q0-33 23.5-56.5T160-760h126l74-80h240l74 80h126q33 0 56.5 23.5T880-680v480q0 33-23.5 56.5T800-120H160Zm0-80h640v-480H638l-73-80H395l-73 80H160v480Zm320-240Z" />
                                 </svg>
                             </label>
-                            <input type="file" id="profile" name="" hidden x-on:change="change_profile"> 
+                            <input type="file" id="profile" name="" hidden x-on:change="changeProfile"> 
                         </div>
                     </div>
                 </div>

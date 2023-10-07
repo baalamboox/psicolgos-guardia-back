@@ -15,10 +15,10 @@ const generalData = ({href}) => html(`
         Ver
     </a>
 `);
-const medicalHistory = ({href}) => html(`
+const medicalHistories = ({href}) => html(`
     <a href="${href}" class="flex text-xs gap-1 align-middle p-1 rounded w-20 mx-auto justify-center border border-purple-100 bg-purple-100 text-purple-400 hover:border-purple-200 hover:bg-purple-200 hover:text-purple-600">
         <svg class="w-4 h-4" fill="currentColor" xmlns="http://www.w3.org/2000/svg" viewBox="0 -960 960 960">
-            <path d="M320-240h320v-80H320v80Zm0-160h320v-80H320v80ZM240-80q-33 0-56.5-23.5T160-160v-640q0-33 23.5-56.5T240-880h320l240 240v480q0 33-23.5 56.5T720-80H240Zm280-520v-200H240v640h480v-440H520ZM240-800v200-200 640-640Z" />
+            <path d="M160-160q-33 0-56.5-23.5T80-240v-480q0-33 23.5-56.5T160-800h240l80 80h320q33 0 56.5 23.5T880-640H447l-80-80H160v480l96-320h684L837-217q-8 26-29.5 41.5T760-160H160Zm84-80h516l72-240H316l-72 240Zm0 0 72-240-72 240Zm-84-400v-80 80Z" />
         </svg>
         Ver
     </a>
@@ -39,19 +39,13 @@ const status = ({state}) => state === 'activo' ? html(`
     </a>
 `);
 
-document.querySelector('#patientsList') && new Grid({
-    columns: ['Foto', 'Paciente', 'Datos generales', 'Historial clínico', 'Estado'],
+document.querySelector('#psychologistsList') && new Grid({
+    columns: ['Foto', 'Psicólogo', 'Datos generales', 'Historiales clínicos', 'Estado'],
     data: [
-        [profile({ src: 'https://images.unsplash.com/flagged/photo-1570612861542-284f4c12e75f?ixlib=rb-1.2.1&q=80&fm=jpg&crop=entropy&cs=tinysrgb&w=200&fit=max&ixid=eyJhcHBfaWQiOjE3Nzg0fQ' }), 'Fernando Sebastian', generalData({href: '/pacientes/datos-generales/1'}), medicalHistory({href: '/pacientes/historial-medico/1'}), status({state: 'eliminado'}),],
-        [profile({ src: 'https://images.pexels.com/photos/2853592/pexels-photo-2853592.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1' }), 'Isabel Rosales', generalData({href: '#'}), medicalHistory({href: '#'}), status({state: 'activo'}),],
-        [profile({ src: 'https://images.pexels.com/photos/7533347/pexels-photo-7533347.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1' }), 'Dante Guzmán', generalData({href: '#'}), medicalHistory({href: '#'}), status({state: 'activo'}),],
-        [profile({ src: 'https://images.pexels.com/photos/415829/pexels-photo-415829.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1' }), 'Karol Velanova', generalData({href: '#'}), medicalHistory({href: '#'}), status({state: 'activo'}),],
-        [profile({ src: 'https://images.pexels.com/photos/1674752/pexels-photo-1674752.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1' }), 'Sandral Curibeña', generalData({href: '#'}), medicalHistory({href: '#'}), status({state: 'eliminado'}),],
-        [profile({ src: 'https://images.pexels.com/photos/1499327/pexels-photo-1499327.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1' }), 'Alondra Sanchéz', generalData({href: '#'}), medicalHistory({href: '#'}), status({state: 'eliminado'}),],
-        [profile({ src: 'https://images.pexels.com/photos/428361/pexels-photo-428361.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1' }), 'Leopoldo Rangel', generalData({href: '#'}), medicalHistory({href: '#'}), status({state: 'activo'}),],
-        [profile({ src: 'https://images.pexels.com/photos/1153334/pexels-photo-1153334.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1' }), 'Adolfo Gutierrez', generalData({href: '#'}), medicalHistory({href: '#'}), status({state: 'activo'}),],
-        [profile({ src: 'https://images.pexels.com/photos/64385/pexels-photo-64385.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1' }), 'Ismale Jiménez', generalData({href: '#'}), medicalHistory({href: '#'}), status({state: 'activo'}),],
-        [profile({ src: 'https://images.pexels.com/photos/2726046/pexels-photo-2726046.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1' }), 'Rosa de la Cruz', generalData({href: '#'}), medicalHistory({href: '#'}), status({state: 'eliminado'}),],
+        [profile({ src: 'https://images.pexels.com/photos/220453/pexels-photo-220453.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1' }), 'Renato Solís', generalData({href: '/psicologos/datos-generales/1'}), medicalHistories({href: '/psicologos/historiales-clinicos/1'}), status({state: 'eliminado'}),],
+        [profile({ src: 'https://images.pexels.com/photos/2726111/pexels-photo-2726111.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1' }), 'Fernanda Tapía', generalData({href: '#'}), medicalHistories({href: '#'}), status({state: 'activo'}),],
+        [profile({ src: 'https://images.pexels.com/photos/3785079/pexels-photo-3785079.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1' }), 'Rafael Agustino', generalData({href: '#'}), medicalHistories({href: '#'}), status({state: 'activo'}),],
+        [profile({ src: 'https://images.pexels.com/photos/415829/pexels-photo-415829.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1' }), 'Fabiola de la Cueva', generalData({href: '#'}), medicalHistories({href: '#'}), status({state: 'activo'}),],
     ],
     pagination: true,
     search: true,
@@ -66,4 +60,4 @@ document.querySelector('#patientsList') && new Grid({
             'results': () => 'pacientes',
         }
     }
-}).render(document.querySelector('#patientsList'));
+}).render(document.querySelector('#psychologistsList'));

@@ -1,16 +1,10 @@
 @extends('layouts.main')
-@section('title', 'Iniciar sesión')
+@section('title', 'Nueva contraseña')
 @section('body')
     <div class="flex items-center min-h-screen p-6 bg-gray-50 dark:bg-gray-900">
-        <div class="flex-1 h-full max-w-4xl mx-auto overflow-hidden bg-white rounded-lg shadow-xl dark:bg-gray-800">
+        <div class="flex-1 h-full max-w-lg mx-auto overflow-hidden bg-white rounded-lg shadow-xl dark:bg-gray-800">
             <div class="flex flex-col overflow-y-auto md:flex-row">
-                <div class="h-32 md:h-auto md:w-1/2">
-                    <div class="flex h-full items-center">
-                        <img src="{{ asset('img/logos/psicologos-guardia.svg') }}" alt="⚠️ Error de carga" class="mx-auto hidden md:block dark:text-white" width="250" height="250" />
-                        <img src="{{ asset('img/logos/psicologos-guardia.svg') }}" alt="⚠️ Error de carga" class="w-24 h-24 mx-auto md:hidden dark:text-white" />
-                    </div>
-                </div>
-                <div class="flex items-center justify-center p-6 sm:p-12 md:w-1/2">
+                <div class="flex items-center justify-center p-6 sm:p-12 md:w-full">
                     <div class="w-full">
                         <div class="flex justify-end">
                             <button class="rounded-md text-purple-600 dark:text-purple-400 focus:outline-none focus:shadow-outline-purple" @click="toggleTheme" aria-label="Toggle color mode">
@@ -26,22 +20,22 @@
                                 </template>
                             </button>
                         </div>
-                        <h1 class="mb-4 text-xl font-semibold text-gray-700 text-center dark:text-gray-200">Administrador</h1>
-                        <label class="block text-sm">
+                        <h1 class="mb-4 text-xl font-semibold text-gray-700 text-center dark:text-gray-200">Nueva contraseña</h1>
+                        <label class="block mt-4 text-sm">
                             <span class="text-gray-700 dark:text-gray-400">
                                 <svg class="w-4 h-4 inline" fill="currentColor" xmlns="http://www.w3.org/2000/svg" viewBox="0 -960 960 960">
-                                    <path d="M480-80q-83 0-156-31.5T197-197q-54-54-85.5-127T80-480q0-83 31.5-156T197-763q54-54 127-85.5T480-880q83 0 156 31.5T763-763q54 54 85.5 127T880-480v58q0 59-40.5 100.5T740-280q-35 0-66-15t-52-43q-29 29-65.5 43.5T480-280q-83 0-141.5-58.5T280-480q0-83 58.5-141.5T480-680q83 0 141.5 58.5T680-480v58q0 26 17 44t43 18q26 0 43-18t17-44v-58q0-134-93-227t-227-93q-134 0-227 93t-93 227q0 134 93 227t227 93h200v80H480Zm0-280q50 0 85-35t35-85q0-50-35-85t-85-35q-50 0-85 35t-35 85q0 50 35 85t85 35Z" />
+                                    <path d="M240-80q-33 0-56.5-23.5T160-160v-400q0-33 23.5-56.5T240-640h40v-80q0-83 58.5-141.5T480-920q83 0 141.5 58.5T680-720v80h40q33 0 56.5 23.5T800-560v400q0 33-23.5 56.5T720-80H240Zm0-80h480v-400H240v400Zm240-120q33 0 56.5-23.5T560-360q0-33-23.5-56.5T480-440q-33 0-56.5 23.5T400-360q0 33 23.5 56.5T480-280ZM360-640h240v-80q0-50-35-85t-85-35q-50 0-85 35t-35 85v80ZM240-160v-400 400Z" />
                                 </svg>
-                                Correo electrónico
+                                Nueva contraseña
                             </span>
-                            <input type="email" class="block w-full mt-1 text-sm dark:border-gray-600 dark:bg-gray-700 focus:border-purple-400 focus:outline-none focus:shadow-outline-purple dark:text-gray-300 dark:focus:shadow-outline-purple form-input" placeholder="usuario@ejemplo.com" />
+                            <input class="block w-full mt-1 text-sm dark:border-gray-600 dark:bg-gray-700 focus:border-purple-400 focus:outline-none focus:shadow-outline-purple dark:text-gray-300 dark:focus:shadow-outline-purple form-input" placeholder="********" x-bind:type="isShowPassword" />
                         </label>
                         <label class="block mt-4 text-sm">
                             <span class="text-gray-700 dark:text-gray-400">
                                 <svg class="w-4 h-4 inline" fill="currentColor" xmlns="http://www.w3.org/2000/svg" viewBox="0 -960 960 960">
                                     <path d="M240-80q-33 0-56.5-23.5T160-160v-400q0-33 23.5-56.5T240-640h40v-80q0-83 58.5-141.5T480-920q83 0 141.5 58.5T680-720v80h40q33 0 56.5 23.5T800-560v400q0 33-23.5 56.5T720-80H240Zm0-80h480v-400H240v400Zm240-120q33 0 56.5-23.5T560-360q0-33-23.5-56.5T480-440q-33 0-56.5 23.5T400-360q0 33 23.5 56.5T480-280ZM360-640h240v-80q0-50-35-85t-85-35q-50 0-85 35t-35 85v80ZM240-160v-400 400Z" />
                                 </svg>
-                                Contraseña
+                                Confirmar contraseña
                             </span>
                             <input class="block w-full mt-1 text-sm dark:border-gray-600 dark:bg-gray-700 focus:border-purple-400 focus:outline-none focus:shadow-outline-purple dark:text-gray-300 dark:focus:shadow-outline-purple form-input" placeholder="********" x-bind:type="isShowPassword" />
                         </label>
@@ -49,15 +43,12 @@
                             <input type="checkbox" id="show_hide_password" class="text-purple-600 border-none form-checkbox mr-2 shadow-outline-purple bg-transparent focus:border-purple-600 focus:outline-none focus:shadow-outline-purple dark:focus:shadow-outline-purple" @click="toggleShowPassword">
                             <label for="show_hide_password" class="text-sm text-gray-700 dark:text-gray-400" x-text="textShowPassword"></label>
                         </div>
-                        <a class="block w-full px-4 py-2 mt-8 text-sm font-medium leading-5 text-center text-white transition-colors duration-150 bg-purple-600 border border-transparent rounded-lg active:bg-purple-600 hover:bg-purple-700 focus:outline-none focus:shadow-outline-purple" href="/">
+                        <a class="block w-full px-4 py-2 mt-8 text-sm font-medium leading-5 text-center text-white transition-colors duration-150 bg-purple-600 border border-transparent rounded-lg active:bg-purple-600 hover:bg-purple-700 focus:outline-none focus:shadow-outline-purple" href="/iniciar-sesion">
                             <svg class="w-5 h-5 inline" fill="currentColor" xmlns="http://www.w3.org/2000/svg" viewBox="0 -960 960 960">
-                                <path d="M480-120v-80h280v-560H480v-80h280q33 0 56.5 23.5T840-760v560q0 33-23.5 56.5T760-120H480Zm-80-160-55-58 102-102H120v-80h327L345-622l55-58 200 200-200 200Z" />
+                                <path d="M840-680v480q0 33-23.5 56.5T760-120H200q-33 0-56.5-23.5T120-200v-560q0-33 23.5-56.5T200-840h480l160 160Zm-80 34L646-760H200v560h560v-446ZM480-240q50 0 85-35t35-85q0-50-35-85t-85-35q-50 0-85 35t-35 85q0 50 35 85t85 35ZM240-560h360v-160H240v160Zm-40-86v446-560 114Z" />
                             </svg>
-                            Iniciar sesión
+                            Guardar cambios
                         </a>
-                        <p class="mt-4">
-                            <a class="text-sm font-medium text-purple-500 dark:text-purple-500 hover:underline" href="/recuperar-clave">¿Olvidaste tu contraseña?</a>
-                        </p>
                     </div>
                 </div>
             </div>

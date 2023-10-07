@@ -46,9 +46,33 @@ Route::get('/perfil/actividad', function () {
 });
 
 Route::get('/pacientes', function () {
-    return view('admin.patients');
+    return view('admin.patients.patients');
 });
 
 Route::get('/psicologos', function () {
-    return view('admin.psychologists');
+    return view('admin.psychologists.psychologists');
+});
+
+Route::get('/pacientes/datos-generales/{id}', function () {
+    return view('admin.patients.general-data');
+});
+
+Route::get('/psicologos/datos-generales/{id}', function () {
+    return view('admin.psychologists.general-data');
+});
+
+Route::get('/psicologos/historiales-clinicos/{id}', function () {
+    return view('admin.psychologists.medical-histories');
+});
+
+Route::get('/pacientes/historial-medico/{id}', function () {
+    return view('admin.patients.medical-history');
+});
+
+Route::get('/codigo-verificacion', function () {
+    return view('auth.verification-code');
+});
+
+Route::get('/nueva-clave', function () {
+    return view('auth.reset-password');
 });

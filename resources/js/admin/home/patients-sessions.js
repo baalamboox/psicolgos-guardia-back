@@ -1,28 +1,28 @@
 import Chart from 'chart.js/auto';
 
-const medicalHistoryConfig = {
+const patientsSessionsConfig = {
     type: 'line',
     data: {
         labels: ['20/10/2023', '21/10/2023', '22/10/2023', '23/10/2023', '24/10/2023', '25/10/2023', '26/10/2023'],
         datasets: [
             {
-                label: 'Creados',
-                backgroundColor: '#68d391',
-                borderColor: '#68d391',
+                label: 'Pacientes',
+                backgroundColor: '#0694a2',
+                borderColor: '#0694a2',
                 data: [10, 32, 40, 54, 30, 50, 10],
                 fill: false,
             },
             {
-                label: 'Actualizados',
+                label: 'Psicólogos',
                 fill: false,
-                backgroundColor: '#f6e05e',
-                borderColor: '#f6e05e',
+                backgroundColor: '#7e3af2',
+                borderColor: '#7e3af2',
                 data: [24, 50, 64, 74, 52, 51, 65],
             },
             {
-                label: 'Eliminados',
-                backgroundColor: '#fc8181',
-                borderColor: '#fc8181',
+                label: 'Administradores',
+                backgroundColor: '#D53F8C',
+                borderColor: '#D53F8C',
                 data: [50, 70, 5, 10, 67, 73, 70],
                 fill: false,
             },
@@ -60,4 +60,4 @@ const medicalHistoryConfig = {
     },
 };
 
-document.querySelector('#medicalHistory') && new Chart(document.querySelector('#medicalHistory'), medicalHistoryConfig);
+document.querySelector('#patientsSessionsContainer') && new Chart(document.querySelector('#patientsSessionsContainer'), patientsSessionsConfig);
