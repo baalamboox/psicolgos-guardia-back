@@ -76,3 +76,7 @@ Route::get('/codigo-verificacion', function () {
 Route::get('/nueva-clave', function () {
     return view('auth.reset-password');
 });
+
+Route::get('/saludar', function () {
+    return 'Hola';
+});
