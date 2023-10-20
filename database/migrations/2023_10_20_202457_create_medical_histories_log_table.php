@@ -11,9 +11,13 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('historiales_clinicos_log', function (Blueprint $table) {
+        Schema::create('medical_histories_log', function (Blueprint $table) {
             $table->id();
-            $table->timestamps();
+            $table->unsignedBigInteger('medical_history_id');
+            $table->unsignedBigInteger('user_id');
+            $table->string('action', 255);
+            $table->text('details');
+            $table->timestamp('created_at');
         });
     }
 
@@ -22,6 +26,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('historiales_clinicos_log');
+        Schema::dropIfExists('medical_histories_log');
     }
 };
