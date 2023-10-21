@@ -18,6 +18,8 @@ return new class extends Migration
             $table->text('password');
             $table->string('profile_photo', 64);
             $table->boolean('state');
+            $table->timestamp('email_verified_at')->nullable();
+            $table->rememberToken();
             $table->softDeletes();
             $table->timestamps();
         });
