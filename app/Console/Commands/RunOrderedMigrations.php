@@ -51,6 +51,8 @@ class RunOrderedMigrations extends Command
                 $this->info("Ejecutando migración: $migrationsToRunInOrder[$i]");
                 echo shell_exec($command . "/database/migrations/$migrationsToRunInOrder[$i]");
             }
+            $this->info('Creando registros en la migración profiles...');
+            echo shell_exec('php artisan db:seed --class=ProfileSeeder');
         } else {
             if($this->confirm("¿Seguro que desea borrar las migraciones?\nTodos los datos se eliminaran")) {
                 $this->error('Eliminando migraciones...');
