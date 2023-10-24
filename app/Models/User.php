@@ -7,6 +7,8 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
+use Illuminate\Database\Eloquent\Relations\belongsTo;
+use Illuminate\Database\Eloquent\Relations\hasOne;
 
 class User extends Authenticatable
 {
@@ -18,9 +20,10 @@ class User extends Authenticatable
      * @var array<int, string>
      */
     protected $fillable = [
-        'name',
         'email',
         'password',
+        'profile_photo',
+        'state'
     ];
 
     /**
@@ -42,4 +45,15 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
         'password' => 'hashed',
     ];
+
+    // Defining relationship to profile.
+    public function profile(): belongsTo
+    {
+        return $this->belongsTo(Profile::class);
+    }
+
+    public function userPersonalData(): hasOne
+    {
+        return $this->hasOne(UserPersonalData::class);
+    }
 }
