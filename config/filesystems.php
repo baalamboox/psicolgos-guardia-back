@@ -44,6 +44,30 @@ return [
             'throw' => false,
         ],
 
+        'admins' => [
+            'driver' => 'local',
+            'root' => storage_path('app/public/profile-photos/admins'),
+            'url' => env('APP_URL').'/storage',
+            'visibility' => 'public',
+            'throw' => false,
+        ],
+
+        'patients' => [
+            'driver' => 'local',
+            'root' => storage_path('app/public/profile-photos/patients'),
+            'url' => env('APP_URL').'/storage',
+            'visibility' => 'public',
+            'throw' => false,
+        ],
+
+        'psychologists' => [
+            'driver' => 'local',
+            'root' => storage_path('app/public/profile-photos/psychologists'),
+            'url' => env('APP_URL').'/storage',
+            'visibility' => 'public',
+            'throw' => false,
+        ],
+
         's3' => [
             'driver' => 's3',
             'key' => env('AWS_ACCESS_KEY_ID'),
@@ -70,7 +94,10 @@ return [
     */
 
     'links' => [
-        public_path('storage') => storage_path('app/public'),
+        // public_path('storage') => storage_path('app/public'),
+        public_path('admins') => storage_path('app/public/profile-photos/admins'),
+        public_path('patients') => storage_path('app/public/profile-photos/patients'),
+        public_path('psychologists') => storage_path('app/public/profile-photos/psychologists')
     ],
 
 ];

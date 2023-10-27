@@ -10,6 +10,7 @@ use Illuminate\Support\Facades\Validator;
 use App\Models\User;
 use App\Models\Profile;
 use App\Models\UserPersonalData;
+use App\Models\UserLog;
 
 class AuthController extends Controller
 {
@@ -22,7 +23,7 @@ class AuthController extends Controller
                 $patientRules = [
                     'email'=>'required|unique:users|email|max:128',
                     'password'=>'required|string|max:8',
-                    'profile_photo'=>'required',
+                    'profile_photo'=>'required|mimes:jpeg,jpg,png|max:2048',
                     'names'=>'required|string|max:32',
                     'first_surname'=>'required|string|max:16',
                     'second_surname'=>'required|string|max:16',
@@ -37,11 +38,20 @@ class AuthController extends Controller
                         'success'=>false
                     ], 400);
                 }
+                if(!$request->hasFile('profile_photo'))
+                {
+                    return response()->json([
+                        'status'=> 400,
+                        'message'=> 'Error al subir la foto.',
+                        'success'=>false
+                    ], 400);
+                }
+                $photo = $request->file('profile_photo');
                 $profile = Profile::find($request->profile);
                 $user = new User([
                     'email'=>$request->email,
                     'password'=>$request->password,
-                    'profile_photo'=>$request->profile_photo,
+                    'profile_photo'=>'patients/'.$photo->storeAs($request->email, $photo->getClientOriginalName(), 'patients'),
                     'state'=>1
                 ]);
                 $profile->users()->save($user);
@@ -53,6 +63,11 @@ class AuthController extends Controller
                 ]);
                 $user->userPersonalData()->save($userPersonalData);
                 $token = $user->createToken('token')->plainTextToken;
+                $userLog = UserLog::create([
+                    'user_id'=>$user->id,
+                    'action'=>'creación de usuario',
+                    'details'=>'creo un usuario con el perfil de paciente'
+                ]);
                 return response()->json([
                     'status'=> 200,
                     'message'=> 'Se creo paciente correctamente.',
@@ -67,7 +82,7 @@ class AuthController extends Controller
                 $psychologistRules = [
                     'email'=>'required|unique:users|email|max:128',
                     'password'=>'required|string|max:8',
-                    'profile_photo'=>'required',
+                    'profile_photo'=>'required|mimes:jpeg,jpg,png|max:2048',
                     'names'=>'required|string|max:32',
                     'first_surname'=>'required|string|max:16',
                     'second_surname'=>'required|string|max:16',
@@ -85,11 +100,20 @@ class AuthController extends Controller
                         'success'=>false
                     ], 400);
                 }
+                if(!$request->hasFile('profile_photo'))
+                {
+                    return response()->json([
+                        'status'=> 400,
+                        'message'=> 'Error al subir la foto.',
+                        'success'=>false
+                    ], 400);
+                }
+                $photo = $request->file('profile_photo');
                 $profile = Profile::find($request->profile);
                 $user = new User([
                     'email'=>$request->email,
                     'password'=>$request->password,
-                    'profile_photo'=>$request->profile_photo,
+                    'profile_photo'=>'psychologists/'.$photo->storeAs($request->email, $photo->getClientOriginalName(), 'psychologists'),
                     'state'=>1
                 ]);
                 $profile->users()->save($user);
@@ -104,6 +128,11 @@ class AuthController extends Controller
                 ]);
                 $user->userPersonalData()->save($userPersonalData);
                 $token = $user->createToken('token')->plainTextToken;
+                $userLog = UserLog::create([
+                    'user_id'=>$user->id,
+                    'action'=>'creación de usuario',
+                    'details'=>'creo un usuario con el perfil de psicólogo'
+                ]);
                 return response()->json([
                     'status'=> 200,
                     'message'=> 'Se creo psicólogo correctamente.',
@@ -135,11 +164,17 @@ class AuthController extends Controller
         }
         $user = User::where('email', $request->email)->first();
         $token = $user->createToken('token')->plainTextToken;
+        $userLog = UserLog::create([
+            'user_id'=>$user->id,
+            'action'=>'inicio de sesión',
+            'details'=>'accedió correctamente a su cuenta'
+        ]);
         return response()->json([
             'status'=>200,
             'message'=>'Usuario autenticado correctamente.',
             'success'=>true,
             'data'=> [
+                'profile_photo'=>env('APP_URL').'/'.$user->profile_photo,
                 'token'=>$token
             ]
         ], 200);
@@ -147,6 +182,11 @@ class AuthController extends Controller
     public function logout(): JsonResponse
     {
         auth()->user()->tokens()->delete();
+        $userLog = UserLog::create([
+            'user_id'=>auth()->user()->id,
+            'action'=>'cierre de sesión',
+            'details'=>'salió correctamente de su cuenta'
+        ]);
         return response()->json([
             'status'=>200,
             'message'=>'Sesión cerrada correctamente.',
