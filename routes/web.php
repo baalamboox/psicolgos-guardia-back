@@ -1,6 +1,10 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\Web\Auth\AuthController;
+use App\Http\Controllers\Web\Admin\HomeController;
+use App\Http\Controllers\Web\Admin\ProfileController;
+use App\Http\Controllers\Web\Admin\NewAdminController;
 
 /*
 |--------------------------------------------------------------------------
@@ -13,36 +17,36 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('home');
+Route::get('/', function() {
+    return redirect()->route('signin');
+});
+Route::prefix('admin')->group(function () {
+    Route::get('/signin', [AuthController::class, 'showSignin'])->name('signin');
+    Route::post('/auth/signin', [AuthController::class, 'signin'])->name('auth.signin');
+    Route::middleware(['auth'])->group(function () {
+        Route::get('/home', [HomeController::class, 'home'])->name('home');
+        Route::get('/profile', [ProfileController::class, 'showProfile'])->name('profile');
+        Route::get('/profile/activity', [ProfileController::class, 'showActivity'])->name('activity');
+        Route::get('/auth/logout', [AuthController::class, 'logout'])->name('auth.logout');
+        Route::get('/new-admin', [NewAdminController::class, 'showViewNewAdmin'])->name('new.admin');
+        Route::post('/create-admin', [NewAdminController::class, 'createNewAdmin'])->name('create.admin');
+    });
 });
 
-Route::get('/iniciar-sesion', function () {
-    return view('auth.signin');
-});
+
+
+
+
 
 Route::get('/recuperar-clave', function () {
     return view('auth.forgot-password');
 });
-
-Route::get('/nuevo-administrador', function () {
-    return view('admin.new-admin');
-});
-
-Route::get('/perfil', function () {
-    return view('admin.profile');
-});
-
 Route::get('/configuraciones', function () {
     return view('admin.config');
 });
 
 Route::get('/metricas', function () {
     return view('admin.metrics');
-});
-
-Route::get('/perfil/actividad', function () {
-    return view('admin.logs');
 });
 
 Route::get('/pacientes', function () {
@@ -75,8 +79,4 @@ Route::get('/codigo-verificacion', function () {
 
 Route::get('/nueva-clave', function () {
     return view('auth.reset-password');
-});
-
-Route::get('/saludar', function () {
-    return 'Hola';
 });

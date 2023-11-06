@@ -26,7 +26,7 @@ return new class extends Migration
             $table->string('type', 255)->nullable();
             $table->string('professional_license', 10)->nullable();
             $table->string('phone', 10)->nullable();
-            $table->string('curp', 18);
+            $table->string('curp', 18)->nullable();
             $table->string('sex', 10)->nullable();
             $table->softDeletes();
             $table->timestamps();

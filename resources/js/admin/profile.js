@@ -1,6 +1,6 @@
 const profile = () => {
     return {
-        profileSource: 'https://source.unsplash.com/MP0IUfwrn0A',
+        profileSource: '/img/profile/default.jpg',
         changeProfile(event) {
             this.profileSource = URL.createObjectURL(event.target.files[0]);
         }
