@@ -1,8 +1,9 @@
+const profilePhoto = document?.querySelector('#profilePhoto');
 const profile = () => {
     return {
-        profileSource: '/img/profile/default.jpg',
-        changeProfile(event) {
-            this.profileSource = URL.createObjectURL(event.target.files[0]);
+        profilePhotoSource: profilePhoto.dataset.src != '' ? '/' + profilePhoto.dataset.src : '/img/default-profile/default.jpg',
+        changeProfilePhoto(event) {
+            this.profilePhotoSource = URL.createObjectURL(event.target.files[0]);
         }
     };
 };

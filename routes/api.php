@@ -2,7 +2,7 @@
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\Api\AuthController;
+use App\Http\Controllers\Api\Auth\AuthController;
 
 /*
 |--------------------------------------------------------------------------
@@ -15,12 +15,13 @@ use App\Http\Controllers\Api\AuthController;
 |
 */
 
-Route::post('/auth/signup', [AuthController::class, 'signup']);
-Route::post('/auth/signin', [AuthController::class, 'signin']);
+Route::post('/auth/sign-up', [AuthController::class, 'signUp']);
+Route::post('/auth/sign-in', [AuthController::class, 'signIn']);
+Route::get('/auth/verify-user', [AuthController::class, 'verifyUser']);
 
 Route::middleware('auth:sanctum')->group(function() {
     Route::get('/user', function (Request $request) {
         return $request->user();
     });
-    Route::get('/auth/logout', [AuthController::class, 'logout']);
+    Route::get('/auth/sign-out', [AuthController::class, 'signOut']);
 });

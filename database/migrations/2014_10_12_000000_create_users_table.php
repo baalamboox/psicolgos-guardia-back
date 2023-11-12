@@ -16,7 +16,7 @@ return new class extends Migration
             $table->foreignId('profile_id')->constrained()->onUpdate('cascade')->onDelete('cascade');
             $table->string('email', 128)->unique();
             $table->text('password');
-            $table->string('profile_photo', 64)->nullable();
+            $table->string('profile_photo', 128)->nullable();
             $table->boolean('state');
             $table->timestamp('email_verified_at')->nullable();
             $table->rememberToken();

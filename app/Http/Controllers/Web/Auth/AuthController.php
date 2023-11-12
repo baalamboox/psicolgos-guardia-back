@@ -11,44 +11,58 @@ use App\Models\UserLog;
 
 class AuthController extends Controller
 {
-    public function showSignin() {
-        return view('auth.signin');
-    }
-    public function signin(Request $request)
+    public function showViewSignIn()
     {
+        return view('auth.sign-in');
+    }
+
+    public function signIn(Request $request)
+    {
+        $email = $request->old('email');
+        $password = $request->old('password');
         $rules = [
-            'email' => 'required|unique:users|email|max:128',
-            'password' => 'required|min:8|max:10'
+            'email' => 'required|email|max:64',
+            'password' => 'required|regex:/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&*.,:?(){}<>"])[A-Za-z\d!@#$%^&*.,:?(){}<>"]{8,10}$/'
         ];
-        $validator = Validator::make($request->all(), $rules);
-        $profile = User::where('email', $request->email)->first()->profile_id;
+        $messages = [
+            'email.required' => 'Correo electrónico requerido.',
+            'email.email' => 'Correo electrónico invalido.',
+            'email.max' => 'Correo electrónico muy largo.',
+            'password.required' => 'Contraseña requerida.',
+            'password.regex' => 'Contraseña debe tener al menos una letra minúscula, al menos una letra mayúscula, al menos un caracter especial, al menos un número y una longitud entre 8 y 10 caracteres.'
+        ];
+        $validator = Validator::make($request->all(), $rules, $messages);
+        if($validator->fails())
+        {
+            return redirect()->route('sign-in')->withErrors($validator)->withInput();
+        }
+        $profile = User::where('email', strtolower($request->email))->first()->profile_id;
         if($profile != 1)
         {
-            return redirect()->route('signin');
+            return redirect()->route('sign-in')->withErrors(['email' => 'Correo electrónico no pertenece a algún administrador.'])->withInput();
         }
-        if(Auth::attempt(['email' => $request->email, 'password' => $request->password])) {
+        if(Auth::attempt(['email' => strtolower($request->email), 'password' => $request->password])) {
             $request->session()->regenerate();
-            $userLog = new UserLog([
+            UserLog::create([
                 'user_id' => $request->user()->id,
-                'action' => 'Inicio de sesión.',
-                'details' => 'Haz iniciado sesión de forma correcta.'
+                'action' => 'inicio de sesión',
+                'details' => 'inició sesión de forma correcta'
             ]);
-            $userLog->save();
             return redirect()->route('home');
         }
-        return redirect()->route('signin');
+        return redirect()->route('sign-in')->withErrors(['password' => 'Contraseña incorrecta.'])->withInput();
     }
-    public function logout(Request $request)
+
+    public function signOut(Request $request)
     {
         $request->session()->invalidate();
         $request->session()->regenerateToken();
-        $userLog = new UserLog([
+        UserLog::create([
             'user_id' => $request->user()->id,
-            'action' => 'Sesión cerrada.',
-            'details' => 'Haz cerrado sesión de forma correcta.'
+            'action' => 'sesión cerrada',
+            'details' => 'cerró sesión de forma correcta'
         ]);
-        $userLog->save();
         Auth::logout();
-        return redirect()->route('signin');
+        return redirect()->route('sign-in');
     }
 }

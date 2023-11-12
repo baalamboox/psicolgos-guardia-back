@@ -7,7 +7,7 @@
             <div class="flex flex-col overflow-y-auto md:flex-row">
                 <div class="h-32 md:h-auto md:w-1/2">
                     @if($profile_photo == null)
-                    <img src="{{ asset('img/profile/default.jpg') }}" alt="⚠️ Error de carga" class="object-cover w-full h-full" aria-hidden="true" />
+                    <img src="{{ asset('img/default-profile/default.jpg') }}" alt="⚠️ Error de carga" class="object-cover w-full h-full" aria-hidden="true" />
                     @else
                     <img src="{{ asset($profile_photo) }}" alt="⚠️ Error de carga" class="object-cover w-full h-full" aria-hidden="true" />
                     @endif
@@ -54,6 +54,7 @@
                                 Correo electrónico : {{ $email }}
                             </span>
                         </label>
+                        @if($phone != null)
                         <label class="block mt-4 text-sm">
                             <span class="text-gray-700 dark:text-gray-400">
                                 <svg class="w-4 h-4 inline" fill="currentColor" xmlns="http://www.w3.org/2000/svg" viewBox="0 -960 960 960">
@@ -62,7 +63,7 @@
                                 Teléfono : {{ $phone }}
                             </span>
                         </label>
-                        <!-- You should use a button here, as the anchor is only used for the example  -->
+                        @endif
                         <a href="{{ route('activity') }}" class="block w-full px-4 py-2 mt-8 text-sm font-medium leading-5 text-center text-white transition-colors duration-150 bg-purple-600 border border-transparent rounded-lg active:bg-purple-600 hover:bg-purple-700 focus:outline-none focus:shadow-outline-purple">
                             <svg class="w-5 h-5 inline" fill="currentColor" xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 -960 960 960" width="24">
                                 <path d="M80-200v-80h400v80H80Zm0-200v-80h200v80H80Zm0-200v-80h200v80H80Zm744 400L670-354q-24 17-52.5 25.5T560-320q-83 0-141.5-58.5T360-520q0-83 58.5-141.5T560-720q83 0 141.5 58.5T760-520q0 29-8.5 57.5T726-410l154 154-56 56ZM560-400q50 0 85-35t35-85q0-50-35-85t-85-35q-50 0-85 35t-35 85q0 50 35 85t85 35Z" />

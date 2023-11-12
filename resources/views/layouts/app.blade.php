@@ -1,7 +1,6 @@
 @extends('layouts.main')
 @section('body')
     <div class="flex h-screen bg-gray-50 dark:bg-gray-900" :class="{ 'overflow-hidden': isSideMenuOpen }">
-        <!-- Desktop sidebar -->
         <aside class="z-20 hidden w-64 overflow-y-auto bg-white dark:bg-gray-800 md:block flex-shrink-0">
             <div class="py-4 text-gray-500 dark:text-gray-400">
                 <div class="flex justify-center">
@@ -57,8 +56,6 @@
                 </div>
             </div>
         </aside>
-        <!-- Mobile sidebar -->
-        <!-- Backdrop -->
         <div class="fixed inset-0 z-10 flex items-end bg-black bg-opacity-50 sm:items-center sm:justify-center" x-show="isSideMenuOpen" x-transition:enter="transition ease-in-out duration-150" x-transition:enter-start="opacity-0" x-transition:enter-end="opacity-100" x-transition:leave="transition ease-in-out duration-150" x-transition:leave-start="opacity-100" x-transition:leave-end="opacity-0"></div>
         <aside class="fixed inset-y-0 z-20 flex-shrink-0 w-64 mt-16 overflow-y-auto bg-white dark:bg-gray-800 md:hidden" x-show="isSideMenuOpen" x-transition:enter="transition ease-in-out duration-150" x-transition:enter-start="opacity-0 transform -translate-x-20" x-transition:enter-end="opacity-100" x-transition:leave="transition ease-in-out duration-150" x-transition:leave-start="opacity-100" x-transition:leave-end="opacity-0 transform -translate-x-20" @click.away="closeSideMenu" @keydown.escape="closeSideMenu">
             <div class="py-4 text-gray-500 dark:text-gray-400">
@@ -115,18 +112,15 @@
                 </div>
             </div>
         </aside>
-        <!-- Header and main section -->
         <div class="flex flex-col flex-1 w-full">
             <header class="z-10 py-4 bg-white shadow-md dark:bg-gray-800">
                 <div class="container flex items-center justify-between h-full px-6 mx-auto text-purple-600 md:justify-end dark:text-purple-300">
-                    <!-- Mobile hamburger -->
                     <button class="p-1 mr-5 -ml-1 rounded-md md:hidden focus:outline-none focus:shadow-outline-purple" @click="toggleSideMenu" aria-label="Menu">
                         <svg class="w-6 h-6" aria-hidden="true" fill="currentColor" xmlns="http://www.w3.org/2000/svg" viewBox="0 -960 960 960">
                             <path d="M120-240v-80h720v80H120Zm0-200v-80h720v80H120Zm0-200v-80h720v80H120Z" />
                         </svg>
                     </button>
                     <ul class="flex items-center flex-shrink-0 space-x-6">
-                        <!-- Theme toggler -->
                         <li class="flex">
                             <button class="rounded-md focus:outline-none focus:shadow-outline-purple" @click="toggleTheme" aria-label="Toggle color mode">
                                 <template x-if="!dark">
@@ -141,13 +135,11 @@
                                 </template>
                             </button>
                         </li>
-                        <!-- Notifications menu -->
                         <li class="relative">
                             <button class="relative align-middle rounded-md focus:outline-none focus:shadow-outline-purple" @click="toggleNotificationsMenu" @keydown.escape="closeNotificationsMenu" aria-label="Notifications" aria-haspopup="true">
                                 <svg class="w-5 h-5" aria-hidden="true" fill="currentColor" xmlns="http://www.w3.org/2000/svg" viewBox="0 -960 960 960">
                                     <path d="M160-200v-80h80v-280q0-83 50-147.5T420-792v-28q0-25 17.5-42.5T480-880q25 0 42.5 17.5T540-820v28q80 20 130 84.5T720-560v280h80v80H160Zm320-300Zm0 420q-33 0-56.5-23.5T400-160h160q0 33-23.5 56.5T480-80ZM320-280h320v-280q0-66-47-113t-113-47q-66 0-113 47t-47 113v280Z" />
                                 </svg>
-                                <!-- Notification badge -->
                                 <span aria-hidden="true" class="absolute top-0 right-0 inline-block w-3 h-3 transform translate-x-1 -translate-y-1 bg-red-600 border-2 border-white rounded-full dark:border-gray-800"></span>
                             </button>
                             <template x-if="isNotificationsMenuOpen">
@@ -161,10 +153,13 @@
                                 </ul>
                             </template>
                         </li>
-                        <!-- Profile menu -->
                         <li class="relative">
                             <button class="align-middle rounded-full focus:shadow-outline-purple focus:outline-none" @click="toggleProfileMenu" @keydown.escape="closeProfileMenu" aria-label="Account" aria-haspopup="true">
-                                <img src="{{ asset('img/profile/default.jpg') }}" alt="" class="object-cover w-8 h-8 rounded-full" aria-hidden="true" />
+                                @if(session('profile_photo') == null)
+                                <img src="{{ asset('img/default-profile/default.jpg') }}" alt="⚠️ Error de carga" class="object-cover w-8 h-8 rounded-full" aria-hidden="true" />
+                                @else
+                                <img src="{{ asset(session('profile_photo')) }}" alt="⚠️ Error de carga" class="object-cover w-8 h-8 rounded-full" aria-hidden="true" />
+                                @endif
                             </button>
                             <template x-if="isProfileMenuOpen">
                                 <ul class="absolute right-0 w-56 p-2 mt-2 space-y-2 text-gray-600 bg-white border border-gray-100 rounded-md shadow-md dark:border-gray-700 dark:text-gray-300 dark:bg-gray-700" x-transition:leave="transition ease-in duration-150" x-transition:leave-start="opacity-100" x-transition:leave-end="opacity-0" @click.away="closeProfileMenu" @keydown.escape="closeProfileMenu" aria-label="submenu">
@@ -177,7 +172,7 @@
                                         </a>
                                     </li>
                                     <li class="flex">
-                                        <a href="/configuraciones" class="inline-flex items-center w-full px-2 py-1 text-sm font-semibold transition-colors duration-150 rounded-md hover:bg-gray-100 hover:text-gray-800 dark:hover:bg-gray-800 dark:hover:text-gray-200">
+                                        <a href="{{ route('config') }}" class="inline-flex items-center w-full px-2 py-1 text-sm font-semibold transition-colors duration-150 rounded-md hover:bg-gray-100 hover:text-gray-800 dark:hover:bg-gray-800 dark:hover:text-gray-200">
                                             <svg class="w-4 h-4 mr-3" fill="currentColor" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" viewBox="0 -960 960 960">
                                                 <path d="m370-80-16-128q-13-5-24.5-12T307-235l-119 50L78-375l103-78q-1-7-1-13.5v-27q0-6.5 1-13.5L78-585l110-190 119 50q11-8 23-15t24-12l16-128h220l16 128q13 5 24.5 12t22.5 15l119-50 110 190-103 78q1 7 1 13.5v27q0 6.5-2 13.5l103 78-110 190-118-50q-11 8-23 15t-24 12L590-80H370Zm112-260q58 0 99-41t41-99q0-58-41-99t-99-41q-59 0-99.5 41T342-480q0 58 40.5 99t99.5 41Zm0-80q-25 0-42.5-17.5T422-480q0-25 17.5-42.5T482-540q25 0 42.5 17.5T542-480q0 25-17.5 42.5T482-420Zm-2-60Zm-40 320h79l14-106q31-8 57.5-23.5T639-327l99 41 39-68-86-65q5-14 7-29.5t2-31.5q0-16-2-31.5t-7-29.5l86-65-39-68-99 42q-22-23-48.5-38.5T533-694l-13-106h-79l-14 106q-31 8-57.5 23.5T321-633l-99-41-39 68 86 64q-5 15-7 30t-2 32q0 16 2 31t7 30l-86 65 39 68 99-42q22 23 48.5 38.5T427-266l13 106Z" />
                                             </svg>
@@ -185,7 +180,7 @@
                                         </a>
                                     </li>
                                     <li class="flex">
-                                        <form action="{{ route('auth.logout') }}" method="get">
+                                        <form action="{{ route('auth.sign-out') }}" method="get">
                                             @csrf
                                             @method('get')
                                             <button type="submit" class="inline-flex items-center w-full px-2 py-1 text-sm font-semibold transition-colors duration-150 rounded-md hover:bg-gray-100 hover:text-gray-800 dark:hover:bg-gray-800 dark:hover:text-gray-200">

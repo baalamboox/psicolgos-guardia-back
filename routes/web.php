@@ -5,6 +5,7 @@ use App\Http\Controllers\Web\Auth\AuthController;
 use App\Http\Controllers\Web\Admin\HomeController;
 use App\Http\Controllers\Web\Admin\ProfileController;
 use App\Http\Controllers\Web\Admin\NewAdminController;
+use App\Http\Controllers\Web\Admin\ConfigController;
 
 /*
 |--------------------------------------------------------------------------
@@ -18,65 +19,21 @@ use App\Http\Controllers\Web\Admin\NewAdminController;
 */
 
 Route::get('/', function() {
-    return redirect()->route('signin');
+    return redirect()->route('sign-in');
 });
 Route::prefix('admin')->group(function () {
-    Route::get('/signin', [AuthController::class, 'showSignin'])->name('signin');
-    Route::post('/auth/signin', [AuthController::class, 'signin'])->name('auth.signin');
+    Route::get('/sign-in', [AuthController::class, 'showViewSignIn'])->name('sign-in');
+    Route::post('/auth/sign-in', [AuthController::class, 'signIn'])->name('auth.sign-in');
     Route::middleware(['auth'])->group(function () {
         Route::get('/home', [HomeController::class, 'home'])->name('home');
-        Route::get('/profile', [ProfileController::class, 'showProfile'])->name('profile');
-        Route::get('/profile/activity', [ProfileController::class, 'showActivity'])->name('activity');
-        Route::get('/auth/logout', [AuthController::class, 'logout'])->name('auth.logout');
+        Route::get('/profile', [ProfileController::class, 'showViewProfile'])->name('profile');
+        Route::get('/profile/activity', [ProfileController::class, 'showViewActivity'])->name('activity');
+        Route::get('/profile/config', [ConfigController::class, 'showViewConfig'])->name('config');
+        Route::post('/profile/config/update-profile-photo', [ConfigController::class, 'updateProfilePhoto'])->name('update.profile.photo');
+        Route::post('/profile/config/update-personal-contact-data', [ConfigController::class, 'updatePersonalContactData'])->name('update.personal.contact.data');
+        Route::post('/profile/config/update-password', [ConfigController::class, 'updatePassword'])->name('update.password');
+        Route::get('/auth/sign-out', [AuthController::class, 'signOut'])->name('auth.sign-out');
         Route::get('/new-admin', [NewAdminController::class, 'showViewNewAdmin'])->name('new.admin');
         Route::post('/create-admin', [NewAdminController::class, 'createNewAdmin'])->name('create.admin');
     });
-});
-
-
-
-
-
-
-Route::get('/recuperar-clave', function () {
-    return view('auth.forgot-password');
-});
-Route::get('/configuraciones', function () {
-    return view('admin.config');
-});
-
-Route::get('/metricas', function () {
-    return view('admin.metrics');
-});
-
-Route::get('/pacientes', function () {
-    return view('admin.patients.patients');
-});
-
-Route::get('/psicologos', function () {
-    return view('admin.psychologists.psychologists');
-});
-
-Route::get('/pacientes/datos-generales/{id}', function () {
-    return view('admin.patients.general-data');
-});
-
-Route::get('/psicologos/datos-generales/{id}', function () {
-    return view('admin.psychologists.general-data');
-});
-
-Route::get('/psicologos/historiales-clinicos/{id}', function () {
-    return view('admin.psychologists.medical-histories');
-});
-
-Route::get('/pacientes/historial-medico/{id}', function () {
-    return view('admin.patients.medical-history');
-});
-
-Route::get('/codigo-verificacion', function () {
-    return view('auth.verification-code');
-});
-
-Route::get('/nueva-clave', function () {
-    return view('auth.reset-password');
 });

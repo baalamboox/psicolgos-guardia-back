@@ -22,14 +22,13 @@ class MagicCommand extends Command
      *
      * @var string
      */
-    protected $description = 'Command description';
+    protected $description = 'Ejecuta todo lo necesario para iniciar el sistema por primera vez.';
 
     /**
      * Execute the console command.
      */
     public function handle()
     {
-        //
         $option = null;
         while($option != 'Salir')
         {
@@ -80,31 +79,32 @@ class MagicCommand extends Command
                     }
                     if($password != $confirmPassword)
                     {
-                        $this->error('Las contraseñas no coinciden abortando la creación del administrador...');
+                        $this->error('Las contraseñas no coinciden, ¡Abortando la creación del administrador!');
                         break;
                     }
                     $profile = Profile::find(1);
                     $user = new User([
-                        'email' => $email,
+                        'email' => strtolower($email),
                         'password' => $password,
-                        'state'=>1
+                        'state' => 1
                     ]);
                     $profile->users()->save($user);
                     $userPersonalData = new UserPersonalData([
-                        'names' => $names,
-                        'first_surname' => $firstSurname,
-                        'second_surname' => $secondSurname
+                        'names' => strtolower($names),
+                        'first_surname' => strtolower($firstSurname),
+                        'second_surname' => strtolower($secondSurname)
                     ]);
                     $user->userPersonalData()->save($userPersonalData);
                     $userLog = new UserLog([
                         'user_id' => $user->id,
-                        'action' => 'Creación de Administrador por defecto.',
-                        'details' => 'El sistema ha creado correctamente tu perfil por primer vez como Administrador.'
+                        'action' => 'creación de administrador por defecto',
+                        'details' => 'el sistema ha creado correctamente tu perfil por primer vez como administrador'
                     ]);
                     $userLog->save();
                     $this->info($user);
                     break;
                 case 'Crear directorios para almacenar fotos de perfil':
+                    echo shell_exec('php artisan storage:link');
                     break;
                 case 'Reiniciar migraciones':
                     if($this->confirm("¿Seguro que desea reiniciar las migraciones?\n\n¡Todos los datos serán eliminados!")) {

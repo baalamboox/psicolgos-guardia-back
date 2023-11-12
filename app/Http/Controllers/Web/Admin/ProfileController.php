@@ -9,21 +9,22 @@ use App\Models\UserLog;
 
 class ProfileController extends Controller
 {
-    //
-    public function showProfile(Request $request)
+    
+    public function showViewProfile(Request $request)
     {
         $getUserData = User::where('id', $request->user()->id)->with('userPersonalData')->first();
         $data = [
             'profile_photo' => $getUserData->profile_photo,
-            'names' => $getUserData->userPersonalData->names,
-            'first_surname' => $getUserData->userPersonalData->first_surname,
-            'second_surname' => $getUserData->userPersonalData->second_surname,
+            'names' => ucwords($getUserData->userPersonalData->names),
+            'first_surname' => ucwords($getUserData->userPersonalData->first_surname),
+            'second_surname' => ucwords($getUserData->userPersonalData->second_surname),
             'email' => $getUserData->email,
             'phone' => $getUserData->userPersonalData->phone
         ];
         return view('admin.profile', $data);
     }
-    public function showActivity(Request $request)
+
+    public function showViewActivity(Request $request)
     {
         $getUserLogs = UserLog::where('user_id', $request->user()->id)->orderBy('created_at', 'desc')->get();
         return view('admin.logs', ['data' => $getUserLogs]);

@@ -12,14 +12,14 @@
                     </svg>
                 </span>
                 <h3 class="flex items-center mb-1 text-lg font-semibold text-gray-900 dark:text-white">
-                    {{ $getUserLog->action }}
+                    {{  ucfirst($getUserLog->action) }}
                     @if($index == 0)
                     <span class="bg-purple-100 text-purple-800 text-sm font-medium mr-2 px-2 py-1 rounded-full dark:bg-purple-900 dark:text-purple-300 ml-3">Último</span>
                     @endif
                 </h3>
                 <time class="block mb-2 text-sm font-normal leading-none text-gray-400 dark:text-gray-500">{{ $getUserLog->created_at }}</time>
                 <p class="mb-4 text-base font-normal text-gray-500 dark:text-gray-400">
-                    {{ $getUserLog->details }}
+                    {{ ucfirst($getUserLog->details) }}.
                 </p>
             </li>
             @endforeach

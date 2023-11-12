@@ -46,7 +46,7 @@ return [
 
         'admins' => [
             'driver' => 'local',
-            'root' => storage_path('app/public/profile-photos/admins'),
+            'root' => storage_path('app/public/img/profiles/admins'),
             'url' => env('APP_URL').'/storage',
             'visibility' => 'public',
             'throw' => false,
@@ -54,7 +54,7 @@ return [
 
         'patients' => [
             'driver' => 'local',
-            'root' => storage_path('app/public/profile-photos/patients'),
+            'root' => storage_path('app/public/img/profiles/patients'),
             'url' => env('APP_URL').'/storage',
             'visibility' => 'public',
             'throw' => false,
@@ -62,7 +62,7 @@ return [
 
         'psychologists' => [
             'driver' => 'local',
-            'root' => storage_path('app/public/profile-photos/psychologists'),
+            'root' => storage_path('app/public/img/profiles/psychologists'),
             'url' => env('APP_URL').'/storage',
             'visibility' => 'public',
             'throw' => false,
@@ -95,9 +95,7 @@ return [
 
     'links' => [
         // public_path('storage') => storage_path('app/public'),
-        public_path('admins') => storage_path('app/public/profile-photos/admins'),
-        public_path('patients') => storage_path('app/public/profile-photos/patients'),
-        public_path('psychologists') => storage_path('app/public/profile-photos/psychologists')
+        public_path('img/profiles') => storage_path('app/public/img/profiles')
     ],
 
 ];
