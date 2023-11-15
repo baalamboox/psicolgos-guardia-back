@@ -313,6 +313,18 @@ class AuthController extends Controller
             ], 400);
         }
         $user = User::where('email', strtolower($request->query('email')))->first();
+        if($user->profile_id == null)
+        {
+            return response()->json([
+                'status' => 400,
+                'message' => 'No existe usuario.',
+                'success' => false,
+                'data' => null,
+                'errors' => [
+                    'email' => ['Correo electrónico no usado por algún usuario.']
+                ]
+            ], 400);
+        }
         if($user->profile_id == 1)
         {
             return response()->json([
@@ -341,14 +353,5 @@ class AuthController extends Controller
                 'errors' => null
             ], 200);
         }
-        return response()->json([
-            'status' => 400,
-            'message' => 'No existe usuario.',
-            'success' => false,
-            'data' => null,
-            'errors' => [
-                'email' => ['Correo electrónico no usado por algún usuario.']
-            ]
-        ], 400);
     }
 }
