@@ -313,8 +313,36 @@ class AuthController extends Controller
             ], 400);
         }
         $user = User::where('email', strtolower($request->query('email')))->first();
-        if(is_null($user->profile_id))
-        {
+        try {
+            if($user->profile_id == 1)
+            {
+                return response()->json([
+                    'status' => 400,
+                    'message' => 'Usuario no permitido.',
+                    'success' => false,
+                    'data' => null,
+                    'errors' => [
+                        'email' => ['Correo electrónico usado por un administrador.']
+                    ]
+                ], 400);
+            }
+            if($user)
+            {
+                $userPersonalData = UserPersonalData::find($user->id);
+                return response()->json([
+                    'status' => 200,
+                    'message' => 'Usuario existente.',
+                    'success' => true,
+                    'data' => [
+                        'email' => $user->email,
+                        'profile_photo' => env('APP_URL') . '/' . $user->profile_photo,
+                        'names' => ucwords($userPersonalData->names),
+                        'first_surname' => ucwords($userPersonalData->first_surname)
+                    ],
+                    'errors' => null
+                ], 200);
+            }
+        } catch (\Throwable $th) {
             return response()->json([
                 'status' => 400,
                 'message' => 'No existe usuario.',
@@ -324,34 +352,6 @@ class AuthController extends Controller
                     'email' => ['Correo electrónico no usado por algún usuario.']
                 ]
             ], 400);
-        }
-        if($user->profile_id == 1)
-        {
-            return response()->json([
-                'status' => 400,
-                'message' => 'Usuario no permitido.',
-                'success' => false,
-                'data' => null,
-                'errors' => [
-                    'email' => ['Correo electrónico usado por un administrador.']
-                ]
-            ], 400);
-        }
-        if($user)
-        {
-            $userPersonalData = UserPersonalData::find($user->id);
-            return response()->json([
-                'status' => 200,
-                'message' => 'Usuario existente.',
-                'success' => true,
-                'data' => [
-                    'email' => $user->email,
-                    'profile_photo' => env('APP_URL') . '/' . $user->profile_photo,
-                    'names' => ucwords($userPersonalData->names),
-                    'first_surname' => ucwords($userPersonalData->first_surname)
-                ],
-                'errors' => null
-            ], 200);
         }
     }
 }
