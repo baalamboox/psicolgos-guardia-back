@@ -313,7 +313,7 @@ class AuthController extends Controller
             ], 400);
         }
         $user = User::where('email', strtolower($request->query('email')))->first();
-        if($user->profile_id == null)
+        if(is_null($user->profile_id))
         {
             return response()->json([
                 'status' => 400,
