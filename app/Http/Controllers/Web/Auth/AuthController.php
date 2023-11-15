@@ -36,21 +36,28 @@ class AuthController extends Controller
         {
             return redirect()->route('sign-in')->withErrors($validator)->withInput();
         }
-        $profile = User::where('email', strtolower($request->email))->first()->profile_id;
-        if($profile != 1)
+        try
         {
-            return redirect()->route('sign-in')->withErrors(['email' => 'Correo electrónico no pertenece a algún administrador.'])->withInput();
+            $profile = User::where('email', strtolower($request->email))->first()->profile_id;
+            if($profile != 1)
+            {
+                return redirect()->route('sign-in')->withErrors(['email' => 'Correo electrónico no pertenece a algún administrador.'])->withInput();
+            }
+            if(Auth::attempt(['email' => strtolower($request->email), 'password' => $request->password]))
+            {
+                $request->session()->regenerate();
+                UserLog::create([
+                    'user_id' => $request->user()->id,
+                    'action' => 'inicio de sesión',
+                    'details' => 'inició sesión de forma correcta'
+                ]);
+                return redirect()->route('home');
+            }
+            return redirect()->route('sign-in')->withErrors(['password' => 'Contraseña incorrecta.'])->withInput();
+        } catch (\Throwable $th)
+        {
+            return redirect()->route('sign-in')->withErrors(['email' => 'Correo electrónico no usado por algún usuario.'])->withInput();
         }
-        if(Auth::attempt(['email' => strtolower($request->email), 'password' => $request->password])) {
-            $request->session()->regenerate();
-            UserLog::create([
-                'user_id' => $request->user()->id,
-                'action' => 'inicio de sesión',
-                'details' => 'inició sesión de forma correcta'
-            ]);
-            return redirect()->route('home');
-        }
-        return redirect()->route('sign-in')->withErrors(['password' => 'Contraseña incorrecta.'])->withInput();
     }
 
     public function signOut(Request $request)
