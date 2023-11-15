@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Web\Auth\AuthController;
+use App\Http\Controllers\Web\Auth\RecoverAccountController;
 use App\Http\Controllers\Web\Admin\HomeController;
 use App\Http\Controllers\Web\Admin\ProfileController;
 use App\Http\Controllers\Web\Admin\NewAdminController;
@@ -23,7 +24,9 @@ Route::get('/', function() {
 });
 Route::prefix('admin')->group(function () {
     Route::get('/sign-in', [AuthController::class, 'showViewSignIn'])->name('sign-in');
-    Route::post('/auth/sign-in', [AuthController::class, 'signIn'])->name('auth.sign-in');
+    Route::prefix('auth')->group(function () {
+        Route::post('/sign-in', [AuthController::class, 'signIn'])->name('auth.sign-in');
+    });
     Route::middleware(['auth'])->group(function () {
         Route::get('/home', [HomeController::class, 'home'])->name('home');
         Route::get('/profile', [ProfileController::class, 'showViewProfile'])->name('profile');
@@ -36,4 +39,5 @@ Route::prefix('admin')->group(function () {
         Route::get('/new-admin', [NewAdminController::class, 'showViewNewAdmin'])->name('new.admin');
         Route::post('/create-admin', [NewAdminController::class, 'createNewAdmin'])->name('create.admin');
     });
+    Route::get('/forgot-password', [RecoverAccountController::class, 'showViewForgotPassword'])->name('for');
 });

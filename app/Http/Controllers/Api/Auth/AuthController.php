@@ -223,7 +223,7 @@ class AuthController extends Controller
     {
         $rules = [
             'email' => 'required|email|max:64',
-            'password' => 'required|regex:/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,10}$/',
+            'password' => 'required|regex:/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&*.,:?(){}<>"])[A-Za-z\d!@#$%^&*.,:?(){}<>"]{8,10}$/',
         ];
         $messages = [
             'email.required' => 'Correo electrónico requerido.',
@@ -244,6 +244,33 @@ class AuthController extends Controller
                 'errors' => $validator->errors() 
             ], 400);
         }
+        $user = User::where('email', strtolower($request->email))->first();
+        try
+        {
+            if($user->profile_id == 1)
+            {
+                return response()->json([
+                    'status' => 400,
+                    'message' => 'Usuario no permitido.',
+                    'success' => false,
+                    'data' => null,
+                    'errors' => [
+                        'email' => ['Correo electrónico usado por un administrador.']
+                    ]
+                ], 400);
+            }
+        } catch (\Throwable $th)
+        {
+            return response()->json([
+                'status' => 400,
+                'message' => 'No existe usuario.',
+                'success' => false,
+                'data' => null,
+                'errors' => [
+                    'email' => ['Correo electrónico no usado por algún usuario.']
+                ]
+            ], 400);
+        }
         if(!Auth::attempt($credentials))
         {
             return response()->json([
@@ -252,7 +279,7 @@ class AuthController extends Controller
                 'success' => false,
                 'data' => null,
                 'errors' => [
-                    'email or password' => ['Correo electrónico no existe ó contraseña errónea.']
+                    'email or password' => ['Correo electrónico ó contraseña errónea.']
                 ]
             ], 400);
         }
