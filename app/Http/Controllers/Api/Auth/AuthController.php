@@ -313,6 +313,18 @@ class AuthController extends Controller
             ], 400);
         }
         $user = User::where('email', strtolower($request->query('email')))->first();
+        if($user->id == 1)
+        {
+            return response()->json([
+                'status' => 400,
+                'message' => 'Usuario no permitido.',
+                'success' => false,
+                'data' => null,
+                'errors' => [
+                    'email' => ['Correo electrónico usado por un administrador.']
+                ]
+            ], 400);
+        }
         if($user)
         {
             $userPersonalData = UserPersonalData::find($user->id);
