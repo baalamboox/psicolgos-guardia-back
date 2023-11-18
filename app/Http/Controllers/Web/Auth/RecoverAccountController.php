@@ -91,6 +91,9 @@ class RecoverAccountController extends Controller
             $verificationCode = $request->old('verification_code');
             return redirect()->route('verification.code')->withErrors($validator)->withInput();
         }
-        return $request;
+        VerificationCode::where('email', session('email'))->update([
+            'checked' => true
+        ]);
+        return redirect()->route('reset.password');
     }
 }
