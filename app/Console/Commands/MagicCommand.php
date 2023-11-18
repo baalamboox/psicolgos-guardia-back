@@ -51,6 +51,7 @@ class MagicCommand extends Command
                         '2023_10_20_202647_create_users_log_table.php',
                         '2023_10_20_202457_create_medical_histories_log_table.php',
                         '2023_10_20_201758_create_appointments_log_table.php',
+                        '2023_11_17_042200_create_verification_codes_table.php',
                         '2014_10_12_100000_create_password_reset_tokens_table.php',
                         '2019_12_14_000001_create_personal_access_tokens_table.php',
                         '2019_08_19_000000_create_failed_jobs_table.php'

@@ -26,6 +26,8 @@ Route::prefix('admin')->group(function () {
     Route::get('/sign-in', [AuthController::class, 'showViewSignIn'])->name('sign-in');
     Route::prefix('auth')->group(function () {
         Route::post('/sign-in', [AuthController::class, 'signIn'])->name('auth.sign-in');
+        Route::post('/send-verification-code', [RecoverAccountController::class, 'sendVerificationCode'])->name('send.verification.code');
+        Route::post('/check-verification-code', [RecoverAccountController::class, 'checkVerificationCode'])->name('check.verification.code');
     });
     Route::middleware(['auth'])->group(function () {
         Route::get('/home', [HomeController::class, 'home'])->name('home');
@@ -39,5 +41,7 @@ Route::prefix('admin')->group(function () {
         Route::get('/new-admin', [NewAdminController::class, 'showViewNewAdmin'])->name('new.admin');
         Route::post('/create-admin', [NewAdminController::class, 'createNewAdmin'])->name('create.admin');
     });
-    Route::get('/forgot-password', [RecoverAccountController::class, 'showViewForgotPassword'])->name('for');
+    Route::get('/forgot-password', [RecoverAccountController::class, 'showViewForgotPassword'])->name('forgot.password');
+    Route::get('/verification-code', [RecoverAccountController::class, 'ShowViewVerificationCode'])->middleware('validate.email.in.sesion')->name('verification.code');
+    Route::get('/reset-password', [RecoverAccountController::class, 'showViewResetPassword'])->middleware('verification.code.is.checked')->name('reset.password');
 });

@@ -74,7 +74,7 @@
                             </button>
                         </form>
                         <p class="mt-4">
-                            <a class="text-sm font-medium text-purple-500 dark:text-purple-500 hover:underline" href="/recuperar-clave">¿Olvidaste tu contraseña?</a>
+                            <a href="{{ route('forgot.password') }}" class="text-sm font-medium text-purple-500 dark:text-purple-500 hover:underline">¿Olvidaste tu contraseña?</a>
                         </p>
                     </div>
                 </div>

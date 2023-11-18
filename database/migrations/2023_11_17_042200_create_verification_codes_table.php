@@ -11,16 +11,11 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('users', function (Blueprint $table) {
+        Schema::create('verification_codes', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('profile_id')->constrained()->onUpdate('cascade')->onDelete('cascade');
             $table->string('email', 64)->unique();
-            $table->text('password');
-            $table->string('profile_photo', 128)->nullable();
-            $table->boolean('state');
-            $table->timestamp('email_verified_at')->nullable();
-            $table->rememberToken();
-            $table->softDeletes();
+            $table->string('code');
+            $table->boolean('checked');
             $table->timestamps();
         });
     }
@@ -30,6 +25,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('users');
+        Schema::dropIfExists('verification_codes');
     }
 };
