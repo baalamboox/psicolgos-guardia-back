@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Mail;
+use Illuminate\Support\Facades\Hash;
 use App\Models\User;
 use App\Models\UserPersonalData;
 use App\Models\UserLog;
@@ -57,12 +58,12 @@ class RecoverAccountController extends Controller
                 $request->session()->put('email', $request->email);
                 $names = ucwords($userPersonalData->names);
                 $code = mt_rand(1000, 9999);
+                Mail::to($request->email)->send(new VerificationCodeMail($names, $code));
                 VerificationCode::create([
                     'email' => $request->email,
                     'code' => $code,
                     'checked' => false
                 ]);
-                Mail::to($request->email)->send(new VerificationCodeMail($names, $code));
                 UserLog::create([
                     'user_id' => $user->id,
                     'action' => 'envío de código de verificación',
@@ -80,10 +81,11 @@ class RecoverAccountController extends Controller
     public function checkVerificationCode(Request $request)
     {
         $rule = [
-            'verification_code' => 'required'
+            'verification_code' => 'required|numeric'
         ];
         $messages = [
-            'verification_code.required' => 'Código de verificación: Requerido.'
+            'verification_code.required' => 'Código de verificación: Requerido.',
+            'verification_code.numeric' => 'Código de verificación: Solo deben de ser números.'
         ];
         $validator = Validator::make($request->only('verification_code'), $rule, $messages);
         if($validator->fails())
@@ -91,9 +93,45 @@ class RecoverAccountController extends Controller
             $verificationCode = $request->old('verification_code');
             return redirect()->route('verification.code')->withErrors($validator)->withInput();
         }
+        if($request->verification_code != VerificationCode::where('email', session('email'))->first()->code)
+        {
+            $verificationCode = $request->old('verification_code');
+            return redirect()->route('verification.code')->withErrors(['verification_code' => 'Código de verificación: No valido.'])->withInput();
+        }
         VerificationCode::where('email', session('email'))->update([
             'checked' => true
         ]);
         return redirect()->route('reset.password');
+    }
+    public function resetPassword(Request $request)
+    {
+        $rules = [
+            'password' => 'required|regex:/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&*.,:?(){}<>"])[A-Za-z\d!@#$%^&*.,:?(){}<>"]{8,10}$/|confirmed'
+        ];
+        $messages = [
+            'password.required' => 'Contraseña: Requerida.',
+            'password.regex' => 'Contraseña: Debe tener al menos una letra minúscula, al menos una letra mayúscula, al menos un caracter especial, al menos un número y una longitud entre 8 y 10 caracteres.',
+            'password.confirmed' => 'Contraseñas: No coinciden.'
+        ];
+        $validator = Validator::make($request->all(), $rules, $messages);
+        if($validator->fails())
+        {
+            $password = $request->old('password');
+            VerificationCode::where('email', session('email'))->update([
+                'checked' => true
+            ]);
+            return redirect()->route('reset.password')->withErrors($validator)->withInput();
+        }
+        $user = User::where('email', session('email'))->first();
+        $user->password = Hash::make($request->password);
+        $user->save();
+        UserLog::create([
+            'user_id' => $user->id,
+            'action' => 'actualización de contraseña',
+            'details' => 'actualizó contraseña correctamente'
+        ]);
+        VerificationCode::where('email', session('email'))->delete();
+        $request->session()->invalidate();
+        return redirect()->route('sign.in')->with('success', true);
     }
 }

@@ -38,7 +38,7 @@
                             </div>
                         </div>
                         @endif
-                        <form action="{{ route('send.verification.code') }}" method="post">
+                        <form action="{{ route('auth.send.verification.code') }}" method="post">
                             @csrf
                             @method('post')
                             <label class="block text-sm">

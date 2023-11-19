@@ -21,34 +21,52 @@
                             </button>
                         </div>
                         <h1 class="mb-4 text-xl font-semibold text-gray-700 text-center dark:text-gray-200">Nueva contraseña</h1>
-                        <label class="block mt-4 text-sm">
-                            <span class="text-gray-700 dark:text-gray-400">
-                                <svg class="w-4 h-4 inline" fill="currentColor" xmlns="http://www.w3.org/2000/svg" viewBox="0 -960 960 960">
-                                    <path d="M240-80q-33 0-56.5-23.5T160-160v-400q0-33 23.5-56.5T240-640h40v-80q0-83 58.5-141.5T480-920q83 0 141.5 58.5T680-720v80h40q33 0 56.5 23.5T800-560v400q0 33-23.5 56.5T720-80H240Zm0-80h480v-400H240v400Zm240-120q33 0 56.5-23.5T560-360q0-33-23.5-56.5T480-440q-33 0-56.5 23.5T400-360q0 33 23.5 56.5T480-280ZM360-640h240v-80q0-50-35-85t-85-35q-50 0-85 35t-35 85v80ZM240-160v-400 400Z" />
-                                </svg>
-                                Nueva contraseña
-                            </span>
-                            <input class="block w-full mt-1 text-sm dark:border-gray-600 dark:bg-gray-700 focus:border-purple-400 focus:outline-none focus:shadow-outline-purple dark:text-gray-300 dark:focus:shadow-outline-purple form-input" placeholder="********" x-bind:type="isShowPassword" />
-                        </label>
-                        <label class="block mt-4 text-sm">
-                            <span class="text-gray-700 dark:text-gray-400">
-                                <svg class="w-4 h-4 inline" fill="currentColor" xmlns="http://www.w3.org/2000/svg" viewBox="0 -960 960 960">
-                                    <path d="M240-80q-33 0-56.5-23.5T160-160v-400q0-33 23.5-56.5T240-640h40v-80q0-83 58.5-141.5T480-920q83 0 141.5 58.5T680-720v80h40q33 0 56.5 23.5T800-560v400q0 33-23.5 56.5T720-80H240Zm0-80h480v-400H240v400Zm240-120q33 0 56.5-23.5T560-360q0-33-23.5-56.5T480-440q-33 0-56.5 23.5T400-360q0 33 23.5 56.5T480-280ZM360-640h240v-80q0-50-35-85t-85-35q-50 0-85 35t-35 85v80ZM240-160v-400 400Z" />
-                                </svg>
-                                Confirmar contraseña
-                            </span>
-                            <input class="block w-full mt-1 text-sm dark:border-gray-600 dark:bg-gray-700 focus:border-purple-400 focus:outline-none focus:shadow-outline-purple dark:text-gray-300 dark:focus:shadow-outline-purple form-input" placeholder="********" x-bind:type="isShowPassword" />
-                        </label>
-                        <div class="mt-4 flex items-center">
-                            <input type="checkbox" id="show_hide_password" class="text-purple-600 border-none form-checkbox mr-2 shadow-outline-purple bg-transparent focus:border-purple-600 focus:outline-none focus:shadow-outline-purple dark:focus:shadow-outline-purple" @click="toggleShowPassword">
-                            <label for="show_hide_password" class="text-sm text-gray-700 dark:text-gray-400" x-text="textShowPassword"></label>
+                        @if($errors->any())
+                        <div class="flex p-4 mb-4 text-sm text-red-800 border border-red-300 rounded-lg bg-red-50 dark:bg-gray-800 dark:text-red-400 dark:border-red-800" role="alert">
+                            <svg class="flex-shrink-0 inline w-4 h-4 mr-2" fill="currentColor" xmlns="http://www.w3.org/2000/svg" viewBox="0 -960 960 960"><path d="m336-280 144-144 144 144 56-56-144-144 144-144-56-56-144 144-144-144-56 56 144 144-144 144 56 56ZM480-80q-83 0-156-31.5T197-197q-54-54-85.5-127T80-480q0-83 31.5-156T197-763q54-54 127-85.5T480-880q83 0 156 31.5T763-763q54 54 85.5 127T880-480q0 83-31.5 156T763-197q-54 54-127 85.5T480-80Zm0-80q134 0 227-93t93-227q0-134-93-227t-227-93q-134 0-227 93t-93 227q0 134 93 227t227 93Zm0-320Z"/></svg>
+                            <span class="sr-only">Danger</span>
+                            <div>
+                                <span class="font-medium">Hay problema con los siguientes datos.</span>
+                                <ul class="mt-1.5 ml-4 list-disc list-inside">
+                                    @foreach($errors->all() as $error) 
+                                    <li>{{ $error }}</li>
+                                    @endforeach
+                                </ul>
+                            </div>
                         </div>
-                        <a class="block w-full px-4 py-2 mt-8 text-sm font-medium leading-5 text-center text-white transition-colors duration-150 bg-purple-600 border border-transparent rounded-lg active:bg-purple-600 hover:bg-purple-700 focus:outline-none focus:shadow-outline-purple" href="/iniciar-sesion">
-                            <svg class="w-5 h-5 inline" fill="currentColor" xmlns="http://www.w3.org/2000/svg" viewBox="0 -960 960 960">
-                                <path d="M840-680v480q0 33-23.5 56.5T760-120H200q-33 0-56.5-23.5T120-200v-560q0-33 23.5-56.5T200-840h480l160 160Zm-80 34L646-760H200v560h560v-446ZM480-240q50 0 85-35t35-85q0-50-35-85t-85-35q-50 0-85 35t-35 85q0 50 35 85t85 35ZM240-560h360v-160H240v160Zm-40-86v446-560 114Z" />
-                            </svg>
-                            Guardar cambios
-                        </a>
+                        @endif
+                        <form action="{{ route('auth.reset.password') }}" method="post">
+                            @csrf
+                            @method('post')
+                            <label class="block mt-4 text-sm">
+                                <span class="text-gray-700 dark:text-gray-400">
+                                    <svg class="w-4 h-4 inline" fill="currentColor" xmlns="http://www.w3.org/2000/svg" viewBox="0 -960 960 960">
+                                        <path d="M240-80q-33 0-56.5-23.5T160-160v-400q0-33 23.5-56.5T240-640h40v-80q0-83 58.5-141.5T480-920q83 0 141.5 58.5T680-720v80h40q33 0 56.5 23.5T800-560v400q0 33-23.5 56.5T720-80H240Zm0-80h480v-400H240v400Zm240-120q33 0 56.5-23.5T560-360q0-33-23.5-56.5T480-440q-33 0-56.5 23.5T400-360q0 33 23.5 56.5T480-280ZM360-640h240v-80q0-50-35-85t-85-35q-50 0-85 35t-35 85v80ZM240-160v-400 400Z" />
+                                    </svg>
+                                    Nueva contraseña
+                                </span>
+                                <input type="password" class="block w-full mt-1 text-sm @error('password') border-red-800 shadow-outline-red @enderror dark:border-gray-600 dark:bg-gray-700 focus:border-purple-400 focus:outline-none focus:shadow-outline-purple dark:text-gray-300 dark:focus:shadow-outline-purple form-input" name="password" placeholder="********" x-bind:type="isShowPassword" value="{{ old('password') }}" />
+                            </label>
+                            <label class="block mt-4 text-sm">
+                                <span class="text-gray-700 dark:text-gray-400">
+                                    <svg class="w-4 h-4 inline" fill="currentColor" xmlns="http://www.w3.org/2000/svg" viewBox="0 -960 960 960">
+                                        <path d="M240-80q-33 0-56.5-23.5T160-160v-400q0-33 23.5-56.5T240-640h40v-80q0-83 58.5-141.5T480-920q83 0 141.5 58.5T680-720v80h40q33 0 56.5 23.5T800-560v400q0 33-23.5 56.5T720-80H240Zm0-80h480v-400H240v400Zm240-120q33 0 56.5-23.5T560-360q0-33-23.5-56.5T480-440q-33 0-56.5 23.5T400-360q0 33 23.5 56.5T480-280ZM360-640h240v-80q0-50-35-85t-85-35q-50 0-85 35t-35 85v80ZM240-160v-400 400Z" />
+                                    </svg>
+                                    Confirmar contraseña
+                                </span>
+                                <input type="password" class="block w-full mt-1 text-sm @error('password') border-red-800 shadow-outline-red @enderror dark:border-gray-600 dark:bg-gray-700 focus:border-purple-400 focus:outline-none focus:shadow-outline-purple dark:text-gray-300 dark:focus:shadow-outline-purple form-input" name="password_confirmation" placeholder="********" x-bind:type="isShowPassword" value="{{ old('password_confirmation') }}" />
+                            </label>
+                            <div class="mt-4 flex items-center">
+                                <input type="checkbox" id="show_hide_password" class="text-purple-600 border-none form-checkbox mr-2 shadow-outline-purple bg-transparent focus:border-purple-600 focus:outline-none focus:shadow-outline-purple dark:focus:shadow-outline-purple" @click="toggleShowPassword">
+                                <label for="show_hide_password" class="text-sm text-gray-700 dark:text-gray-400" x-text="textShowPassword"></label>
+                            </div>
+                            <button type="submit" class="block w-full px-4 py-2 mt-8 text-sm font-medium leading-5 text-center text-white transition-colors duration-150 bg-purple-600 border border-transparent rounded-lg active:bg-purple-600 hover:bg-purple-700 focus:outline-none focus:shadow-outline-purple">
+                                <svg class="w-5 h-5 inline" fill="currentColor" xmlns="http://www.w3.org/2000/svg" viewBox="0 -960 960 960">
+                                    <path d="M840-680v480q0 33-23.5 56.5T760-120H200q-33 0-56.5-23.5T120-200v-560q0-33 23.5-56.5T200-840h480l160 160Zm-80 34L646-760H200v560h560v-446ZM480-240q50 0 85-35t35-85q0-50-35-85t-85-35q-50 0-85 35t-35 85q0 50 35 85t85 35ZM240-560h360v-160H240v160Zm-40-86v446-560 114Z" />
+                                </svg>
+                                Guardar cambios
+                            </button>
+                        </form>
                     </div>
                 </div>
             </div>

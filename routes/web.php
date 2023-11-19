@@ -20,14 +20,15 @@ use App\Http\Controllers\Web\Admin\ConfigController;
 */
 
 Route::get('/', function() {
-    return redirect()->route('sign-in');
+    return redirect()->route('sign.in');
 });
 Route::prefix('admin')->group(function () {
-    Route::get('/sign-in', [AuthController::class, 'showViewSignIn'])->name('sign-in');
+    Route::get('/sign-in', [AuthController::class, 'showViewSignIn'])->name('sign.in');
     Route::prefix('auth')->group(function () {
-        Route::post('/sign-in', [AuthController::class, 'signIn'])->name('auth.sign-in');
-        Route::post('/send-verification-code', [RecoverAccountController::class, 'sendVerificationCode'])->name('send.verification.code');
-        Route::post('/check-verification-code', [RecoverAccountController::class, 'checkVerificationCode'])->name('check.verification.code');
+        Route::post('/sign-in', [AuthController::class, 'signIn'])->name('auth.sign.in');
+        Route::post('/send-verification-code', [RecoverAccountController::class, 'sendVerificationCode'])->name('auth.send.verification.code');
+        Route::post('/check-verification-code', [RecoverAccountController::class, 'checkVerificationCode'])->name('auth.check.verification.code');
+        Route::post('/reset-password', [RecoverAccountController::class, 'resetPassword'])->name('auth.reset.password');
     });
     Route::middleware(['auth'])->group(function () {
         Route::get('/home', [HomeController::class, 'home'])->name('home');
@@ -37,7 +38,7 @@ Route::prefix('admin')->group(function () {
         Route::post('/profile/config/update-profile-photo', [ConfigController::class, 'updateProfilePhoto'])->name('update.profile.photo');
         Route::post('/profile/config/update-personal-contact-data', [ConfigController::class, 'updatePersonalContactData'])->name('update.personal.contact.data');
         Route::post('/profile/config/update-password', [ConfigController::class, 'updatePassword'])->name('update.password');
-        Route::get('/auth/sign-out', [AuthController::class, 'signOut'])->name('auth.sign-out');
+        Route::get('/auth/sign-out', [AuthController::class, 'signOut'])->name('auth.sign.out');
         Route::get('/new-admin', [NewAdminController::class, 'showViewNewAdmin'])->name('new.admin');
         Route::post('/create-admin', [NewAdminController::class, 'createNewAdmin'])->name('create.admin');
     });

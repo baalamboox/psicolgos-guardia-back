@@ -25,6 +25,9 @@ class ValidateIfVerificationCodeIsChecked
         {
             return redirect()->route('verification.code');
         }
+        VerificationCode::where('email', session('email'))->update([
+            'checked' => false
+        ]);
         return $next($request);
     }
 }

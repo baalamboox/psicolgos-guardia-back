@@ -34,14 +34,14 @@ class AuthController extends Controller
         $validator = Validator::make($request->all(), $rules, $messages);
         if($validator->fails())
         {
-            return redirect()->route('sign-in')->withErrors($validator)->withInput();
+            return redirect()->route('sign.in')->withErrors($validator)->withInput();
         }
         try
         {
             $profile = User::where('email', strtolower($request->email))->first()->profile_id;
             if($profile != 1)
             {
-                return redirect()->route('sign-in')->withErrors(['email' => 'Correo electrónico no pertenece a algún administrador.'])->withInput();
+                return redirect()->route('sign.in')->withErrors(['email' => 'Correo electrónico no pertenece a algún administrador.'])->withInput();
             }
             if(Auth::attempt(['email' => strtolower($request->email), 'password' => $request->password]))
             {
@@ -53,10 +53,10 @@ class AuthController extends Controller
                 ]);
                 return redirect()->route('home');
             }
-            return redirect()->route('sign-in')->withErrors(['password' => 'Contraseña incorrecta.'])->withInput();
+            return redirect()->route('sign.in')->withErrors(['password' => 'Contraseña incorrecta.'])->withInput();
         } catch (\Throwable $th)
         {
-            return redirect()->route('sign-in')->withErrors(['email' => 'Correo electrónico no usado por algún usuario.'])->withInput();
+            return redirect()->route('sign.in')->withErrors(['email' => 'Correo electrónico no usado por algún usuario.'])->withInput();
         }
     }
 
@@ -70,6 +70,6 @@ class AuthController extends Controller
             'details' => 'cerró sesión de forma correcta'
         ]);
         Auth::logout();
-        return redirect()->route('sign-in');
+        return redirect()->route('sign.in');
     }
 }
