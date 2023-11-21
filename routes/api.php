@@ -4,6 +4,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Api\Auth\AuthController;
 use App\Http\Controllers\Api\Auth\RecoverAccountController;
+use App\Http\Controllers\Api\Patients\ListAllPatientsController;
 
 /*
 |--------------------------------------------------------------------------
@@ -30,4 +31,10 @@ Route::middleware('auth:sanctum')->group(function() {
         return $request->user();
     });
     Route::get('/auth/sign-out', [AuthController::class, 'signOut']);
+});
+
+Route::middleware(['web', 'auth'])->group(function() {
+    Route::prefix('patients')->group(function() {
+        Route::get('/list-all-patients', ListAllPatientsController::class);
+    });
 });
