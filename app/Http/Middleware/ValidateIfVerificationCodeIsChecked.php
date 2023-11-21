@@ -16,6 +16,38 @@ class ValidateIfVerificationCodeIsChecked
      */
     public function handle(Request $request, Closure $next): Response
     {
+        if($request->isMethod('put'))
+        {
+            try {
+                $codeIsChecked = VerificationCode::where('email', strtolower($request->email))->first()->checked;
+                if($codeIsChecked == '0')
+                {
+                    return response()->json([
+                        'status' => 400,
+                        'message' => 'Error de código de verificación.',
+                        'success' => false,
+                        'data' => null,
+                        'errors' => [
+                            'verification_code' => ['Código de verificación: No verificado aún.']
+                        ]
+                    ], 400);
+                }
+            } catch (\Throwable $th) {
+                return response()->json([
+                    'status' => 400,
+                    'message' => 'Error de código de verificación.',
+                    'success' => false,
+                    'data' => null,
+                    'errors' => [
+                        'verification_code' => ['Código de verificación: No se ha encontrado ningún código.']
+                    ]
+                ], 400);
+            }
+            VerificationCode::where('email', strtolower($request->email))->update([
+                'checked' => false
+            ]);
+            return $next($request);
+        }
         if(is_null(session('email')))
         {
             return redirect()->route('forgot.password');

@@ -3,6 +3,7 @@
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Api\Auth\AuthController;
+use App\Http\Controllers\Api\Auth\RecoverAccountController;
 
 /*
 |--------------------------------------------------------------------------
@@ -15,9 +16,14 @@ use App\Http\Controllers\Api\Auth\AuthController;
 |
 */
 
-Route::post('/auth/sign-up', [AuthController::class, 'signUp']);
-Route::post('/auth/sign-in', [AuthController::class, 'signIn']);
-Route::get('/auth/verify-user', [AuthController::class, 'verifyUser']);
+Route::prefix('auth')->group(function() {
+    Route::post('/sign-up', [AuthController::class, 'signUp']);
+    Route::post('/sign-in', [AuthController::class, 'signIn']);
+    Route::get('/verify-user', [AuthController::class, 'verifyUser']);
+    Route::post('/send-verification-code', [RecoverAccountController::class, 'sendVerificationCode']);
+    Route::post('/check-verification-code', [RecoverAccountController::class, 'checkVerificationCode']);
+    Route::put('/reset-password', [RecoverAccountController::class, 'resetPassword'])->middleware('verification.code.is.checked');
+});
 
 Route::middleware('auth:sanctum')->group(function() {
     Route::get('/user', function (Request $request) {
