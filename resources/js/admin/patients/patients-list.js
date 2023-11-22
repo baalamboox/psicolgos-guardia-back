@@ -1,5 +1,5 @@
-import { data } from "autoprefixer";
 import { Grid, html } from "gridjs";
+import { capitalLetters } from '../../capital-letters';
 import 'gridjs/dist/theme/mermaid.css';
 
 const profile = ({src}) => html(`
@@ -44,9 +44,9 @@ document.querySelector('#patientsList') && new Grid({
     columns: ['Foto', 'Paciente', 'Datos generales', 'Historial clínico', 'Estado'],
     server: {
         url: '/api/patients/list-all-patients',
-        then: data => data.patients.map(patient => [
+        then: data => data.data.map(patient => [
             profile({ src: `${ window.location.origin }/${ patient.profile_photo }` }),
-            `${ patient.user_personal_data.names } ${ patient.user_personal_data.first_surname }`,
+            capitalLetters({ words: `${ patient.user_personal_data.names } ${ patient.user_personal_data.first_surname }` }),
             generalData({ href: `/admin/patients/general-data/${ patient.id }` }),
             medicalHistory({ href: `/admin/patients/medical-history/${ patient.id }` }),
             status({ state: patient.state })

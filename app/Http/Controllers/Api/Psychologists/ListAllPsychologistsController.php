@@ -1,12 +1,12 @@
 <?php
 
-namespace App\Http\Controllers\Api\Patients;
+namespace App\Http\Controllers\Api\Psychologists;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\User;
 
-class ListAllPatientsController extends Controller
+class ListAllPsychologistsController extends Controller
 {
     /**
      * Handle the incoming request.
@@ -14,12 +14,12 @@ class ListAllPatientsController extends Controller
     public function __invoke(Request $request)
     {
         //
-        $patients = User::where('profile_id', 2)->with('userPersonalData')->get();
+        $psychologists = User::where('profile_id', 3)->with('userPersonalData')->get();
         return response()->json([
             'status' => 200,
-            'message' => 'Estos son todos los Pacientes encontrados.',
+            'message' => 'Estos son todos los Psicólogos encontrados.',
             'success' => true,
-            'data' => $patients,
+            'data' => $psychologists,
             'errors' => null
         ], 200);
     }

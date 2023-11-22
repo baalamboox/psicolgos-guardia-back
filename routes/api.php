@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Api\Auth\AuthController;
 use App\Http\Controllers\Api\Auth\RecoverAccountController;
 use App\Http\Controllers\Api\Patients\ListAllPatientsController;
+use App\Http\Controllers\Api\Psychologists\ListAllPsychologistsController;
 
 /*
 |--------------------------------------------------------------------------
@@ -36,5 +37,8 @@ Route::middleware('auth:sanctum')->group(function() {
 Route::middleware(['web', 'auth'])->group(function() {
     Route::prefix('patients')->group(function() {
         Route::get('/list-all-patients', ListAllPatientsController::class);
+    });
+    Route::prefix('psychologists')->group(function() {
+        Route::get('/list-all-psychologists', ListAllPsychologistsController::class);
     });
 });
