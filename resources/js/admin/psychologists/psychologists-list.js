@@ -43,7 +43,7 @@ const status = ({state}) => state === '1' ? html(`
 document.querySelector('#psychologistsList') && new Grid({
     columns: ['Foto', 'Psicólogo', 'Datos generales', 'Historiales clínicos', 'Estado'],
     server: {
-        url: '/api/psychologists/list-all-psychologists',
+        url: '/api/v1.0/psychologists/list-all-psychologists',
         then: data => data.data.map(psychologist => [
             profile({ src: `${ window.location.origin }/${ psychologist.profile_photo }` }),
             capitalLetters({ words: `${ psychologist.user_personal_data.names } ${ psychologist.user_personal_data.first_surname }` }),

@@ -43,7 +43,7 @@ const status = ({state}) => state === '1' ? html(`
 document.querySelector('#patientsList') && new Grid({
     columns: ['Foto', 'Paciente', 'Datos generales', 'Historial clínico', 'Estado'],
     server: {
-        url: '/api/patients/list-all-patients',
+        url: '/api/v1.0/patients/list-all-patients',
         then: data => data.data.map(patient => [
             profile({ src: `${ window.location.origin }/${ patient.profile_photo }` }),
             capitalLetters({ words: `${ patient.user_personal_data.names } ${ patient.user_personal_data.first_surname }` }),

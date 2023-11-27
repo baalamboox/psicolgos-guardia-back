@@ -7,6 +7,7 @@ use App\Http\Controllers\Web\Admin\HomeController;
 use App\Http\Controllers\Web\Admin\ProfileController;
 use App\Http\Controllers\Web\Admin\NewAdminController;
 use App\Http\Controllers\Web\Admin\ConfigController;
+use App\Http\Controllers\Web\Admin\Patients\GeneralDataController;
 
 /*
 |--------------------------------------------------------------------------
@@ -45,11 +46,20 @@ Route::prefix('admin')->group(function() {
             Route::get('/patient-list', function() {
                 return view('admin.patients.patients');
             })->name('patients');
+            Route::get('/general-data/{id}', GeneralDataController::class);
+            Route::get('/medical-history/{id}', function() {
+                return view('admin.patients.medical-history');
+            });
         });
         Route::prefix('psychologists')->group(function() {
             Route::get('/psychologist-list', function() {
                 return view('admin.psychologists.psychologists');
             })->name('psychologists');
+        });
+        Route::prefix('metrics')->group(function() {
+            Route::get('/graphs', function() {
+                return view('admin.metrics');
+            })->name('graphs');
         });
     });
     Route::get('/forgot-password', [RecoverAccountController::class, 'showViewForgotPassword'])->name('forgot.password');
