@@ -87,7 +87,7 @@ class MagicCommand extends Command
                     $user = new User([
                         'email' => strtolower($email),
                         'password' => $password,
-                        'state' => 1
+                        'state' => 'activo'
                     ]);
                     $profile->users()->save($user);
                     $userPersonalData = new UserPersonalData([
@@ -114,6 +114,7 @@ class MagicCommand extends Command
                     }
                     break;
                 case 'Ayuda':
+                    $this->info("1.- Primero debes ejecutar todas las migraciones listadas, para ello debes ingresar la opción [0].\n2.- Segundo debes ejecutar el Seeder para que se cargen los perfiles de usuario, para ello debes ingresar la opción [1].\n3.- Tercero debes crear un Administrador por defecto, para ello debes ingresar la opción [2].\n4.- Cuarto debes crear el directorio donde se almacenarán las fotos de perfil, para ello debes ingresar la opción [3].\n5.- Quinto solo debes ejecutar la opción [4] si se esta en modo desarrollo.\n6.- Muestra este menú de ayuda.[5]\n7.- Cierra este menú de ayuda. [6]\n");
                     break;
                 case 'Salir':
                     echo "saliendo";

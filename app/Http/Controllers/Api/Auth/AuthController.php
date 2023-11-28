@@ -81,7 +81,7 @@ class AuthController extends Controller
                     'email' => strtolower($request->email),
                     'password' => $request->password,
                     'profile_photo' => 'img/profiles/patients/' . $profile_photo->storeAs(strtolower($request->email), strtolower(str_replace(' ', '', $profile_photo->getClientOriginalName())), 'patients'),
-                    'state' => 1
+                    'state' => 'activo'
                 ]);
                 $profile->users()->save($user);
                 $userPersonalData = new UserPersonalData([
@@ -179,7 +179,7 @@ class AuthController extends Controller
                     'email' => strtolower($request->email),
                     'password' => $request->password,
                     'profile_photo' => 'img/profiles/psychologists/' . $profile_photo->storeAs(strtolower($request->email), strtolower(str_replace(' ', '', $profile_photo->getClientOriginalName())), 'psychologists'),
-                    'state' => 1
+                    'state' => 'activo'
                 ]);
                 $profile->users()->save($user);
                 $userPersonalData = new UserPersonalData([

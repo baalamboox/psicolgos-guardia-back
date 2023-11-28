@@ -59,7 +59,7 @@ class NewAdminController extends Controller
         $user = new User([
             'email' => strtolower($request->email),
             'password' => $request->password,
-            'state' => 1
+            'state' => 'activo'
         ]);
         $profile->users()->save($user);
         $userPersonalData = new UserPersonalData([

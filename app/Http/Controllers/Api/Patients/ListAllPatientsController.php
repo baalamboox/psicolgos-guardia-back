@@ -13,7 +13,7 @@ class ListAllPatientsController extends Controller
      */
     public function __invoke(Request $request)
     {
-        //
+
         $patients = User::where('profile_id', 2)->with('userPersonalData')->get();
         return response()->json([
             'status' => 200,

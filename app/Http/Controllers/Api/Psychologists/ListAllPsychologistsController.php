@@ -13,7 +13,7 @@ class ListAllPsychologistsController extends Controller
      */
     public function __invoke(Request $request)
     {
-        //
+        
         $psychologists = User::where('profile_id', 3)->with('userPersonalData')->get();
         return response()->json([
             'status' => 200,

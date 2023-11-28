@@ -97,6 +97,7 @@ class ConfigController extends Controller
         ]);
         return redirect()->route('config')->with('success', 'Datos actualizados.');
     }
+    
     public function updatePassword(Request $request)
     {
         $rule = [

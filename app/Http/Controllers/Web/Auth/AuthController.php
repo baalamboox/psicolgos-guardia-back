@@ -11,6 +11,7 @@ use App\Models\UserLog;
 
 class AuthController extends Controller
 {
+    
     public function showViewSignIn()
     {
         return view('auth.sign-in');

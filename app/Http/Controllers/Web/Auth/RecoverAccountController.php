@@ -103,6 +103,7 @@ class RecoverAccountController extends Controller
         ]);
         return redirect()->route('reset.password');
     }
+    
     public function resetPassword(Request $request)
     {
         $rules = [
