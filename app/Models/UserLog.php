@@ -10,6 +10,7 @@ class UserLog extends Model
     use HasFactory;
 
     const UPDATED_AT = null;
+    
     public $timestamps = 'created_at';
 
     protected $table = 'users_log';

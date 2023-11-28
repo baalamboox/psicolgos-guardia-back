@@ -16,6 +16,7 @@ return new class extends Migration
             $table->foreignId('user_id')->constrained()->onUpdate('cascade')->onDelete('cascade');
             $table->float('latitude');
             $table->float('length');
+            $table->string('zone', 32);
             $table->softDeletes();
             $table->timestamps();
         });

@@ -4,6 +4,7 @@ namespace App\Models;
 
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
@@ -12,7 +13,7 @@ use Illuminate\Database\Eloquent\Relations\hasOne;
 
 class User extends Authenticatable
 {
-    use HasApiTokens, HasFactory, Notifiable;
+    use HasApiTokens, HasFactory, Notifiable, SoftDeletes;
 
     /**
      * The attributes that are mass assignable.
@@ -46,13 +47,12 @@ class User extends Authenticatable
         'password' => 'hashed',
     ];
 
-    // Defining relationship to profile.
-    public function profile(): belongsTo
+    public function profile()
     {
         return $this->belongsTo(Profile::class);
     }
 
-    public function userPersonalData(): hasOne
+    public function userPersonalData()
     {
         return $this->hasOne(UserPersonalData::class);
     }

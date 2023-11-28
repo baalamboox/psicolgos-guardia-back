@@ -8,4 +8,16 @@ use Illuminate\Database\Eloquent\Model;
 class MedicalHistoryLog extends Model
 {
     use HasFactory;
+
+    const UPDATED_AT = null;
+    
+    public $timestamps = 'created_at';
+
+    protected $table = 'medical_histories_log';
+
+    protected $fillable = [
+        'user_id',
+        'action',
+        'details'
+    ];
 }
