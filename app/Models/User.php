@@ -8,8 +8,9 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
-use Illuminate\Database\Eloquent\Relations\belongsTo;
-use Illuminate\Database\Eloquent\Relations\hasOne;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasOne;
+use Illuminate\Database\Eloquest\Relation\HasMany;
 
 class User extends Authenticatable
 {
@@ -55,5 +56,20 @@ class User extends Authenticatable
     public function userPersonalData()
     {
         return $this->hasOne(UserPersonalData::class);
+    }
+
+    public function emergencyContact()
+    {
+        return $this->hasMany(EmergencyContact::class);
+    }
+
+    public function userLocation()
+    {
+        return $this->hasOne(UserLocation::class);
+    }
+
+    public function medicalHistory()
+    {
+        return $this->hasOne(MedicalHistory::class);
     }
 }

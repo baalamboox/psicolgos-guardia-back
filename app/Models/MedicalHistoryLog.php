@@ -16,6 +16,7 @@ class MedicalHistoryLog extends Model
     protected $table = 'medical_histories_log';
 
     protected $fillable = [
+        'medical_history_id',
         'user_id',
         'action',
         'details'
