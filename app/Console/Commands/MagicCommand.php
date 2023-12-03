@@ -54,7 +54,8 @@ class MagicCommand extends Command
                         '2023_11_17_042200_create_verification_codes_table.php',
                         '2014_10_12_100000_create_password_reset_tokens_table.php',
                         '2019_12_14_000001_create_personal_access_tokens_table.php',
-                        '2019_08_19_000000_create_failed_jobs_table.php'
+                        '2019_08_19_000000_create_failed_jobs_table.php',
+                        '0000_00_00_000000_create_websockets_statistics_entries_table.php'
                     ];
                     for($i=0; $i < sizeof($migrationsOrdered); $i++) {
                         $this->info("Ejecutando migración: $migrationsOrdered[$i]");
