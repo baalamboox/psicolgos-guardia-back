@@ -6,6 +6,7 @@ use App\Http\Controllers\Api\Auth\AuthController;
 use App\Http\Controllers\Api\Auth\RecoverAccountController;
 use App\Http\Controllers\Api\Patients\ListAllPatientsController;
 use App\Http\Controllers\Api\Psychologists\ListAllPsychologistsController;
+use App\Http\Controllers\Api\Location\SetLocationController;
 
 /*
 |--------------------------------------------------------------------------
@@ -42,5 +43,9 @@ Route::prefix('v1.0')->group(function() {
         Route::prefix('psychologists')->group(function() {
             Route::get('/list-all-psychologists', ListAllPsychologistsController::class);
         });
+    });
+
+    Route::prefix('location')->group(function() {
+        Route::post('/set-location', SetLocationController::class);
     });
 });
