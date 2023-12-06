@@ -53,7 +53,7 @@ class NewAdminController extends Controller
             $first_surname = $request->old('first_surname');
             $second_surname = $request->old('second_surname');
             $email = $request->old('email');
-            $password = $request->old('password');
+            // $password = $request->old('password');
             return redirect()->route('new.admin')->withErrors($validator)->withInput();
         }
         $profile = Profile::find(1);

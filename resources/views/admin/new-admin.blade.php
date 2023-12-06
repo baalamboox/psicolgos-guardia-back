@@ -79,7 +79,7 @@
                                     </svg>
                                     Contraseña
                                 </span>
-                                <input type="password" class="block w-full mt-1 text-sm @error('password') border-red-800 shadow-outline-red @enderror dark:border-gray-600 dark:bg-gray-700 focus:border-purple-400 focus:outline-none focus:shadow-outline-purple dark:text-gray-300 dark:focus:shadow-outline-gray form-input" name="password" placeholder="********" x-bind:type="isShowPassword" value="{{ old('password') }}" />
+                                <input type="password" class="block w-full mt-1 text-sm dark:border-gray-600 dark:bg-gray-700 focus:border-purple-400 focus:outline-none focus:shadow-outline-purple dark:text-gray-300 dark:focus:shadow-outline-gray form-input" name="password" placeholder="********" x-bind:type="isShowPassword" value="Abcd@1234" disabled />
                             </label>
                             <label class="block mt-4 text-sm">
                                 <span class="text-gray-700 dark:text-gray-400">
@@ -88,7 +88,7 @@
                                     </svg>
                                     Confirmar contraseña
                                 </span>
-                                <input type="password" class="block w-full mt-1 text-sm @error('password') border-red-800 shadow-outline-red @enderror dark:border-gray-600 dark:bg-gray-700 focus:border-purple-400 focus:outline-none focus:shadow-outline-purple dark:text-gray-300 dark:focus:shadow-outline-gray form-input" name="password_confirmation" placeholder="********" x-bind:type="isShowPassword" value="{{ old('password_confirmation') }}" />
+                                <input type="password" class="block w-full mt-1 text-sm dark:border-gray-600 dark:bg-gray-700 focus:border-purple-400 focus:outline-none focus:shadow-outline-purple dark:text-gray-300 dark:focus:shadow-outline-gray form-input" name="password_confirmation" placeholder="********" x-bind:type="isShowPassword" value="Abcd@1234" disabled />
                             </label>
                             <div class="mt-4 flex items-center">
                                 <input type="checkbox" id="show_hide_password" class="text-purple-600 form-checkbox mr-2 shadow-outline-purple border-purple-300 bg-transparent focus:border-purple-400 focus:outline-none focus:shadow-outline-purple dark:focus:shadow-outline-gray" @click="toggleShowPassword">
