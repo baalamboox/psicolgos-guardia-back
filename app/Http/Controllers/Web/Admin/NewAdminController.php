@@ -9,6 +9,7 @@ use App\Models\Profile;
 use App\Models\User;
 use App\Models\UserPersonalData;
 use App\Models\UserLog;
+use App\Events\Admin\SendNotifications;
 
 class NewAdminController extends Controller
 {
@@ -73,6 +74,7 @@ class NewAdminController extends Controller
             'action' => 'creación de usuario',
             'details' => 'creó un nuevo perfil de administrador en el sistema'
         ]);
+        broadcast(new SendNotifications('Se ha creado un nuevo administrador.'))->toOthers();
         return redirect()->route('new.admin')->with('success', true);
     } 
 }

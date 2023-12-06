@@ -8,7 +8,7 @@ const data = () => {
         return (
             !!window.matchMedia &&
             window.matchMedia('(prefers-color-scheme: dark)').matches
-        )
+        );
     }
     const setThemeToLocalStorage = (value) => {
         window.localStorage.setItem('dark', value)
@@ -29,11 +29,9 @@ const data = () => {
         isNotificationsMenuOpen: false,
         toggleNotificationsMenu() {
             this.isNotificationsMenuOpen = !this.isNotificationsMenuOpen
-            console.log(this.isNotificationsMenuOpen)
         },
         closeNotificationsMenu() {
             this.isNotificationsMenuOpen = false
-            console.log(this.isNotificationsMenuOpen)
         },
         isProfileMenuOpen: false,
         toggleProfileMenu() {

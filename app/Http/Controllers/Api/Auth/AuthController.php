@@ -10,6 +10,7 @@ use App\Models\Profile;
 use App\Models\User;
 use App\Models\UserPersonalData;
 use App\Models\UserLog;
+use App\Events\Admin\SendNotifications;
 
 class AuthController extends Controller
 {
@@ -96,6 +97,7 @@ class AuthController extends Controller
                     'action' => 'creación de usuario',
                     'details' => 'creó un usuario con el perfil de paciente'
                 ]);
+                broadcast(new SendNotifications('Se ha registrado un nuevo paciente.'));
                 return response()->json([
                     'status' => 200,
                     'message' => 'Se creó paciente correctamente.',
@@ -197,6 +199,7 @@ class AuthController extends Controller
                     'action' => 'creación de usuario',
                     'details' => 'creó un usuario con el perfil de psicólogo'
                 ]);
+                broadcast(new SendNotifications('Se ha registrado un nuevo psicólogo.'));
                 return response()->json([
                     'status' => 200,
                     'message' => 'Se creó psicólogo correctamente.',
