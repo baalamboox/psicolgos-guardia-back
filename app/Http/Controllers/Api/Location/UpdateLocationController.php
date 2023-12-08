@@ -5,10 +5,9 @@ namespace App\Http\Controllers\Api\Location;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
-use App\Models\User;
 use App\Models\UserLocation;
 
-class SetLocationController extends Controller
+class UpdateLocationController extends Controller
 {
     /**
      * Handle the incoming request.
@@ -16,7 +15,7 @@ class SetLocationController extends Controller
     public function __invoke(Request $request)
     {
         $rules = [
-            'user_id' => 'required|numeric|unique:user_locations',
+            'user_id' => 'required|numeric',
             'latitude' => 'required|decimal:4,16',
             'length' => 'required|decimal:4,16',
             'zone' => 'required|regex:/^[a-zA-ZáéíóúÁÉÍÓÚñÑ ]+$/|max:32'
@@ -44,16 +43,14 @@ class SetLocationController extends Controller
                 'errors' => $validotor->errors()
             ], 400);
         }
-        $user = User::find($request->user_id);
-        $userLocation = new UserLocation([
+        UserLocation::where('user_id', $request->user_id)->update([
             'latitude' => $request->latitude,
             'length' => $request->length,
             'zone' => strtolower($request->zone)
         ]);
-        $user->userLocation()->save($userLocation);
         return response()->json([
             'status' => 200,
-            'message' => 'Se ha definido correctamente la ubicación.',
+            'message' => 'Se ha actualizado correctamente la ubicación.',
             'success' => true,
             'data' => null,
             'errors' => null 
