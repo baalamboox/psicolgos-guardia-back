@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="es-MX" dir="ltr" :class="{'theme-dark': dark}" x-data="data()">
+<html lang="es-MX" dir="ltr" :class="{'theme-dark': dark}" x-data="data()" x-init="getNotificationMessage()">
     <head>
         <meta charset="UTF-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -9,6 +9,7 @@
         @auth
             <script>
                 var isAuthenticated = true;
+                var notificationSound = new Audio("{{ asset('sounds/sfx-cartoons10.mp3') }}");
             </script>
         @else
             <script>

@@ -146,11 +146,22 @@
                             </button>
                             <template x-if="isNotificationsMenuOpen">
                                 <ul class="absolute right-0 w-56 p-2 mt-2 space-y-2 text-gray-600 bg-white border border-gray-100 rounded-md shadow-md dark:text-gray-300 dark:border-gray-700 dark:bg-gray-700" x-transition:leave="transition ease-in duration-150" x-transition:leave-start="opacity-100" x-transition:leave-end="opacity-0" @click.away="closeNotificationsMenu" @keydown.escape="closeNotificationsMenu">
-                                    <li class="flex" x-data="dataNotification()" x-init="getMessage()">
-                                        <a href="#" class="inline-flex items-center justify-between w-full px-2 py-1 text-sm font-semibold transition-colors duration-150 rounded-md hover:bg-gray-100 hover:text-gray-800 dark:hover:bg-gray-800 dark:hover:text-gray-200">
-                                            <span  x-text="notificationMessage" ></span>
-                                            <!-- <span class="inline-flex items-center justify-center px-2 py-1 text-xs font-bold leading-none text-red-600 bg-red-100 rounded-full dark:text-red-100 dark:bg-red-600">13</span> -->
-                                        </a>
+                                    <li class="flex">
+                                        <div class="flex align-items-center w-full">
+                                            <svg class="w-6 h-6 self-center m-2" fill="currentColor" xmlns="http://www.w3.org/2000/svg" viewBox="0 -960 960 960">
+                                                <path d="m354-247 126-76 126 77-33-144 111-96-146-13-58-136-58 135-146 13 111 97-33 143ZM233-80l65-281L80-550l288-25 112-265 112 265 288 25-218 189 65 281-247-149L233-80Zm247-350Z" x-show="!notificationDefaultIcon" />
+                                                <path d="m226-559 78 33q14-28 29-54t33-52l-56-11-84 84Zm142 83 114 113q42-16 90-49t90-75q70-70 109.5-155.5T806-800q-72-5-158 34.5T492-656q-42 42-75 90t-49 90Zm178-65q-23-23-23-56.5t23-56.5q23-23 57-23t57 23q23 23 23 56.5T660-541q-23 23-57 23t-57-23Zm19 321 84-84-11-56q-26 18-52 32.5T532-299l33 79Zm313-653q19 121-23.5 235.5T708-419l20 99q4 20-2 39t-20 33L538-80l-84-197-171-171-197-84 167-168q14-14 33.5-20t39.5-2l99 20q104-104 218-147t235-24ZM157-321q35-35 85.5-35.5T328-322q35 35 34.5 85.5T327-151q-25 25-83.5 43T82-76q14-103 32-161.5t43-83.5Zm57 56q-10 10-20 36.5T180-175q27-4 53.5-13.5T270-208q12-12 13-29t-11-29q-12-12-29-11.5T214-265Z" x-show="notificationDefaultIcon" />
+                                            </svg>
+                                            <a href="#" class="inline-flex items-center justify-between w-full px-2 py-1 text-sm font-semibold transition-colors duration-150 rounded-md hover:bg-gray-100 hover:text-gray-800 dark:hover:bg-gray-800 dark:hover:text-gray-200">
+                                                <small x-text="notificationMessage"></small>
+                                                <!-- <span class="inline-flex items-center justify-center px-2 py-1 text-xs font-bold leading-none text-red-600 bg-red-100 rounded-full dark:text-red-100 dark:bg-red-600">13</span> -->
+                                            </a>
+                                            <button class="w-6 h-6 rounded-full self-center focus:outline-none focus:shadow-outline-red text-red-400" title="Descartar alerta" x-show="notificationDiscartIcon" x-on:click="discartNotification()">
+                                                <svg class="w-4 h-4 m-1" fill="currentColor" xmlns="http://www.w3.org/2000/svg" viewBox="0 -960 960 960">
+                                                    <path d="M280-120q-33 0-56.5-23.5T200-200v-520h-40v-80h200v-40h240v40h200v80h-40v520q0 33-23.5 56.5T680-120H280Zm400-600H280v520h400v-520ZM360-280h80v-360h-80v360Zm160 0h80v-360h-80v360ZM280-720v520-520Z" />
+                                                </svg>
+                                            </button>
+                                        </div>
                                     </li>
                                 </ul>
                             </template>

@@ -1,3 +1,5 @@
+const notificationIcon = document?.querySelector('#notificationIcon');
+
 const data = () => {
     const getThemeFromLocalStorage = () => {
         // if user already changed the theme, use it
@@ -71,6 +73,27 @@ const data = () => {
             this.isModalOpen = false
             this.trapCleanup()
         },
+        notificationMessage: 'Sin novedades',
+        notificationDiscartIcon: false,
+        notificationDefaultIcon: false, 
+        getNotificationMessage() {
+            if(isAuthenticated) {
+                Echo.channel('notifications').listen('Admin.SendNotifications', (event) => {
+                    notificationIcon.hidden = false;
+                    this.notificationDiscartIcon = true;
+                    this.notificationDefaultIcon = true;
+                    this.notificationMessage = `${event.message}`;
+                    notificationSound.play();
+                });
+            }
+        },
+        discartNotification() {
+            this.notificationMessage = 'Sin noverdades';
+            this.notificationDefaultIcon = false;
+            this.notificationDiscartIcon = false;
+            notificationIcon.hidden = true;
+            this.isNotificationsMenuOpen = !this.isNotificationsMenuOpen;
+        } 
     }
 }
 
