@@ -26,11 +26,11 @@ class AuthController extends Controller
             'password' => 'required|regex:/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&*.,:?(){}<>"])[A-Za-z\d!@#$%^&*.,:?(){}<>"]{8,10}$/'
         ];
         $messages = [
-            'email.required' => 'Correo electrónico requerido.',
-            'email.email' => 'Correo electrónico invalido.',
-            'email.max' => 'Correo electrónico muy largo.',
-            'password.required' => 'Contraseña requerida.',
-            'password.regex' => 'Contraseña debe tener al menos una letra minúscula, al menos una letra mayúscula, al menos un caracter especial, al menos un número y una longitud entre 8 y 10 caracteres.'
+            'email.required' => 'Correo electrónico: Requerido.',
+            'email.email' => 'Correo electrónico: Inválido.',
+            'email.max' => 'Correo electrónico: Muy largo.',
+            'password.required' => 'Contraseña: Requerida.',
+            'password.regex' => 'Contraseña: Debe tener al menos una letra minúscula, al menos una letra mayúscula, al menos un caracter especial, al menos un número y una longitud entre 8 y 10 caracteres.'
         ];
         $validator = Validator::make($request->all(), $rules, $messages);
         if($validator->fails())
@@ -42,7 +42,7 @@ class AuthController extends Controller
             $profile = User::where('email', strtolower($request->email))->first()->profile_id;
             if($profile != 1)
             {
-                return redirect()->route('sign.in')->withErrors(['email' => 'Correo electrónico no pertenece a algún administrador.'])->withInput();
+                return redirect()->route('sign.in')->withErrors(['email' => 'Correo electrónico: No pertenece a ningún administrador.'])->withInput();
             }
             if(Auth::attempt(['email' => strtolower($request->email), 'password' => $request->password]))
             {
@@ -54,10 +54,10 @@ class AuthController extends Controller
                 ]);
                 return redirect()->route('home');
             }
-            return redirect()->route('sign.in')->withErrors(['password' => 'Contraseña incorrecta.'])->withInput();
+            return redirect()->route('sign.in')->withErrors(['password' => 'Contraseña: Incorrecta.'])->withInput();
         } catch (\Throwable $th)
         {
-            return redirect()->route('sign.in')->withErrors(['email' => 'Correo electrónico no usado por algún usuario.'])->withInput();
+            return redirect()->route('sign.in')->withErrors(['email' => 'Correo electrónico: No registrado.'])->withInput();
         }
     }
 

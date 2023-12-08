@@ -71,10 +71,10 @@ class RecoverAccountController extends Controller
                 ]);
                 return redirect()->route('verification.code');
             }
-            return redirect()->route('forgot.password')->withErrors(['email' => 'Correo electrónico no pertenece a ningún administrador.'])->withInput();
+            return redirect()->route('forgot.password')->withErrors(['email' => 'Correo electrónico: No pertenece a ningún administrador.'])->withInput();
         } catch (\Throwable $th)
         {
-            return redirect()->route('forgot.password')->withErrors(['email' => 'Correo electrónico no registrado.'])->withInput();
+            return redirect()->route('forgot.password')->withErrors(['email' => 'Correo electrónico: No registrado.'])->withInput();
         }
     }
 

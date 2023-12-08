@@ -30,28 +30,28 @@ class AuthController extends Controller
                     'curp' => 'required|alpha_num:ascii|min:18|max:18'
                 ];
                 $patientMessages = [
-                    'email.required' => 'Correo electrónico requerido.',
-                    'email.unique' => 'Correo electrónico ya registrado.',
-                    'email.email' => 'Correo electrónico invalido.',
-                    'email.max' => 'Correo electrónico muy largo.',
-                    'password.required' => 'Contraseña requerida.',
-                    'password.regex' => 'Contraseña debe tener al menos una letra minúscula, al menos una letra mayúscula, al menos un caracter especial, al menos un número y una longitud entre 8 y 10 caracteres.',
-                    'profile_photo.required' => 'Foto de perfil requerida.',
-                    'profile_photo.mimes' => 'Foto de perfil solo puede ser de tipo: JPG, PNG ó JPEG.',
-                    'profile_photo.max' => 'Foto de perfil no debe pesar más de 2 MB.',
-                    'names.required' => 'Nombre(s) requerido(s).',
-                    'names.regex' => 'Nombre(s) debe contener solo letras.',
-                    'names.max' => 'Nombre(s) demasiado largo.',
-                    'first_surname.required' => 'Apellido paterno requerido.',
-                    'first_surname.regex' => 'Apellido paterno debe contener solo letras.',
-                    'first_surname.max' => 'Apellido paterno demasiado largo.',
-                    'second_surname.required' => 'Apellido materno requerido.',
-                    'second_surname.regex' => 'Apellido materno debe contener solo letras.',
-                    'second_surname.max' => 'Apellido materno demasiado largo.',
-                    'curp.required' => 'CURP requerido.',
-                    'curp.alpha_num' => 'CURP debe contener solo caracteres alfanuméricos.',
-                    'curp.min' => 'CURP demasiado corto.',
-                    'curp.max' => 'CURP demasiado largo'
+                    'email.required' => 'Correo electrónico: Requerido.',
+                    'email.unique' => 'Correo electrónico: Ya registrado.',
+                    'email.email' => 'Correo electrónico: Inválido.',
+                    'email.max' => 'Correo electrónico: Muy largo.',
+                    'password.required' => 'Contraseña: Requerida.',
+                    'password.regex' => 'Contraseña: Debe tener al menos una letra minúscula, al menos una letra mayúscula, al menos un caracter especial, al menos un número y una longitud entre 8 y 10 caracteres.',
+                    'profile_photo.required' => 'Foto de perfil: Requerida.',
+                    'profile_photo.mimes' => 'Foto de perfil: Solo puede ser de tipo: JPG, PNG ó JPEG.',
+                    'profile_photo.max' => 'Foto de perfil: No debe pesar más de 2 MB.',
+                    'names.required' => 'Nombre(s): Requerido(s).',
+                    'names.regex' => 'Nombre(s): Debe contener solo letras.',
+                    'names.max' => 'Nombre(s): Demasiado largo.',
+                    'first_surname.required' => 'Apellido paterno: Requerido.',
+                    'first_surname.regex' => 'Apellido paterno: Debe contener solo letras.',
+                    'first_surname.max' => 'Apellido paterno: Demasiado largo.',
+                    'second_surname.required' => 'Apellido materno: Requerido.',
+                    'second_surname.regex' => 'Apellido materno: Debe contener solo letras.',
+                    'second_surname.max' => 'Apellido materno: Demasiado largo.',
+                    'curp.required' => 'CURP: Requerido.',
+                    'curp.alpha_num' => 'CURP: Debe contener solo caracteres alfanuméricos.',
+                    'curp.min' => 'CURP: Demasiado corto.',
+                    'curp.max' => 'CURP: Demasiado largo'
                 ];
                 $patientValidator = Validator::make($request->all(), $patientRules, $patientMessages);
                 if($patientValidator->fails())
@@ -72,7 +72,7 @@ class AuthController extends Controller
                         'success' => false,
                         'data' => null,
                         'errors' => [
-                            'profile_photo' => ['Foto de perfil no existe.']
+                            'profile_photo' => ['Foto de perfil: No existe.']
                         ]
                     ], 400);
                 }
@@ -120,37 +120,37 @@ class AuthController extends Controller
                     'title' => 'required|regex:/^[a-zA-ZáéíóúÁÉÍÓÚñÑ. ]+$/'
                 ];
                 $psychologistMessages = [
-                    'email.required' => 'Correo electrónico requerido.',
-                    'email.unique' => 'Correo electrónico ya registrado.',
-                    'email.email' => 'Correo electrónico invalido.',
-                    'email.max' => 'Correo electrónico muy largo.',
-                    'password.required' => 'Contraseña requerida.',
-                    'password.regex' => 'Contraseña debe tener al menos una letra minúscula, al menos una letra mayúscula, al menos un caracter especial, al menos un número y una longitud entre 8 y 10 caracteres.',
-                    'profile_photo.required' => 'Foto de perfil requerida.',
-                    'profile_photo.mimes' => 'Foto de perfil solo puede ser de tipo: JPG, PNG ó JPEG.',
-                    'profile_photo.max' => 'Foto de perfil no debe pesar más de 2 MB.',
-                    'names.required' => 'Nombre(s) requerido(s).',
-                    'names.regex' => 'Nombre(s) debe contener solo letras.',
-                    'names.max' => 'Nombre(s) demasiado largo.',
-                    'first_surname.required' => 'Apellido paterno requerido.',
-                    'first_surname.regex' => 'Apellido paterno debe contener solo letras.',
-                    'first_surname.max' => 'Apellido paterno demasiado largo.',
-                    'second_surname.required' => 'Apellido materno requerido.',
-                    'second_surname.regex' => 'Apellido materno debe contener solo letras.',
-                    'second_surname.max' => 'Apellido materno demasiado largo.',
-                    'curp.required' => 'CURP requerido.',
-                    'curp.alpha_num' => 'CURP debe contener solo caracteres alfanuméricos.',
-                    'curp.min' => 'CURP demasiado corto.',
-                    'curp.max' => 'CURP demasiado largo',
-                    'type.required' => 'Tipo requerido.',
-                    'type.regex' => 'Tipo debe contener solo letras.',
-                    'type.max' => 'Tipo debe contener máximo 255 caracteres.',
-                    'professional_license.required' => 'Cédula profesional requerida.',
-                    'professional_license.regex' => 'Cédula profesional solo puede contener números, guiones o letras.',
-                    'professional_license.min' => 'Cédula profesional debe tener mínimo 7 caracteres.',
-                    'professional_license.max' => 'Cédula profesional debe tener máximo 10 caracteres.',
-                    'title.required' => 'Título requerido.',
-                    'title.regex' => 'Título solo puede contener letras, espacios y puntos.'
+                    'email.required' => 'Correo electrónico: Requerido.',
+                    'email.unique' => 'Correo electrónico: Ya registrado.',
+                    'email.email' => 'Correo electrónico: Inválido.',
+                    'email.max' => 'Correo electrónico: Muy largo.',
+                    'password.required' => 'Contraseña: Requerida.',
+                    'password.regex' => 'Contraseña: Debe tener al menos una letra minúscula, al menos una letra mayúscula, al menos un caracter especial, al menos un número y una longitud entre 8 y 10 caracteres.',
+                    'profile_photo.required' => 'Foto de perfil: Requerida.',
+                    'profile_photo.mimes' => 'Foto de perfil: Solo puede ser de tipo: JPG, PNG ó JPEG.',
+                    'profile_photo.max' => 'Foto de perfil: No debe pesar más de 2 MB.',
+                    'names.required' => 'Nombre(s): Requerido(s).',
+                    'names.regex' => 'Nombre(s): Debe contener solo letras.',
+                    'names.max' => 'Nombre(s): Demasiado largo.',
+                    'first_surname.required' => 'Apellido paterno: Requerido.',
+                    'first_surname.regex' => 'Apellido paterno: Debe contener solo letras.',
+                    'first_surname.max' => 'Apellido paterno: Demasiado largo.',
+                    'second_surname.required' => 'Apellido materno: Requerido.',
+                    'second_surname.regex' => 'Apellido materno: Debe contener solo letras.',
+                    'second_surname.max' => 'Apellido materno: Demasiado largo.',
+                    'curp.required' => 'CURP: requerido.',
+                    'curp.alpha_num' => 'CURP: Debe contener solo caracteres alfanuméricos.',
+                    'curp.min' => 'CURP: Demasiado corto.',
+                    'curp.max' => 'CURP: Demasiado largo',
+                    'type.required' => 'Tipo: Requerido.',
+                    'type.regex' => 'Tipo: Debe contener solo letras.',
+                    'type.max' => 'Tipo: Debe contener máximo 255 caracteres.',
+                    'professional_license.required' => 'Cédula profesional: Requerida.',
+                    'professional_license.regex' => 'Cédula profesional: Solo puede contener números, guiones o letras.',
+                    'professional_license.min' => 'Cédula profesional: Debe tener mínimo 7 caracteres.',
+                    'professional_license.max' => 'Cédula profesional: Debe tener máximo 10 caracteres.',
+                    'title.required' => 'Título: Requerido.',
+                    'title.regex' => 'Título: Solo puede contener letras, espacios y puntos.'
                 ];
                 $psychologistValidator = Validator::make($request->all(), $psychologistRules, $psychologistMessages);
                 if($psychologistValidator->fails())
@@ -171,7 +171,7 @@ class AuthController extends Controller
                         'success'=>false,
                         'data' => null,
                         'errors' => [
-                            'profile_photo' => ['Foto de perfil no existe.']
+                            'profile_photo' => ['Foto de perfil: No existe.']
                         ]
                     ], 400);
                 }
@@ -215,7 +215,7 @@ class AuthController extends Controller
                     'success' => false,
                     'data' => null,
                     'errors' => [
-                        'profile' => ['Perfil debe tener un valor entero entre 2:paciente y 3:psicólogo.']
+                        'profile' => ['Perfil: Debe tener un valor entero entre 2=paciente y 3=psicólogo.']
                     ]
                 ], 400);
                 break;
@@ -229,11 +229,11 @@ class AuthController extends Controller
             'password' => 'required|regex:/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&*.,:?(){}<>"])[A-Za-z\d!@#$%^&*.,:?(){}<>"]{8,10}$/',
         ];
         $messages = [
-            'email.required' => 'Correo electrónico requerido.',
-            'email.email' => 'Correo invalido.',
-            'email.max' => 'Correo demasiado largo.',
-            'password.required' => 'Contraseña requerida.',
-            'password.regex' => 'Contraseña debe tener al menos una letra minúscula, al menos una letra mayúscula, al menos un caracter especial, al menos un número y una longitud entre 8 y 10 caracteres.'
+            'email.required' => 'Correo electrónico: Requerido.',
+            'email.email' => 'Correo electrónico: Inválido.',
+            'email.max' => 'Correo electrónico: Demasiado largo.',
+            'password.required' => 'Contraseña: Requerida.',
+            'password.regex' => 'Contraseña: Debe tener al menos una letra minúscula, al menos una letra mayúscula, al menos un caracter especial, al menos un número y una longitud entre 8 y 10 caracteres.'
         ];
         $credentials = $request->only('email', 'password');
         $validator = Validator::make($credentials, $rules, $messages);
@@ -258,7 +258,7 @@ class AuthController extends Controller
                     'success' => false,
                     'data' => null,
                     'errors' => [
-                        'email' => ['Correo electrónico usado por un administrador.']
+                        'email' => ['Correo electrónico: Usado por un administrador.']
                     ]
                 ], 400);
             }
@@ -270,7 +270,7 @@ class AuthController extends Controller
                 'success' => false,
                 'data' => null,
                 'errors' => [
-                    'email' => ['Correo electrónico no usado por algún usuario.']
+                    'email' => ['Correo electrónico: No registrado.']
                 ]
             ], 400);
         }
@@ -282,7 +282,7 @@ class AuthController extends Controller
                 'success' => false,
                 'data' => null,
                 'errors' => [
-                    'email or password' => ['Correo electrónico ó contraseña errónea.']
+                    'email or password' => ['Correo electrónico: Erróneo ó Contraseña: Errónea.']
                 ]
             ], 400);
         }
@@ -327,9 +327,9 @@ class AuthController extends Controller
             'email' => 'required|email|max:64'
         ];
         $messages = [
-            'email.required' => 'Correo electrónico requerido.',
-            'email.email' => 'Correo electrónico invalido.',
-            'email.max' => 'Correo electrónico demasiado largo.'
+            'email.required' => 'Correo electrónico: Requerido.',
+            'email.email' => 'Correo electrónico: Inválido.',
+            'email.max' => 'Correo electrónico: Demasiado largo.'
         ];
         $validator = Validator::make($request->only('email'), $rule, $messages);
         if($validator->fails())
@@ -353,7 +353,7 @@ class AuthController extends Controller
                     'success' => false,
                     'data' => null,
                     'errors' => [
-                        'email' => ['Correo electrónico usado por un administrador.']
+                        'email' => ['Correo electrónico: Usado por un administrador.']
                     ]
                 ], 400);
             }
@@ -381,7 +381,7 @@ class AuthController extends Controller
                 'success' => false,
                 'data' => null,
                 'errors' => [
-                    'email' => ['Correo electrónico no usado por algún usuario.']
+                    'email' => ['Correo electrónico: No registrado.']
                 ]
             ], 400);
         }

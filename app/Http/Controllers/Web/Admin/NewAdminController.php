@@ -29,22 +29,22 @@ class NewAdminController extends Controller
             'second_surname' => 'required|regex:/^[a-zA-ZáéíóúÁÉÍÓÚñÑ ]+$/|max:16',
         ];
         $messages = [
-            'email.required' => 'Correo electrónico requerido.',
-            'email.unique' => 'Correo electrónico ya registrado.',
-            'email.email' => 'Correo electrónico invalido.',
-            'email.max' => 'Correo electrónico muy largo.',
-            'password.required' => 'Contraseña requerida.',
-            'password.regex' => 'Contraseña debe tener al menos una letra minúscula, al menos una letra mayúscula, al menos un caracter especial, al menos un número y una longitud entre 8 y 10 caracteres.',
-            'password.confirmed' => 'Contraseñas no coinciden.',
-            'names.required' => 'Nombre(s) requerido(s).',
-            'names.regex' => 'Nombre(s) debe contener solo letras.',
-            'names.max' => 'Nombre(s) demasiado largo.',
-            'first_surname.required' => 'Apellido paterno requerido.',
-            'first_surname.regex' => 'Apellido paterno debe contener solo letras.',
-            'first_surname.max' => 'Apellido paterno demasiado largo.',
-            'second_surname.required' => 'Apellido materno requerido.',
-            'second_surname.regex' => 'Apellido materno debe contener solo letras.',
-            'second_surname.max' => 'Apellido materno demasiado largo.'
+            'email.required' => 'Correo electrónico: Requerido.',
+            'email.unique' => 'Correo electrónico: Ya registrado.',
+            'email.email' => 'Correo electrónico: Inválido.',
+            'email.max' => 'Correo electrónico: Muy largo.',
+            'password.required' => 'Contraseña: Requerida.',
+            'password.regex' => 'Contraseña: Debe tener al menos una letra minúscula, al menos una letra mayúscula, al menos un caracter especial, al menos un número y una longitud entre 8 y 10 caracteres.',
+            'password.confirmed' => 'Contraseñas: No coinciden.',
+            'names.required' => 'Nombre(s): Requerido(s).',
+            'names.regex' => 'Nombre(s): Debe contener solo letras.',
+            'names.max' => 'Nombre(s): Demasiado largo.',
+            'first_surname.required' => 'Apellido paterno: Requerido.',
+            'first_surname.regex' => 'Apellido paterno: Debe contener solo letras.',
+            'first_surname.max' => 'Apellido paterno: Demasiado largo.',
+            'second_surname.required' => 'Apellido materno: Requerido.',
+            'second_surname.regex' => 'Apellido materno: Debe contener solo letras.',
+            'second_surname.max' => 'Apellido materno: Demasiado largo.'
         ];
         $validator = Validator::make($request->all(), $rules, $messages);
         if($validator->fails())

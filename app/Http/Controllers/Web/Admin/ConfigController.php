@@ -33,9 +33,9 @@ class ConfigController extends Controller
             'profile_photo' => 'required|mimes:jpeg,jpg,png|max:2048'
         ];
         $messages = [
-            'profile_photo.required' => 'Foto de perfil requerida.',
-            'profile_photo.mimes' => 'Foto de perfil solo puede ser de tipo: JPG, PNG ó JPEG.',
-            'profile_photo.max' => 'Foto de perfil no debe pesar más de 2 MB.',
+            'profile_photo.required' => 'Foto de perfil: Requerida.',
+            'profile_photo.mimes' => 'Foto de perfil: Solo puede ser de tipo: JPG, PNG ó JPEG.',
+            'profile_photo.max' => 'Foto de perfil: No debe pesar más de 2 MB.',
         ];
         $validator = Validator::make($request->only('profile_photo'), $rule, $messages);
         if($validator->fails())
@@ -44,7 +44,7 @@ class ConfigController extends Controller
         }
         if(!$request->hasFile('profile_photo'))
         {
-            return redirect()->route('config')->withErrors(['profile_photo' => 'Foto de perfil no existe.'])->withInput();
+            return redirect()->route('config')->withErrors(['profile_photo' => 'Foto de perfil: No existe.'])->withInput();
         }
         $profile_photo = $request->file('profile_photo');
         $user = User::find($request->user()->id);
@@ -55,7 +55,7 @@ class ConfigController extends Controller
             'action' => 'actualización de foto de perfil',
             'details' => 'actualizó foto de perfil correctamente'
         ]);
-        return redirect()->route('config')->with('success', 'Actualizó foto de perfil.');
+        return redirect()->route('config')->with('success', 'Foto de perfil: Actualizada.');
     }
 
     public function updatePersonalContactData(Request $request)
@@ -67,17 +67,17 @@ class ConfigController extends Controller
             'phone' => 'required|digits:10'
         ];
         $messages = [
-            'names.required' => 'Nombre(s) requerido(s).',
-            'names.regex' => 'Nombre(s) debe contener solo letras.',
-            'names.max' => 'Nombre(s) demasiado largo.',
-            'first_surname.required' => 'Apellido paterno requerido.',
-            'first_surname.regex' => 'Apellido paterno debe contener solo letras.',
-            'first_surname.max' => 'Apellido paterno demasiado largo.',
-            'second_surname.required' => 'Apellido materno requerido.',
-            'second_surname.regex' => 'Apellido materno debe contener solo letras.',
-            'second_surname.max' => 'Apellido materno demasiado largo.',
-            'phone.required' => 'Teléfono requerido.',
-            'phone.digits' => 'Teléfono invalido.'
+            'names.required' => 'Nombre(s): Requerido(s).',
+            'names.regex' => 'Nombre(s): Debe contener solo letras.',
+            'names.max' => 'Nombre(s): Demasiado largo.',
+            'first_surname.required' => 'Apellido paterno: Requerido.',
+            'first_surname.regex' => 'Apellido paterno: Debe contener solo letras.',
+            'first_surname.max' => 'Apellido paterno: Demasiado largo.',
+            'second_surname.required' => 'Apellido materno: Requerido.',
+            'second_surname.regex' => 'Apellido materno: Debe contener solo letras.',
+            'second_surname.max' => 'Apellido materno: Demasiado largo.',
+            'phone.required' => 'Teléfono: Requerido.',
+            'phone.digits' => 'Teléfono: Invalido.'
         ];
         $validator = Validator::make($request->all(), $rules, $messages);
         if($validator->fails())
@@ -95,7 +95,7 @@ class ConfigController extends Controller
             'action' => 'actualización de datos personales',
             'details' => 'actualizó datos personales correctamente'
         ]);
-        return redirect()->route('config')->with('success', 'Datos actualizados.');
+        return redirect()->route('config')->with('success', 'Datos: Actualizados.');
     }
     
     public function updatePassword(Request $request)
@@ -104,9 +104,9 @@ class ConfigController extends Controller
             'password' => 'required|regex:/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&*.,:?(){}<>"])[A-Za-z\d!@#$%^&*.,:?(){}<>"]{8,10}$/|confirmed',
         ];
         $messages = [
-            'password.required' => 'Contraseña requerida.',
-            'password.regex' => 'Contraseña debe tener al menos una letra minúscula, al menos una letra mayúscula, al menos un caracter especial, al menos un número y una longitud entre 8 y 10 caracteres.',
-            'password.confirmed' => 'Contraseñas no coinciden.'
+            'password.required' => 'Contraseña: Requerida.',
+            'password.regex' => 'Contraseña: Debe tener al menos una letra minúscula, al menos una letra mayúscula, al menos un caracter especial, al menos un número y una longitud entre 8 y 10 caracteres.',
+            'password.confirmed' => 'Contraseñas: No coinciden.'
         ];
         $validator = Validator::make($request->all(), $rule, $messages);
         if($validator->fails())
@@ -123,6 +123,6 @@ class ConfigController extends Controller
             'action' => 'actualización de contraseña',
             'details' => 'actualizó contraseña correctamente'
         ]);
-        return redirect()->route('config')->with('success', 'Contraseña actualizada.');
+        return redirect()->route('config')->with('success', 'Contraseña: Actualizada.');
     }
 }
