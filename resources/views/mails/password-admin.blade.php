@@ -1,16 +1,16 @@
 @extends('layouts.main')
-@section('title', 'Verificación de código')
+@section('title', 'Contraseña para Administrador')
 @section('body')               
 <section class="max-w-2xl px-6 py-8 mx-auto bg-white dark:bg-gray-800">
     <main class="mt-8">
         <h2 class="text-gray-700 dark:text-gray-200">¡Hola {{ $names }}!,</h2>
         <p class="mt-2 leading-loose text-gray-600 dark:text-gray-300">
-            Este es tu código de verificación:
+            Esta es tu contraseña para inciar sesión como Administrador:
         </p>
         <div class="flex items-center mt-4 gap-x-4">
             <strong>
                 <h3>
-                    {{ $code }}
+                    {{ $password }}
                 </h3>
             </strong>
         </div>

@@ -4,7 +4,7 @@
     <h2 class="my-6 text-2xl font-semibold text-gray-700 dark:text-gray-200">Crear administrador</h2>
     <div class="flex items-center min-h-screen p-6 bg-gray-50 dark:bg-gray-900">
         <div class="flex-1 h-full max-w-4xl mx-auto overflow-hidden bg-white rounded-lg shadow-xl dark:bg-gray-800">
-            <div class="flex flex-col overflow-y-auto md:flex-row">
+            <div class="flex h-full flex-col overflow-y-auto md:flex-row">
                 <div class="h-32 md:h-auto md:w-1/2">
                     <img src="{{asset('img/backgrounds/new-admin.jpg')}}" alt="⚠️ Error de carga" class="object-cover w-full h-full" aria-hidden="true" />
                 </div>
@@ -20,6 +20,8 @@
                                 <span class="sr-only">Info</span>
                                 <div>
                                     <span class="font-medium">¡Genial!</span> Creó un nuevo administrador.
+                                    <br />
+                                    <small>Contraseña enviada al correo:<br />{{ session('email') }}</small>
                                 </div>
                             </div>
                             @endif
@@ -72,14 +74,14 @@
                                 </span>
                                 <input type="email" class="block w-full mt-1 text-sm @error('email') border-red-800 shadow-outline-red @enderror dark:border-gray-600 dark:bg-gray-700 focus:border-purple-400 focus:outline-none focus:shadow-outline-purple dark:text-gray-300 dark:focus:shadow-outline-gray form-input" name="email" placeholder="usuario@ejemplo.com" value="{{ old('email') }}" />
                             </label>
-                            <label class="block mt-4 text-sm">
+                            <!-- <label class="block mt-4 text-sm">
                                 <span class="text-gray-700 dark:text-gray-400">
                                     <svg class="w-4 h-4 inline" fill="currentColor" xmlns="http://www.w3.org/2000/svg" viewBox="0 -960 960 960">
                                         <path d="M240-80q-33 0-56.5-23.5T160-160v-400q0-33 23.5-56.5T240-640h40v-80q0-83 58.5-141.5T480-920q83 0 141.5 58.5T680-720v80h40q33 0 56.5 23.5T800-560v400q0 33-23.5 56.5T720-80H240Zm0-80h480v-400H240v400Zm240-120q33 0 56.5-23.5T560-360q0-33-23.5-56.5T480-440q-33 0-56.5 23.5T400-360q0 33 23.5 56.5T480-280ZM360-640h240v-80q0-50-35-85t-85-35q-50 0-85 35t-35 85v80ZM240-160v-400 400Z" />
                                     </svg>
                                     Contraseña
                                 </span>
-                                <input type="password" class="block w-full mt-1 text-sm dark:border-gray-600 dark:bg-gray-700 focus:border-purple-400 focus:outline-none focus:shadow-outline-purple dark:text-gray-300 dark:focus:shadow-outline-gray form-input" name="password" placeholder="********" x-bind:type="isShowPassword" value="Abcd@1234" disabled />
+                                <input type="password" class="block w-full mt-1 text-sm @error('password') border-red-800 shadow-outline-red @enderror dark:border-gray-600 dark:bg-gray-700 focus:border-purple-400 focus:outline-none focus:shadow-outline-purple dark:text-gray-300 dark:focus:shadow-outline-gray form-input" name="password" placeholder="********" x-bind:type="isShowPassword" value="{{ old('password') }}" />
                             </label>
                             <label class="block mt-4 text-sm">
                                 <span class="text-gray-700 dark:text-gray-400">
@@ -88,12 +90,12 @@
                                     </svg>
                                     Confirmar contraseña
                                 </span>
-                                <input type="password" class="block w-full mt-1 text-sm dark:border-gray-600 dark:bg-gray-700 focus:border-purple-400 focus:outline-none focus:shadow-outline-purple dark:text-gray-300 dark:focus:shadow-outline-gray form-input" name="password_confirmation" placeholder="********" x-bind:type="isShowPassword" value="Abcd@1234" disabled />
+                                <input type="password" class="block w-full mt-1 text-sm @error('password') border-red-800 shadow-outline-red @enderror dark:border-gray-600 dark:bg-gray-700 focus:border-purple-400 focus:outline-none focus:shadow-outline-purple dark:text-gray-300 dark:focus:shadow-outline-gray form-input" name="password_confirmation" placeholder="********" x-bind:type="isShowPassword" value="{{ old('password') }}" />
                             </label>
                             <div class="mt-4 flex items-center">
                                 <input type="checkbox" id="show_hide_password" class="text-purple-600 form-checkbox mr-2 shadow-outline-purple border-purple-300 bg-transparent focus:border-purple-400 focus:outline-none focus:shadow-outline-purple dark:focus:shadow-outline-gray" @click="toggleShowPassword">
                                 <label for="show_hide_password" class="text-sm text-white text-gray-700 dark:text-gray-400" x-text="textShowPassword"></label>
-                            </div>
+                            </div> -->
                             <button type="submit" class="block w-full px-4 py-2 mt-8 text-sm font-medium leading-5 text-center text-white transition-colors duration-150 bg-purple-600 border border-transparent rounded-lg active:bg-purple-600 hover:bg-purple-700 focus:outline-none focus:shadow-outline-purple">
                                 <svg class="w-5 h-5 inline" fill="currentColor" xmlns="http://www.w3.org/2000/svg" viewBox="0 -960 960 960">
                                     <path d="M720-400v-120H600v-80h120v-120h80v120h120v80H800v120h-80Zm-360-80q-66 0-113-47t-47-113q0-66 47-113t113-47q66 0 113 47t47 113q0 66-47 113t-113 47ZM40-160v-112q0-34 17.5-62.5T104-378q62-31 126-46.5T360-440q66 0 130 15.5T616-378q29 15 46.5 43.5T680-272v112H40Zm80-80h480v-32q0-11-5.5-20T580-306q-54-27-109-40.5T360-360q-56 0-111 13.5T140-306q-9 5-14.5 14t-5.5 20v32Zm240-320q33 0 56.5-23.5T440-640q0-33-23.5-56.5T360-720q-33 0-56.5 23.5T280-640q0 33 23.5 56.5T360-560Zm0-80Zm0 400Z" />

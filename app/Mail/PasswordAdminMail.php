@@ -9,19 +9,19 @@ use Illuminate\Mail\Mailables\Content;
 use Illuminate\Mail\Mailables\Envelope;
 use Illuminate\Queue\SerializesModels;
 
-class VerificationCodeMail extends Mailable
+class PasswordAdminMail extends Mailable
 {
     use Queueable, SerializesModels;
 
     private $names;
-    private $code;
+    private $password;
     /**
      * Create a new message instance.
      */
-    public function __construct($names, $code)
+    public function __construct($names, $password)
     {
         $this->names = $names;
-        $this->code = $code;
+        $this->password = $password;
     }
 
     /**
@@ -30,7 +30,7 @@ class VerificationCodeMail extends Mailable
     public function envelope(): Envelope
     {
         return new Envelope(
-            subject: 'Código de verificación',
+            subject: 'Contraseña para Administrador',
         );
     }
 
@@ -40,10 +40,10 @@ class VerificationCodeMail extends Mailable
     public function content(): Content
     {
         return new Content(
-            view: 'mails.verification-code',
+            view: 'mails.password-admin',
             with: [
                 'names' => $this->names,
-                'code' => $this->code
+                'password' => $this->password
             ]
         );
     }
