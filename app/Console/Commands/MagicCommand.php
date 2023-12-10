@@ -3,10 +3,13 @@
 namespace App\Console\Commands;
 
 use Illuminate\Console\Command;
+use Illuminate\Support\Facades\Mail;
+use Illuminate\Support\Str;
 use App\Models\Profile;
 use App\Models\User;
 use App\Models\UserPersonalData;
 use App\Models\UserLog;
+use App\Mail\PasswordAdminMail;
 
 class MagicCommand extends Command
 {
@@ -23,6 +26,33 @@ class MagicCommand extends Command
      * @var string
      */
     protected $description = 'Ejecuta todo lo necesario para iniciar el sistema por primera vez.';
+
+    private function generateRandomPassword($length = 8, $upperCase = true, $lowerCase = true, $numbers = true, $symbols = true) {
+        $password = '';
+        $upperLetters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
+        $lowerLetters = 'abcdefghijklmnopqrstuvwxyz';
+        $symbols = '!@#$%^&*.,:?(){}<>"';
+        for($i = 0; $i < $length; $i++)
+        { 
+            if($upperCase)
+            {
+                $password .= Str::charAt($upperLetters, random_int(0, Str::length($upperLetters) - 1));
+            }
+            if($lowerCase)
+            {
+                $password .= Str::charAt($lowerLetters, random_int(0, Str::length($lowerLetters) - 1));
+            }
+            if($numbers)
+            {
+                $password .= random_int(0, 9);
+            }
+            if($symbols)
+            {
+                $password .= Str::charAt($symbols, random_int(0, Str::length($symbols) - 1));
+            }
+        }
+        return str_shuffle(substr($password, 0, $length));
+    }
 
     /**
      * Execute the console command.
@@ -68,42 +98,39 @@ class MagicCommand extends Command
                     break;
                 case 'Crear administrador por defecto':
                     $this->info('Los siguientes datos del administrador por defecto son importantes para su creación.');
+                    $password = $this->generateRandomPassword();
                     $names = $this->ask('Nombre(s)');
                     $firstSurname = $this->ask('Apellido paterno');
                     $secondSurname = $this->ask('Apellido materno');
                     $email = $this->ask('Correo electrónico');
-                    $password = $this->secret('Contraseña');
-                    $confirmPassword = $this->secret('Confirmar contraseña');
-                    if($names == null || $firstSurname == null || $secondSurname == null || $email == null)
+                    if(Str::length($password) == 8)
                     {
-                        $this->error('Los datos requeridos, no cumplen lo necesario, ¡Abortando la creación del administrador!');
-                        break;
+                        Mail::to(strtolower($email))->send(new PasswordAdminMail(ucwords($names . ' ' . $firstSurname), $password));
+                        $profile = Profile::find(1);
+                        $user = new User([
+                            'email' => strtolower($email),
+                            'password' => $password,
+                            'state' => 'activo'
+                        ]);
+                        $profile->users()->save($user);
+                        $userPersonalData = new UserPersonalData([
+                            'names' => strtolower($names),
+                            'first_surname' => strtolower($firstSurname),
+                            'second_surname' => strtolower($secondSurname)
+                        ]);
+                        $user->userPersonalData()->save($userPersonalData);
+                        $userLog = new UserLog([
+                            'user_id' => $user->id,
+                            'action' => 'creación de administrador por defecto',
+                            'details' => 'el sistema ha creado correctamente tu perfil por primer vez como administrador'
+                        ]);
+                        $userLog->save();
+                        $this->info('¡Genial! Creó el primer Administrador.');
+                        $this->info('Contraseña enviada al correo:');
+                        $this->warn($email);
+                    } else {
+                        $this->error('Ocurrió un error, intente de nuevo.');
                     }
-                    if($password != $confirmPassword)
-                    {
-                        $this->error('Las contraseñas no coinciden, ¡Abortando la creación del administrador!');
-                        break;
-                    }
-                    $profile = Profile::find(1);
-                    $user = new User([
-                        'email' => strtolower($email),
-                        'password' => $password,
-                        'state' => 'activo'
-                    ]);
-                    $profile->users()->save($user);
-                    $userPersonalData = new UserPersonalData([
-                        'names' => strtolower($names),
-                        'first_surname' => strtolower($firstSurname),
-                        'second_surname' => strtolower($secondSurname)
-                    ]);
-                    $user->userPersonalData()->save($userPersonalData);
-                    $userLog = new UserLog([
-                        'user_id' => $user->id,
-                        'action' => 'creación de administrador por defecto',
-                        'details' => 'el sistema ha creado correctamente tu perfil por primer vez como administrador'
-                    ]);
-                    $userLog->save();
-                    $this->info($user);
                     break;
                 case 'Crear directorios para almacenar fotos de perfil':
                     echo shell_exec('php artisan storage:link');
