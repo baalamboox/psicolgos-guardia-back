@@ -8,6 +8,7 @@ use App\Http\Controllers\Api\Patients\ListAllPatientsController;
 use App\Http\Controllers\Api\Psychologists\ListAllPsychologistsController;
 use App\Http\Controllers\Api\Location\SetLocationController;
 use App\Http\Controllers\Api\Location\UpdateLocationController;
+use App\Http\Controllers\Api\Location\GetLocationsController;
 
 /*
 |--------------------------------------------------------------------------
@@ -31,9 +32,6 @@ Route::prefix('v1.0')->group(function() {
     });
 
     Route::middleware('auth:sanctum')->group(function() {
-        Route::get('/user', function (Request $request) {
-            return $request->user();
-        });
         Route::get('/auth/sign-out', [AuthController::class, 'signOut']);
     });
 
@@ -49,5 +47,6 @@ Route::prefix('v1.0')->group(function() {
     Route::prefix('location')->group(function() {
         Route::post('/set-location', SetLocationController::class);
         Route::put('/update-location', UpdateLocationController::class);
+        Route::get('/psychologists/locations', [GetLocationsController::class, 'getLocationsPsychologists']);
     });
 });

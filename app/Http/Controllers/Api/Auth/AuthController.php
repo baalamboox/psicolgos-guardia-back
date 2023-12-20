@@ -116,8 +116,8 @@ class AuthController extends Controller
                     'second_surname' => 'required|regex:/^[a-zA-ZáéíóúÁÉÍÓÚñÑ ]+$/|max:16',
                     'curp' => 'required|alpha_num:ascii|min:18|max:18',
                     'type' => 'required|regex:/^[a-zA-ZáéíóúÁÉÍÓÚñÑ ]+$/|max:255',
-                    'professional_license' => 'required|regex:/^[a-zA-Z0-9-]+$/|min:7|max:10',
-                    'title' => 'required|regex:/^[a-zA-ZáéíóúÁÉÍÓÚñÑ. ]+$/'
+                    'professional_license' => 'regex:/^[a-zA-Z0-9-]+$/|min:7|max:10',
+                    'title' => 'regex:/^[a-zA-ZáéíóúÁÉÍÓÚñÑ. ]+$/'
                 ];
                 $psychologistMessages = [
                     'email.required' => 'Correo electrónico: Requerido.',
@@ -145,11 +145,9 @@ class AuthController extends Controller
                     'type.required' => 'Tipo: Requerido.',
                     'type.regex' => 'Tipo: Debe contener solo letras.',
                     'type.max' => 'Tipo: Debe contener máximo 255 caracteres.',
-                    'professional_license.required' => 'Cédula profesional: Requerida.',
                     'professional_license.regex' => 'Cédula profesional: Solo puede contener números, guiones o letras.',
                     'professional_license.min' => 'Cédula profesional: Debe tener mínimo 7 caracteres.',
                     'professional_license.max' => 'Cédula profesional: Debe tener máximo 10 caracteres.',
-                    'title.required' => 'Título: Requerido.',
                     'title.regex' => 'Título: Solo puede contener letras, espacios y puntos.'
                 ];
                 $psychologistValidator = Validator::make($request->all(), $psychologistRules, $psychologistMessages);
