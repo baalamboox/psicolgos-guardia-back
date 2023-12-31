@@ -9,6 +9,7 @@ use App\Http\Controllers\Api\Psychologists\ListAllPsychologistsController;
 use App\Http\Controllers\Api\Location\SetLocationController;
 use App\Http\Controllers\Api\Location\UpdateLocationController;
 use App\Http\Controllers\Api\Location\GetLocationsController;
+use App\Http\Controllers\Web\Admin\HomeController;
 
 /*
 |--------------------------------------------------------------------------
@@ -42,6 +43,7 @@ Route::prefix('v1.0')->group(function() {
         Route::prefix('psychologists')->group(function() {
             Route::get('/list-all-psychologists', ListAllPsychologistsController::class);
         });
+        Route::get('/recent-users', [HomeController::class, 'recentUsers']);
     });
 
     Route::prefix('location')->group(function() {

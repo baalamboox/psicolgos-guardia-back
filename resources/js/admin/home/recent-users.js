@@ -19,64 +19,68 @@ const state = ({state}) => html(`
 `);
 
 const recentUsers = new Grid({
-    columns: ['Usuario', 'Rol', 'Estado', 'Fecha'],
-    data: [
-        [
-            user({
-                src: 'https://images.unsplash.com/flagged/photo-1570612861542-284f4c12e75f?ixlib=rb-1.2.1&q=80&fm=jpg&crop=entropy&cs=tinysrgb&w=200&fit=max&ixid=eyJhcHBfaWQiOjE3Nzg0fQ',
-                name: 'Guillermo',
-                firstSurname: 'Jiménez',
-            }),
-            'Administrador',
-            state({
-                state: 'Activo',
-            }),
-            '20/10/2023',
-        ],
-        [
-            user({
-                src: 'https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-0.3.5&q=80&fm=jpg&crop=entropy&cs=tinysrgb&w=200&facepad=3&fit=facearea&s=707b9c33066bf8808c934c8ab394dff6',
-                name: 'Yamilet',
-                firstSurname: 'Hernández',
-            }),
-            'Psicólogo',
-            state({
-                state: 'Activo',
-            }),
-            '20/10/2023',
-        ],
-        [
-            user({
-                src: 'https://images.unsplash.com/photo-1551069613-1904dbdcda11?ixlib=rb-1.2.1&q=80&fm=jpg&crop=entropy&cs=tinysrgb&w=200&fit=max&ixid=eyJhcHBfaWQiOjE3Nzg0fQ',
-                name: 'Sarah',
-                firstSurname: 'Rosales',
-            }),
-            'Administrador',
-            state({
-                state: 'Activo',
-            }),
-            '20/10/2023',
-        ],
-        [
-            user({
-                src: 'https://images.unsplash.com/photo-1551006917-3b4c078c47c9?ixlib=rb-1.2.1&q=80&fm=jpg&crop=entropy&cs=tinysrgb&w=200&fit=max&ixid=eyJhcHBfaWQiOjE3Nzg0fQ',
-                name: 'Julia',
-                firstSurname: 'Robles',
-            }),
-            'Psicólogo',
-            state({
-                state: 'Activo',
-            }),
-            '20/10/2023',
-        ],
-    ],
+    // columns: ['Usuario', 'Rol', 'Estado', 'Fecha'],
+    server: {
+        url: `/api/v1.0/recent-users`,
+        then: data => console.log(data)
+    },
+    // data: [
+    //     [
+    //         user({
+    //             src: 'https://images.unsplash.com/flagged/photo-1570612861542-284f4c12e75f?ixlib=rb-1.2.1&q=80&fm=jpg&crop=entropy&cs=tinysrgb&w=200&fit=max&ixid=eyJhcHBfaWQiOjE3Nzg0fQ',
+    //             name: 'Guillermo',
+    //             firstSurname: 'Jiménez',
+    //         }),
+    //         'Administrador',
+    //         state({
+    //             state: 'Activo',
+    //         }),
+    //         '20/10/2023',
+    //     ],
+    //     [
+    //         user({
+    //             src: 'https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-0.3.5&q=80&fm=jpg&crop=entropy&cs=tinysrgb&w=200&facepad=3&fit=facearea&s=707b9c33066bf8808c934c8ab394dff6',
+    //             name: 'Yamilet',
+    //             firstSurname: 'Hernández',
+    //         }),
+    //         'Psicólogo',
+    //         state({
+    //             state: 'Activo',
+    //         }),
+    //         '20/10/2023',
+    //     ],
+    //     [
+    //         user({
+    //             src: 'https://images.unsplash.com/photo-1551069613-1904dbdcda11?ixlib=rb-1.2.1&q=80&fm=jpg&crop=entropy&cs=tinysrgb&w=200&fit=max&ixid=eyJhcHBfaWQiOjE3Nzg0fQ',
+    //             name: 'Sarah',
+    //             firstSurname: 'Rosales',
+    //         }),
+    //         'Administrador',
+    //         state({
+    //             state: 'Activo',
+    //         }),
+    //         '20/10/2023',
+    //     ],
+    //     [
+    //         user({
+    //             src: 'https://images.unsplash.com/photo-1551006917-3b4c078c47c9?ixlib=rb-1.2.1&q=80&fm=jpg&crop=entropy&cs=tinysrgb&w=200&fit=max&ixid=eyJhcHBfaWQiOjE3Nzg0fQ',
+    //             name: 'Julia',
+    //             firstSurname: 'Robles',
+    //         }),
+    //         'Psicólogo',
+    //         state({
+    //             state: 'Activo',
+    //         }),
+    //         '20/10/2023',
+    //     ],
+    // ],
     pagination: true,
     language: {
         'pagination': {
           'previous': '<',
           'next': '>',
           'showing': 'Mostrando',
-          'results': () => 'registros'
+          'results': 'registros'
         }
     }
 });

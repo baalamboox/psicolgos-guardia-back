@@ -12,7 +12,7 @@
             </div>
             <div>
                 <p class="mb-2 text-sm font-medium text-gray-600 dark:text-gray-400">Total</p>
-                <p class="text-lg font-semibold text-gray-700 dark:text-gray-200">128</p>
+                <p class="text-lg font-semibold text-gray-700 dark:text-gray-200">{{ $totalPatients }}</p>
             </div>
         </div>
         <div class="flex items-center p-4 bg-white rounded-lg shadow-xs dark:bg-gray-800">
@@ -23,7 +23,7 @@
             </div>
             <div>
                 <p class="mb-2 text-sm font-medium text-gray-600 dark:text-gray-400">En línea</p>
-                <p class="text-lg font-semibold text-gray-700 dark:text-gray-200">24</p>
+                <p class="text-lg font-semibold text-gray-700 dark:text-gray-200">0</p>
             </div>
         </div>
         <div class="flex items-center p-4 bg-white rounded-lg shadow-xs dark:bg-gray-800">
@@ -34,7 +34,7 @@
             </div>
             <div>
                 <p class="mb-2 text-sm font-medium text-gray-600 dark:text-gray-400">Fuera de línea</p>
-                <p class="text-lg font-semibold text-gray-700 dark:text-gray-200">94</p>
+                <p class="text-lg font-semibold text-gray-700 dark:text-gray-200">0</p>
             </div>
         </div>
         <div class="flex items-center p-4 bg-white rounded-lg shadow-xs dark:bg-gray-800">
@@ -45,7 +45,7 @@
             </div>
             <div>
                 <p class="mb-2 text-sm font-medium text-gray-600 dark:text-gray-400">Activos</p>
-                <p class="text-lg font-semibold text-gray-700 dark:text-gray-200">118</p>
+                <p class="text-lg font-semibold text-gray-700 dark:text-gray-200">{{ $activePatients }}</p>
             </div>
         </div>
         <div class="flex items-center p-4 bg-white rounded-lg shadow-xs dark:bg-gray-800">
@@ -56,7 +56,7 @@
             </div>
             <div>
                 <p class="mb-2 text-sm font-medium text-gray-600 dark:text-gray-400">Eliminados</p>
-                <p class="text-lg font-semibold text-gray-700 dark:text-gray-200">10</p>
+                <p class="text-lg font-semibold text-gray-700 dark:text-gray-200">{{ $deletedPatients }}</p>
             </div>
         </div>
     </div>
@@ -70,7 +70,7 @@
             </div>
             <div>
                 <p class="mb-2 text-sm font-medium text-gray-600 dark:text-gray-400">Total</p>
-                <p class="text-lg font-semibold text-gray-700 dark:text-gray-200">64</p>
+                <p class="text-lg font-semibold text-gray-700 dark:text-gray-200">{{ $totalPsychologists }}</p>
             </div>
         </div>
         <div class="flex items-center p-4 bg-white rounded-lg shadow-xs dark:bg-gray-800">
@@ -81,7 +81,7 @@
             </div>
             <div>
                 <p class="mb-2 text-sm font-medium text-gray-600 dark:text-gray-400">En línea</p>
-                <p class="text-lg font-semibold text-gray-700 dark:text-gray-200">18</p>
+                <p class="text-lg font-semibold text-gray-700 dark:text-gray-200">0</p>
             </div>
         </div>
         <div class="flex items-center p-4 bg-white rounded-lg shadow-xs dark:bg-gray-800">
@@ -92,7 +92,7 @@
             </div>
             <div>
                 <p class="mb-2 text-sm font-medium text-gray-600 dark:text-gray-400">Fuera de línea</p>
-                <p class="text-lg font-semibold text-gray-700 dark:text-gray-200">100</p>
+                <p class="text-lg font-semibold text-gray-700 dark:text-gray-200">0</p>
             </div>
         </div>
         <div class="flex items-center p-4 bg-white rounded-lg shadow-xs dark:bg-gray-800">
@@ -103,7 +103,7 @@
             </div>
             <div>
                 <p class="mb-2 text-sm font-medium text-gray-600 dark:text-gray-400">Activos</p>
-                <p class="text-lg font-semibold text-gray-700 dark:text-gray-200">100</p>
+                <p class="text-lg font-semibold text-gray-700 dark:text-gray-200">{{ $activePsychologists }}</p>
             </div>
         </div>
         <div class="flex items-center p-4 bg-white rounded-lg shadow-xs dark:bg-gray-800">
@@ -114,7 +114,7 @@
             </div>
             <div>
                 <p class="mb-2 text-sm font-medium text-gray-600 dark:text-gray-400">Eliminados</p>
-                <p class="text-lg font-semibold text-gray-700 dark:text-gray-200">100</p>
+                <p class="text-lg font-semibold text-gray-700 dark:text-gray-200">{{ $deletedPsychologists }}</p>
             </div>
         </div>
     </div>
