@@ -31,7 +31,13 @@ class HomeController extends Controller
 
     public function recentUsers()
     {
-        $recentUsers = User::where('profile_id', '!=', 1)->whereDate('created_at', date('Y-m-d'))->get();
-        return response()->json($recentUsers, 200);
+        $recentUsers = User::where('profile_id', '!=', 1)->whereDate('created_at', date('Y-m-d'))->with('userPersonalData')->get();
+        return response()->json([
+            'status' => 200,
+            'message' => 'Estos son todos los usuarios recientes encontrados.',
+            'success' => true,
+            'data' => $recentUsers,
+            'errors' => null
+        ], 200);
     }
 }

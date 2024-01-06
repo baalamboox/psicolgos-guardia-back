@@ -8,6 +8,7 @@ use App\Http\Controllers\Web\Admin\ProfileController;
 use App\Http\Controllers\Web\Admin\NewAdminController;
 use App\Http\Controllers\Web\Admin\ConfigController;
 use App\Http\Controllers\Web\Admin\Patients\GeneralDataController;
+use App\Http\Controllers\Web\Admin\Patients\MedicalHistoryController;
 
 /*
 |--------------------------------------------------------------------------
@@ -47,14 +48,13 @@ Route::prefix('admin')->group(function() {
                 return view('admin.patients.patients');
             })->name('patients');
             Route::get('/general-data/{id}', GeneralDataController::class);
-            Route::get('/medical-history/{id}', function() {
-                return view('admin.patients.medical-history');
-            });
+            Route::get('/medical-history/{id}', MedicalHistoryController::class);
         });
         Route::prefix('psychologists')->group(function() {
             Route::get('/psychologist-list', function() {
                 return view('admin.psychologists.psychologists');
             })->name('psychologists');
+            Route::get('/general-data/{id}', GeneralDataController::class);
         });
         Route::prefix('metrics')->group(function() {
             Route::get('/graphs', function() {

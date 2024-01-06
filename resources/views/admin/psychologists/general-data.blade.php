@@ -4,7 +4,7 @@
     <h2 class="my-6 text-2xl font-semibold text-gray-700 dark:text-gray-200">Datos generales</h2>
     <div class="flex items-center min-h-screen p-6 bg-gray-50 dark:bg-gray-900">
         <div class="flex-1 h-full max-w-4xl mx-auto overflow-hidden bg-white rounded-lg shadow-xl dark:bg-gray-800">
-            <div class="flex flex-col overflow-y-auto md:flex-row">
+            <div class="flex h-full flex-col overflow-y-auto md:flex-row">
                 <div class="h-32 md:h-auto md:w-1/2">
                     <img src="https://images.pexels.com/photos/220453/pexels-photo-220453.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" alt="⚠️ Error de carga" class="object-cover w-full h-full" aria-hidden="true" />
                 </div>
