@@ -44,6 +44,7 @@ Route::prefix('v1.0')->group(function() {
             Route::get('/list-all-psychologists', ListAllPsychologistsController::class);
         });
         Route::get('/recent-users', [HomeController::class, 'recentUsers']);
+        Route::get('/logins', [HomeController::class, 'logins']);
     });
 
     Route::prefix('location')->group(function() {
