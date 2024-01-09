@@ -10,6 +10,7 @@ use App\Http\Controllers\Api\Location\SetLocationController;
 use App\Http\Controllers\Api\Location\UpdateLocationController;
 use App\Http\Controllers\Api\Location\GetLocationsController;
 use App\Http\Controllers\Web\Admin\HomeController;
+use App\Http\Controllers\Api\Appointments\AppointmentsController;
 
 /*
 |--------------------------------------------------------------------------
@@ -33,6 +34,9 @@ Route::prefix('v1.0')->group(function() {
     });
 
     Route::middleware('auth:sanctum')->group(function() {
+        Route::prefix('appointments')->group(function() {
+            Route::post('/create', [AppointmentsController::class, 'create']);
+        });
         Route::get('/auth/sign-out', [AuthController::class, 'signOut']);
     });
 

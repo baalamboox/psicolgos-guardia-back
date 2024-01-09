@@ -17,8 +17,7 @@ return new class extends Migration
             $table->unsignedBigInteger('patient_user_id');
             $table->string('reason_inquiry', 255);
             $table->string('note', 255);
-            $table->time('preferred_time');
-            $table->date('preferred_date');
+            $table->datetime('preferred_datetime');
             $table->string('way_pay', 64);
             $table->string('state', 32);
             $table->softDeletes();
