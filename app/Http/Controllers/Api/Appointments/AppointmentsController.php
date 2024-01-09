@@ -15,7 +15,7 @@ class AppointmentsController extends Controller
         $rules = [
             'psychologist_user_id' => 'required|integer',
             'reason_inquiry' => 'required|regex:/^[a-zA-ZáéíóúÁÉÍÓÚñÑ., ]+$/|max:255',
-            'note' => 'nullable|regex:/^[a-zA-ZáéíóúÁÉÍÓÚñÑ., ]+$/|max:255',
+            'note' => 'nullable|regex:/^[a-zA-ZáéíóúÁÉÍÓÚñÑ.,():"" ]+$/|max:255',
             'preferred_datetime' => 'required',
             'way_pay' => 'required|regex:/^[a-zA-ZáéíóúÁÉÍÓÚñÑ., ]+$/|max:64',
         ];
