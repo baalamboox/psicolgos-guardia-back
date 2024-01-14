@@ -16,6 +16,7 @@ class AppointmentLog extends Model
     protected $table = 'appointments_log';
 
     protected $fillable = [
+        'appointment_id',
         'user_id',
         'action',
         'details'

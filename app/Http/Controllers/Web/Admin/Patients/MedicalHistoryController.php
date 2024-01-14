@@ -14,6 +14,6 @@ class MedicalHistoryController extends Controller
     public function __invoke(Request $request, int $id)
     {
         $data = User::where('id', $id)->with('medicalHistory')->get();
-        return response()->json($data, 200);;
+        return response()->json($data, 200);
     }
 }

@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 use App\Models\Appointment;
+use App\Models\AppointmentLog;
 
 class AppointmentsController extends Controller
 {
@@ -44,7 +45,7 @@ class AppointmentsController extends Controller
                 'errors' => $validator->errors()
             ], 400);
         }
-        Appointment::create([
+        $appointment = Appointment::create([
             'psychologist_user_id' => $request->psychologist_user_id,
             'patient_user_id' => auth()->user()->id,
             'reason_inquiry' => $request->reason_inquiry,
@@ -52,6 +53,12 @@ class AppointmentsController extends Controller
             'preferred_datetime' => $request->preferred_datetime,
             'way_pay' => $request->way_pay,
             'state' => 'enviado'
+        ]);
+        AppointmentLog::create([
+            'appointment_id' => $appointment->id,
+            'user_id' => auth()->user()->id,
+            'action' => 'creación de cita',
+            'details' => 'creó una cita de forma correcta.'
         ]);
         return response()->json([
             'status' => 200,
