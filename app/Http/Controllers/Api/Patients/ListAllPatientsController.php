@@ -13,13 +13,17 @@ class ListAllPatientsController extends Controller
      */
     public function __invoke(Request $request)
     {
-
         $patients = User::where('profile_id', 2)->with('userPersonalData')->get();
         if($patients->isEmpty())
         {
-            return session(['existPatients' => false]);
+            return response()->json([
+                'status' => 200,
+                'message' => 'No hay pacientes aún.',
+                'success' => true,
+                'data' => $patients,
+                'errors' => null
+            ], 200);
         } else {
-            session(['existPatients' => true]);
             return response()->json([
                 'status' => 200,
                 'message' => 'Estos son todos los Pacientes encontrados.',
@@ -28,5 +32,6 @@ class ListAllPatientsController extends Controller
                 'errors' => null
             ], 200);
         }
+        
     }
 }

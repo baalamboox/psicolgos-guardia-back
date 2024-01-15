@@ -2,6 +2,9 @@ import { Grid, html } from "gridjs";
 import { capitalLetters } from '../../capital-letters';
 import 'gridjs/dist/theme/mermaid.css';
 
+const coverNoPatients = document?.querySelector('#coverNoPatients');
+const containerPatientsList = document?.querySelector('#containerPatientsList');
+
 const profile = ({src}) => html(`
     <div class="flex items-center text-sm">
         <div class="relative mx-auto w-10 h-10 mr-3 rounded-full shadow-lg">
@@ -46,13 +49,15 @@ document.querySelector('#patientsList') && new Grid({
     columns: ['Foto', 'Paciente', 'Datos generales', 'Historial clínico', 'Estado'],
     server: {
         url: '/api/v1.0/patients/list-all-patients',
-        then: data => data.data.map(patient => [
-            profile({ src: `${ window.location.origin }/${ patient.profile_photo }` }),
-            capitalLetters({ words: `${ patient.user_personal_data.names } ${ patient.user_personal_data.first_surname }` }),
-            generalData({ href: `/admin/patients/general-data/${ patient.id }` }),
-            medicalHistory({ href: `/admin/patients/medical-history/${ patient.id }` }),
-            status({ state: patient.state })
-        ]),
+        then: data => data.data.length != 0 ? (
+            data.data.map(patient => [
+                profile({ src: `${ window.location.origin }/${ patient.profile_photo }` }),
+                capitalLetters({ words: `${ patient.user_personal_data.names } ${ patient.user_personal_data.first_surname }` }),
+                generalData({ href: `/admin/patients/general-data/${ patient.id }` }),
+                medicalHistory({ href: `/admin/patients/medical-history/${ patient.id }` }),
+                status({ state: patient.state })
+            ])
+        ) : [containerPatientsList.hidden = true, coverNoPatients.hidden = false],
     },
     pagination: {
         limit: 10

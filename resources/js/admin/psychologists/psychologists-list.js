@@ -2,6 +2,9 @@ import { Grid, html } from "gridjs";
 import { capitalLetters } from '../../capital-letters';
 import 'gridjs/dist/theme/mermaid.css';
 
+const coverNoPsychologists = document?.querySelector('#coverNoPsychologists');
+const containerPsychologistsList = document?.querySelector('#containerPsychologistsList');
+
 const profile = ({src}) => html(`
     <div class="relative mx-auto w-10 h-10 mr-3 rounded-full shadow-lg">
         <img src="${src}" alt="⚠️ Error de carga" class="object-cover w-full h-full rounded-full" loading="lazy" />
@@ -44,13 +47,15 @@ document.querySelector('#psychologistsList') && new Grid({
     columns: ['Foto', 'Psicólogo', 'Datos generales', 'Historiales clínicos', 'Estado'],
     server: {
         url: '/api/v1.0/psychologists/list-all-psychologists',
-        then: data => data.data.map(psychologist => [
-            profile({ src: `${ window.location.origin }/${ psychologist.profile_photo }` }),
-            capitalLetters({ words: `${ psychologist.user_personal_data.names } ${ psychologist.user_personal_data.first_surname }` }),
-            generalData({ href: `/admin/psychologists/general-data/${ psychologist.id }` }),
-            medicalHistories({ href: `/admin/psychologists/medical-history/${ psychologist.id }` }),
-            status({ state: psychologist.state })
-        ]),
+        then: data => data.data.length != 0 ? (
+            data.data.map(psychologist => [
+                profile({ src: `${ window.location.origin }/${ psychologist.profile_photo }` }),
+                capitalLetters({ words: `${ psychologist.user_personal_data.names } ${ psychologist.user_personal_data.first_surname }` }),
+                generalData({ href: `/admin/psychologists/general-data/${ psychologist.id }` }),
+                medicalHistories({ href: `/admin/psychologists/medical-history/${ psychologist.id }` }),
+                status({ state: psychologist.state })
+            ])
+        ) : [containerPsychologistsList.hidden = true, coverNoPsychologists.hidden = false],
     },
     pagination: {
         limit: 10
