@@ -11,6 +11,7 @@ use App\Http\Controllers\Api\Location\UpdateLocationController;
 use App\Http\Controllers\Api\Location\GetLocationsController;
 use App\Http\Controllers\Web\Admin\HomeController;
 use App\Http\Controllers\Api\Appointments\AppointmentsController;
+use App\Http\Controllers\Api\Psychologists\MedicalHistoryController;
 
 /*
 |--------------------------------------------------------------------------
@@ -24,6 +25,7 @@ use App\Http\Controllers\Api\Appointments\AppointmentsController;
 */
 
 Route::prefix('v1.0')->group(function() {
+
     Route::prefix('auth')->group(function() {
         Route::post('/sign-up', [AuthController::class, 'signUp']);
         Route::post('/sign-in', [AuthController::class, 'signIn']);
@@ -36,6 +38,18 @@ Route::prefix('v1.0')->group(function() {
     Route::middleware('auth:sanctum')->group(function() {
         Route::prefix('appointments')->group(function() {
             Route::post('/create', [AppointmentsController::class, 'create']);
+        });
+        // Route::prefix('patients')->group(function() {
+        //     Route::prefix('emergency-contacts')->group(function() {
+        //         Route::get('show-all-contacts', []);
+        //     });
+        // });
+        Route::prefix('psychologists')->group(function() {
+            Route::prefix('medical-history')->group(function() {
+                Route::get('/search',  [MedicalHistoryController::class, 'search']);
+                Route::post('/create', [MedicalHistoryController::class, 'create']);
+                Route::put('/edit', [MedicalHistoryController::class, 'edit']);
+            });
         });
         Route::get('/auth/sign-out', [AuthController::class, 'signOut']);
     });
