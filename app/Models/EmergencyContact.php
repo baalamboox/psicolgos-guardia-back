@@ -14,6 +14,7 @@ class EmergencyContact extends Model
     protected $table = 'emergency_contacts';
 
     protected $fillable = [
+        'user_id',
         'names',
         'first_surname',
         'second_surname',

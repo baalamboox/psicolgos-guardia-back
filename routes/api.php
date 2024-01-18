@@ -12,6 +12,7 @@ use App\Http\Controllers\Api\Location\GetLocationsController;
 use App\Http\Controllers\Web\Admin\HomeController;
 use App\Http\Controllers\Api\Appointments\AppointmentsController;
 use App\Http\Controllers\Api\Psychologists\MedicalHistoryController;
+use App\Http\Controllers\Api\Patients\EmergencyContactController;
 
 /*
 |--------------------------------------------------------------------------
@@ -36,24 +37,44 @@ Route::prefix('v1.0')->group(function() {
     });
 
     Route::middleware('auth:sanctum')->group(function() {
-        Route::prefix('appointments')->group(function() {
-            Route::post('/create', [AppointmentsController::class, 'create']);
+        Route::prefix('patients')->group(function() {
+            /*
+            |-------------------------------------------------------------
+            | Emergency Contacts ApiResource tiene las siguientes acciones:
+            |-------------------------------------------------------------
+            | 1.- Crear contacto de emergencia.
+            | 2.- Actualizar contacto de emergencia.
+            | 3.- Mostrar todos los contactos de emergencia.
+            | 4.- Eliminar contacto de emergencia.
+            */
+            Route::apiResource('emergency-contacts', EmergencyContactController::class);
+            /*
+            |-------------------------------------------------------------
+            | Appointments ApiResource tiene las siguientes acciones:
+            |-------------------------------------------------------------
+            | 1.- Crear cita.
+            | 2.- Actualizar cita.
+            | 3.- Mostrar todas las citas.
+            | 4.- Eliminar cita.
+            | 5.- Mostrar cita.
+            */
+            Route::apiResource('appointments', AppointmentsController::class);
         });
-        // Route::prefix('patients')->group(function() {
-        //     Route::prefix('emergency-contacts')->group(function() {
-        //         Route::get('show-all-contacts', []);
-        //     });
-        // });
         Route::prefix('psychologists')->group(function() {
-            Route::prefix('medical-history')->group(function() {
-                Route::get('/search',  [MedicalHistoryController::class, 'search']);
-                Route::post('/create', [MedicalHistoryController::class, 'create']);
-                Route::put('/edit', [MedicalHistoryController::class, 'edit']);
-            });
+            /*
+            |-------------------------------------------------------------
+            | Medical histories ApiResource tiene las siguientes acciones:
+            |-------------------------------------------------------------
+            | 1.- Crear historiales clínicos.
+            | 2.- Actualizar historial clínico.
+            | 3.- Mostrar todos los historiales clínicos.
+            | 4.- Eliminar historial clínico.
+            | 5.- Mostrar historial clínico.
+            */
+            Route::apiResource('medical-histories', MedicalHistoryController::class);
         });
         Route::get('/auth/sign-out', [AuthController::class, 'signOut']);
     });
-
     Route::middleware(['web', 'auth'])->group(function() {
         Route::prefix('patients')->group(function() {
             Route::get('/list-all-patients', ListAllPatientsController::class);
@@ -64,7 +85,6 @@ Route::prefix('v1.0')->group(function() {
         Route::get('/recent-users', [HomeController::class, 'recentUsers']);
         Route::get('/logins', [HomeController::class, 'logins']);
     });
-
     Route::prefix('location')->group(function() {
         Route::post('/set-location', SetLocationController::class);
         Route::put('/update-location', UpdateLocationController::class);

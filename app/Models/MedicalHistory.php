@@ -14,6 +14,7 @@ class MedicalHistory extends Model
     protected $table = 'medical_histories';
 
     protected $fillable = [
+        'user_id',
         'treatment_plan',
         'admission_date',
         'clinical_evaluation',
