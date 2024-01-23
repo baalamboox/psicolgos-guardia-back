@@ -13,6 +13,7 @@ use App\Http\Controllers\Web\Admin\HomeController;
 use App\Http\Controllers\Api\Appointments\AppointmentsController;
 use App\Http\Controllers\Api\Psychologists\MedicalHistoryController;
 use App\Http\Controllers\Api\Patients\EmergencyContactController;
+use App\Http\Controllers\Api\Profile\ProfileController;
 
 /*
 |--------------------------------------------------------------------------
@@ -26,7 +27,7 @@ use App\Http\Controllers\Api\Patients\EmergencyContactController;
 */
 
 Route::prefix('v1.0')->group(function() {
-
+    
     Route::prefix('auth')->group(function() {
         Route::post('/sign-up', [AuthController::class, 'signUp']);
         Route::post('/sign-in', [AuthController::class, 'signIn']);
@@ -59,6 +60,15 @@ Route::prefix('v1.0')->group(function() {
             | 5.- Mostrar cita.
             */
             Route::apiResource('appointments', AppointmentsController::class);
+            /*
+            |-------------------------------------------------------------
+            | Profile ApiResource tiene las siguientes acciones:
+            |-------------------------------------------------------------
+            | 1.- Mostrar datos del Paciente.
+            | 2.- Eliminar cuenta del Paciente.
+            | 3.- Acualizar datos necesario para el Paciente.
+            */
+            Route::apiResource('profile', ProfileController::class);
         });
         Route::prefix('psychologists')->group(function() {
             /*
@@ -72,6 +82,15 @@ Route::prefix('v1.0')->group(function() {
             | 5.- Mostrar historial clínico.
             */
             Route::apiResource('medical-histories', MedicalHistoryController::class);
+            /*
+            |-------------------------------------------------------------
+            | Profile ApiResource tiene las siguientes acciones:
+            |-------------------------------------------------------------
+            | 1.- Mostrar datos del Psicólogo.
+            | 2.- Eliminar cuenta del Psicólogo.
+            | 3.- Acualizar datos necesario para el Psicólogo.
+            */
+            Route::apiResource('profile', ProfileController::class);
         });
         Route::get('/auth/sign-out', [AuthController::class, 'signOut']);
     });
