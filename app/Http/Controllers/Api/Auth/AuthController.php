@@ -58,7 +58,7 @@ class AuthController extends Controller
                 {
                     return response()->json([
                         'status' => 400,
-                        'message' => 'Error de datos del paciente a crear.',
+                        'message' => 'Error en la validación de datos.',
                         'success' => false,
                         'data' => null,
                         'errors' => $patientValidator->errors()
@@ -102,7 +102,7 @@ class AuthController extends Controller
                     'status' => 200,
                     'message' => 'Se creó paciente correctamente.',
                     'success' => true,
-                    'data' => null,
+                    'data' => $user,
                     'errors' => null
                 ], 200);
                 break;
@@ -202,7 +202,7 @@ class AuthController extends Controller
                     'status' => 200,
                     'message' => 'Se creó psicólogo correctamente.',
                     'success' => true,
-                    'data' => null,
+                    'data' => $user,
                     'errors' => null
                 ], 200);
                 break;
@@ -296,6 +296,7 @@ class AuthController extends Controller
             'message' => 'Usuario autenticado correctamente.',
             'success' => true,
             'data' => [
+                'user_id' => $user->id,
                 'token'=> $token
             ],
             'errors' => null
