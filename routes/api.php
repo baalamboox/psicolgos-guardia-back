@@ -4,16 +4,10 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Api\Auth\AuthController;
 use App\Http\Controllers\Api\Auth\RecoverAccountController;
-use App\Http\Controllers\Api\Patients\ListAllPatientsController;
-use App\Http\Controllers\Api\Psychologists\ListAllPsychologistsController;
-use App\Http\Controllers\Api\Location\SetLocationController;
-use App\Http\Controllers\Api\Location\UpdateLocationController;
-use App\Http\Controllers\Api\Location\GetLocationsController;
-use App\Http\Controllers\Web\Admin\HomeController;
-use App\Http\Controllers\Api\Appointments\AppointmentsController;
-use App\Http\Controllers\Api\Psychologists\MedicalHistoryController;
-use App\Http\Controllers\Api\Patients\EmergencyContactController;
-use App\Http\Controllers\Api\Profile\ProfileController;
+use App\Http\Controllers\Api\Location\LocationController;
+use App\Http\Controllers\Api\Location\PsychologistLocationsController;
+use App\Http\Controllers\Api\Patient\PsychologistInfoMapController;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -26,87 +20,65 @@ use App\Http\Controllers\Api\Profile\ProfileController;
 |
 */
 
+// Primera versión de la API Rest.
 Route::prefix('v1.0')->group(function() {
-    
+
+    /*
+    |--------------------------------------------------------------------------------------------
+    | Auth tiene los siguientes EndPoints:
+    |--------------------------------------------------------------------------------------------
+    | 1. Registrar (Pacientes ó Psicólogos).
+    | 2. Autenticar (Pacientes ó Psicólogos).
+    | 3. Verificar si existen (Pacientes ó Psicólogos) registrados.
+    | 4. Enviar código de verificación por correo electrónico (Recuperación de contraseña).
+    | 5. Verificar el código de verificación.
+    | 6. Registrar nueva contraseña para recuperar cuenta.
+    */
     Route::prefix('auth')->group(function() {
-        Route::post('/sign-up', [AuthController::class, 'signUp']);
-        Route::post('/sign-in', [AuthController::class, 'signIn']);
-        Route::get('/verify-user', [AuthController::class, 'verifyUser']);
-        Route::post('/send-verification-code', [RecoverAccountController::class, 'sendVerificationCode']);
-        Route::post('/check-verification-code', [RecoverAccountController::class, 'checkVerificationCode']);
-        Route::put('/reset-password', [RecoverAccountController::class, 'resetPassword'])->middleware('verification.code.is.checked');
+        Route::post('sign-up', [AuthController::class, 'signUp']);
+        Route::post('sign-in', [AuthController::class, 'signIn']);
+        Route::get('verify-user', [AuthController::class, 'verifyUser']);
+        Route::post('send-verification-code', [RecoverAccountController::class, 'sendVerificationCode']);
+        Route::post('check-verification-code', [RecoverAccountController::class, 'checkVerificationCode']);
+
+        // El siguiente EndPoint hace uso de un Middleware creado para verificar si el código de veridicación ha sido verificado.
+        Route::put('reset-password', [RecoverAccountController::class, 'resetPassword'])->middleware('verification.code.is.checked');
     });
 
     Route::middleware('auth:sanctum')->group(function() {
-        Route::prefix('patients')->group(function() {
-            /*
-            |-------------------------------------------------------------
-            | Emergency Contacts ApiResource tiene las siguientes acciones:
-            |-------------------------------------------------------------
-            | 1.- Crear contacto de emergencia.
-            | 2.- Actualizar contacto de emergencia.
-            | 3.- Mostrar todos los contactos de emergencia.
-            | 4.- Eliminar contacto de emergencia.
-            */
-            Route::apiResource('emergency-contacts', EmergencyContactController::class);
-            /*
-            |-------------------------------------------------------------
-            | Appointments ApiResource tiene las siguientes acciones:
-            |-------------------------------------------------------------
-            | 1.- Crear cita.
-            | 2.- Actualizar cita.
-            | 3.- Mostrar todas las citas.
-            | 4.- Eliminar cita.
-            | 5.- Mostrar cita.
-            */
-            Route::apiResource('appointments', AppointmentsController::class);
-            /*
-            |-------------------------------------------------------------
-            | Profile ApiResource tiene las siguientes acciones:
-            |-------------------------------------------------------------
-            | 1.- Mostrar datos del Paciente.
-            | 2.- Eliminar cuenta del Paciente.
-            | 3.- Acualizar datos necesario para el Paciente.
-            */
-            Route::apiResource('profile', ProfileController::class);
-        });
-        Route::prefix('psychologists')->group(function() {
-            /*
-            |-------------------------------------------------------------
-            | Medical histories ApiResource tiene las siguientes acciones:
-            |-------------------------------------------------------------
-            | 1.- Crear historiales clínicos.
-            | 2.- Actualizar historial clínico.
-            | 3.- Mostrar todos los historiales clínicos.
-            | 4.- Eliminar historial clínico.
-            | 5.- Mostrar historial clínico.
-            */
-            Route::apiResource('medical-histories', MedicalHistoryController::class);
-            /*
-            |-------------------------------------------------------------
-            | Profile ApiResource tiene las siguientes acciones:
-            |-------------------------------------------------------------
-            | 1.- Mostrar datos del Psicólogo.
-            | 2.- Eliminar cuenta del Psicólogo.
-            | 3.- Acualizar datos necesario para el Psicólogo.
-            */
-            Route::apiResource('profile', ProfileController::class);
-        });
+
+        // EndPoint para cerrar sesión.
         Route::get('/auth/sign-out', [AuthController::class, 'signOut']);
-    });
-    Route::middleware(['web', 'auth'])->group(function() {
-        Route::prefix('patients')->group(function() {
-            Route::get('/list-all-patients', ListAllPatientsController::class);
+
+        /*
+        |-----------------------------------------------------------------
+        | Location tiene los siguientes EndPoints:
+        |-----------------------------------------------------------------
+        | 1.- Almacenar ubicación (Paciente o psicólogo).
+        | 2.- Actualizar ubicación (Paciente o psicólogo).
+        */
+        Route::prefix('location')->group(function() {
+            Route::post('store', [LocationController::class, 'store']);
+            Route::put('update', [LocationController::class, 'update']);
         });
-        Route::prefix('psychologists')->group(function() {
-            Route::get('/list-all-psychologists', ListAllPsychologistsController::class);
+
+        /*
+        |-----------------------------------------------------------------
+        | Appointment tiene los siguientes EndPoints:
+        |-----------------------------------------------------------------
+        | 1.- Almacenar ubicación (Paciente o psicólogo).
+        | 2.- Actualizar ubicación (Paciente o psicólogo).
+        */
+
+        Route::prefix('patient')->group(function() {
         });
-        Route::get('/recent-users', [HomeController::class, 'recentUsers']);
-        Route::get('/logins', [HomeController::class, 'logins']);
+        Route::prefix('psychologist')->group(function() {
+        });
     });
-    Route::prefix('location')->group(function() {
-        Route::post('/set-location', SetLocationController::class);
-        Route::put('/update-location', UpdateLocationController::class);
-        Route::get('/psychologists/locations', [GetLocationsController::class, 'getLocationsPsychologists']);
-    });
+
+    // EndPoint para obtener las ubicaciones de Psicólogos por zona.
+    Route::get('location/psychologists', PsychologistLocationsController::class);
+
+    // EndPoint para obtener la información breve del psicólogo.
+    Route::get('patient/psychologistInfoMap/{userId}', PsychologistInfoMapController::class);
 });
