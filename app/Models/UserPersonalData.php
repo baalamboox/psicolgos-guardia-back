@@ -21,10 +21,12 @@ class UserPersonalData extends Model
         'gender',
         'address',
         'birthday',
+        'professional_title',
         'specialty',
         'type',
         'professional_license',
         'phone',
+        'whatsapp',
         'curp',
         'sex'
     ];

@@ -80,5 +80,5 @@ Route::prefix('v1.0')->group(function() {
     Route::get('location/psychologists', PsychologistLocationsController::class);
 
     // EndPoint para obtener la información breve del psicólogo.
-    Route::get('patient/psychologistInfoMap/{userId}', PsychologistInfoMapController::class);
+    Route::get('patient/psychologist-info-map/{userId}', PsychologistInfoMapController::class);
 });

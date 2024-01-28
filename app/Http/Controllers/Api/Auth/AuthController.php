@@ -24,9 +24,9 @@ class AuthController extends Controller
                     'email' => 'required|email|unique:users|max:64',
                     'password' => 'required|regex:/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&*.,:?(){}<>"])[A-Za-z\d!@#$%^&*.,:?(){}<>"]{8,10}$/',
                     'profile_photo' => 'required|mimes:jpeg,jpg,png|max:2048',
-                    'names' => 'required|regex:/^[a-zA-ZáéíóúÁÉÍÓÚñÑ ]+$/|max:32',
-                    'first_surname' => 'required|regex:/^[a-zA-ZáéíóúÁÉÍÓÚñÑ ]+$/|max:16',
-                    'second_surname' => 'required|regex:/^[a-zA-ZáéíóúÁÉÍÓÚñÑ ]+$/|max:16',
+                    'names' => 'required|regex:/^[a-zA-ZáéíóúÁÉÍÓÚñÑ\s]+$/|max:32',
+                    'first_surname' => 'required|regex:/^[a-zA-ZáéíóúÁÉÍÓÚñÑ\s]+$/|max:16',
+                    'second_surname' => 'required|regex:/^[a-zA-ZáéíóúÁÉÍÓÚñÑ\s]+$/|max:16',
                     'curp' => 'required|alpha_num:ascii|min:18|max:18'
                 ];
                 $patientMessages = [
@@ -111,13 +111,13 @@ class AuthController extends Controller
                     'email' => 'required|email|unique:users|max:64',
                     'password' => 'required|regex:/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&*.,:?(){}<>"])[A-Za-z\d!@#$%^&*.,:?(){}<>"]{8,10}$/',
                     'profile_photo' => 'required|mimes:jpeg,jpg,png|max:2048',
-                    'names' => 'required|regex:/^[a-zA-ZáéíóúÁÉÍÓÚñÑ ]+$/|max:32',
-                    'first_surname' => 'required|regex:/^[a-zA-ZáéíóúÁÉÍÓÚñÑ ]+$/|max:16',
-                    'second_surname' => 'required|regex:/^[a-zA-ZáéíóúÁÉÍÓÚñÑ ]+$/|max:16',
+                    'names' => 'required|regex:/^[a-zA-ZáéíóúÁÉÍÓÚñÑ\s]+$/|max:32',
+                    'first_surname' => 'required|regex:/^[a-zA-ZáéíóúÁÉÍÓÚñÑ\s]+$/|max:16',
+                    'second_surname' => 'required|regex:/^[a-zA-ZáéíóúÁÉÍÓÚñÑ\s]+$/|max:16',
                     'curp' => 'required|alpha_num:ascii|min:18|max:18',
-                    'type' => 'required|regex:/^[a-zA-ZáéíóúÁÉÍÓÚñÑ ]+$/|max:255',
+                    'type' => 'required|regex:/^[a-zA-ZáéíóúÁÉÍÓÚñÑ\s]+$/|max:255',
                     'professional_license' => 'regex:/^[a-zA-Z0-9-]+$/|min:7|max:10',
-                    'title' => 'regex:/^[a-zA-ZáéíóúÁÉÍÓÚñÑ. ]+$/'
+                    'title' => 'regex:/^[a-zA-ZáéíóúÁÉÍÓÚñÑ.\s]+$/'
                 ];
                 $psychologistMessages = [
                     'email.required' => 'Correo electrónico: Requerido.',
@@ -188,8 +188,8 @@ class AuthController extends Controller
                     'second_surname' => strtolower($request->second_surname),
                     'curp' => strtolower($request->curp),
                     'type' => strtolower($request->type),
-                    'professional_license' => strtolower($request->professional_license),
-                    'title' => strtolower($request->title)
+                    'professional_title' => strtolower($request->professional_title),
+                    'professional_license' => strtolower($request->professional_license)
                 ]);
                 $user->userPersonalData()->save($userPersonalData);
                 UserLog::create([

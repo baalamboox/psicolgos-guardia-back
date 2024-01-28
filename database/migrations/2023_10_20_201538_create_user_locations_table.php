@@ -14,8 +14,8 @@ return new class extends Migration
         Schema::create('user_locations', function (Blueprint $table) {
             $table->id();
             $table->foreignId('user_id')->unique()->constrained()->onUpdate('cascade')->onDelete('cascade');
-            $table->float('latitude',15, 16);
-            $table->float('length', 15, 16);
+            $table->float('latitude',19, 16);
+            $table->float('length', 19, 16);
             $table->string('zone', 32);
             $table->softDeletes();
             $table->timestamps();

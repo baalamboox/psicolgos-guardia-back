@@ -21,11 +21,14 @@ class PsychologistInfoMapController extends Controller
         ->join('user_personal_data', 'users.id', '=', 'user_personal_data.user_id')
         ->select(
             'users.id',
+            'users.email',
             'users.profile_photo',
             'user_personal_data.names',
             'user_personal_data.first_surname',
             'user_personal_data.second_surname',
-            'user_personal_data.title',
+            'user_personal_data.type',
+            'user_personal_data.professional_title',
+            'user_personal_data.professional_license',
             'user_personal_data.specialty',
             'user_personal_data.phone',
             'user_personal_data.whatsapp'
