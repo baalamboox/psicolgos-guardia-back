@@ -7,6 +7,7 @@ use App\Http\Controllers\Api\Auth\RecoverAccountController;
 use App\Http\Controllers\Api\Location\LocationController;
 use App\Http\Controllers\Api\Location\PsychologistLocationsController;
 use App\Http\Controllers\Api\Patient\PsychologistInfoMapController;
+use App\Http\Controllers\Api\Patient\EmergencyContactController;
 
 
 /*
@@ -48,30 +49,36 @@ Route::prefix('v1.0')->group(function() {
     Route::middleware('auth:sanctum')->group(function() {
 
         // EndPoint para cerrar sesión.
-        Route::get('/auth/sign-out', [AuthController::class, 'signOut']);
+        Route::get('auth/sign-out', [AuthController::class, 'signOut']);
 
         /*
         |-----------------------------------------------------------------
         | Location tiene los siguientes EndPoints:
         |-----------------------------------------------------------------
-        | 1.- Almacenar ubicación (Paciente o psicólogo).
-        | 2.- Actualizar ubicación (Paciente o psicólogo).
+        | 1. Almacenar ubicación (Paciente o psicólogo).
+        | 2. Actualizar ubicación (Paciente o psicólogo).
         */
         Route::prefix('location')->group(function() {
             Route::post('store', [LocationController::class, 'store']);
             Route::put('update', [LocationController::class, 'update']);
         });
 
-        /*
-        |-----------------------------------------------------------------
-        | Appointment tiene los siguientes EndPoints:
-        |-----------------------------------------------------------------
-        | 1.- Almacenar ubicación (Paciente o psicólogo).
-        | 2.- Actualizar ubicación (Paciente o psicólogo).
-        */
-
+        // Grupo de EndPoints para pacientes.
         Route::prefix('patient')->group(function() {
+
+            /*
+            |-----------------------------------------------------------------
+            | Emergency contact Api Resource tiene los siguientes EndPoints:
+            |-----------------------------------------------------------------
+            | 1. Crear contacto de emergencia (Solo paciente).
+            | 2. Editar contacto de emergencia (Solo paciente).
+            | 3. Eliminar contacto de emergencia (Solo paciente).
+            | 4. Mostrar contactos de emergencia por paciente.
+            | 5. Mostrar contacto de emergencia (Solo paciente).
+            */
+            Route::apiResource('emergency-contact', EmergencyContactController::class);
         });
+
         Route::prefix('psychologist')->group(function() {
         });
     });
