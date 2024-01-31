@@ -21,7 +21,7 @@ return new class extends Migration
             $table->text('gender')->nullable();
             $table->string('address', 255)->nullable();
             $table->date('birthday')->nullable();
-            $table->text('title')->nullable();
+            $table->text('professinal_title')->nullable();
             $table->string('specialty', 255)->nullable();
             $table->string('type', 255)->nullable();
             $table->string('professional_license', 10)->nullable();

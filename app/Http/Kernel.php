@@ -66,5 +66,6 @@ class Kernel extends HttpKernel
         'verified' => \Illuminate\Auth\Middleware\EnsureEmailIsVerified::class,
         'verification.code.is.checked' => \App\Http\Middleware\ValidateIfVerificationCodeIsChecked::class,
         'validate.email.in.sesion' => \App\Http\Middleware\ValidateEmailIfExistInSession::class,
+        'check.pending.or.scheduled' => \App\Http\Middleware\CheckPendingOrScheduled::class,
     ];
 }
