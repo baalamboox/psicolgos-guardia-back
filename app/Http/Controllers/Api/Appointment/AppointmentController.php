@@ -284,7 +284,7 @@ class AppointmentController extends Controller
                         'message' => 'Ocurrió un error al atender la cita.',
                         'success' => false,
                         'data' => null,
-                        'errors' => ['Cita:' => 'Ya ha sido agendada ó rechazada.']
+                        'errors' => ['Cita:' => 'Ya ha sido atendida.']
                     ], 400);
                 }
             } else {
