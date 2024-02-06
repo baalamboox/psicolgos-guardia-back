@@ -15,16 +15,18 @@ class LocationController extends Controller
     {
         $rules = [
             'user_id' => 'unique:user_locations',
-            'latitude' => 'required|decimal:15,16',
-            'length' => 'required|decimal:15,16',
+            // 'latitude' => 'required|decimal:15,16',
+            // 'length' => 'required|decimal:15,16',
+            'latitude' => 'required',
+            'length' => 'required',
             'zone' => 'required|regex:/^[a-záéíóúñ\s]+$/|max:32'
         ];
         $messages = [
             'user_id.unique' => 'ID usuario: Ya se ha registrado su ubicación.',
             'latitude.required' => 'Latitud: Requerida.',
-            'latitude.decimal' => 'Latitud: Formato incorrecto.',
+            // 'latitude.decimal' => 'Latitud: Formato incorrecto.',
             'length.required' => 'Longitud: Requerida.',
-            'length.decimal' => 'Latitud: Formato incorrecto.',
+            // 'length.decimal' => 'Latitud: Formato incorrecto.',
             'zone.required' => 'Zona: Requerida.',
             'zone.regex' => 'Zona: Debe contener solo letras minúsculas y espacios.',
             'zone.max' => 'Zona: Demasiado larga.'
