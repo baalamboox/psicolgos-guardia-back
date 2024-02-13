@@ -72,15 +72,15 @@ class LocationController extends Controller
     public function update(Request $request)
     {
         $rules = [
-            'latitude' => 'required|decimal:15,16',
-            'length' => 'required|decimal:15,16',
+            'latitude' => 'required|regex:/^[0-9\.-]+$/|',
+            'length' => 'required|regex:/^[0-9\.-]+$/|',
             'zone' => 'required|regex:/^[a-záéíóúñ\s]+$/|max:32'
         ];
         $messages = [
             'latitude.required' => 'Latitud: Requerida.',
-            'latitude.decimal' => 'Latitud: Formato incorrecto.',
             'length.required' => 'Longitud: Requerida.',
-            'length.decimal' => 'Latitud: Formato incorrecto.',
+            'latitude.regex' => 'Latitud: Formato de coordenada incorrecta.',
+            'length.regex' => 'Longitud: Formato de coordenada incorrecta.',
             'zone.required' => 'Zona: Requerida.',
             'zone.regex' => 'Zona: Debe contener solo letras minúsculas y espacios.',
             'zone.max' => 'Zona: Demasiado larga.'
