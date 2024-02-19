@@ -22,10 +22,10 @@ return new class extends Migration
             $table->text('psychological_history')->nullable();
             $table->text('medication')->nullable();
             $table->text('provisional_diagnosis')->nullable();
-            $table->text('traumatic_experiences')->nullable();
+            $table->json('traumatic_experiences')->nullable();
             $table->text('psychosocial_history')->nullable();
-            $table->text('substance_consumption')->nullable();
-            $table->text('ailments')->nullable();
+            $table->json('substance_consumption')->nullable();
+            $table->json('ailments')->nullable();
             $table->softDeletes();
             $table->timestamps();
         });

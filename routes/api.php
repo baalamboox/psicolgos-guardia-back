@@ -9,6 +9,7 @@ use App\Http\Controllers\Api\Location\PsychologistLocationsController;
 use App\Http\Controllers\Api\Patient\PsychologistInfoMapController;
 use App\Http\Controllers\Api\Patient\EmergencyContactController;
 use App\Http\Controllers\Api\Appointment\AppointmentController;
+use App\Http\Controllers\Api\Psychologist\MedicalHistoryController;
 
 
 /*
@@ -89,6 +90,8 @@ Route::prefix('v1.0')->group(function () {
                 Route::post('create', [AppointmentController::class, 'create'])->middleware('check.pending.or.scheduled');
                 Route::patch('{id}/cancel', [AppointmentController::class, 'cancel']);
             });
+
+            // Route::get('my-medical-history');
         });
 
         // Grupo de EndPoints para psicólogos.
@@ -97,6 +100,10 @@ Route::prefix('v1.0')->group(function () {
                 Route::patch('{id}/schedule', [AppointmentController::class, 'schedule']);
                 Route::patch('{id}/reject', [AppointmentController::class, 'reject']);
                 Route::patch('{id}/attend', [AppointmentController::class, 'attend']);
+            });
+            Route::prefix('medical-history')->group(function () {
+                Route::post('{idPatient}/create', [MedicalHistoryController::class, 'create']);
+                Route::get('{idPatient}/show', [MedicalHistoryController::class, 'show']);
             });
         });
     });
