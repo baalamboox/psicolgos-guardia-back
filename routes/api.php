@@ -106,6 +106,10 @@ Route::prefix('v1.0')->group(function () {
                 Route::get('{idPatient}/show', [MedicalHistoryController::class, 'show']);
             });
         });
+
+        Route::prefix('appointment')->group(function () {
+            Route::get('show-pending', [AppointmentController::class, 'showPending']);
+        });
     });
 
     // EndPoint para obtener las ubicaciones de Psicólogos por zona.

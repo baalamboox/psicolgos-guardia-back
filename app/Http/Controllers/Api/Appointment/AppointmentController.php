@@ -306,4 +306,42 @@ class AppointmentController extends Controller
             ], 400);
         }
     }
+
+    public function showPending()
+    {
+        $profile = '';
+        switch (auth()->user()->profile_id)
+        {
+            case '2':
+                $profile = 'patient';
+                break;
+            case '3':
+                $profile = 'psychologist';
+                break;
+            default:
+                break;
+        }
+        $pending = Appointment::where([
+            [$profile . '_user_id', auth()->user()->id],
+            ['state', 'pendiente']
+        ])->get();
+        if($pending->isEmpty())
+        {
+            return response()->json([
+                'status' => 400,
+                'message' => 'No se encontrarón citas pendientes.',
+                'success' => false,
+                'data' => null,
+                'errors' => null
+            ], 400);
+        } else {
+            return response()->json([
+                'status' => 200,
+                'message' => 'Se encontrarón las siguientes citas pendientes.',
+                'success' => true,
+                'data' => $pending,
+                'errors' => null
+            ], 200);
+        }
+    }
 }
