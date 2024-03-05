@@ -108,7 +108,8 @@ Route::prefix('v1.0')->group(function () {
         });
 
         Route::prefix('appointment')->group(function () {
-            Route::get('show-pending', [AppointmentController::class, 'showPending']);
+            Route::get('show-by', [AppointmentController::class, 'showBy']);
+            Route::delete('{id}/delete', [AppointmentController::class, 'delete']);
         });
     });
 

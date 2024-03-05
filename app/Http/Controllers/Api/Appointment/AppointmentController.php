@@ -307,7 +307,7 @@ class AppointmentController extends Controller
         }
     }
 
-    public function showPending()
+    public function showBy(Request $request)
     {
         $profile = '';
         switch (auth()->user()->profile_id)
@@ -323,13 +323,13 @@ class AppointmentController extends Controller
         }
         $pending = Appointment::where([
             [$profile . '_user_id', auth()->user()->id],
-            ['state', 'pendiente']
+            ['state', strtolower($request->query('state'))]
         ])->get();
         if($pending->isEmpty())
         {
             return response()->json([
                 'status' => 400,
-                'message' => 'No se encontrarón citas pendientes.',
+                'message' => 'No se encontrarón citas ' . strtolower($request->query('state')) . 's.',
                 'success' => false,
                 'data' => null,
                 'errors' => null
@@ -337,11 +337,76 @@ class AppointmentController extends Controller
         } else {
             return response()->json([
                 'status' => 200,
-                'message' => 'Se encontrarón las siguientes citas pendientes.',
+                'message' => 'Se encontrarón las siguientes citas ' . strtolower($request->query('state')) . 's.',
                 'success' => true,
                 'data' => $pending,
                 'errors' => null
             ], 200);
+        }
+    }
+
+    public function delete(int $id)
+    {
+        $profile = '';
+        switch (auth()->user()->profile_id) {
+            case '2':
+                $profile = 'patient';
+                break;
+            case '3':
+                $profile = 'psychologist';
+                break;
+            default:
+                break;
+        }
+        $appointment = Appointment::where([
+            ['id', '=', $id],
+            [$profile . '_user_id', '=', auth()->user()->id],
+        ])->get();
+        if($appointment->isEmpty())
+        {
+            return response()->json([
+                'status' => 400,
+                'message' => 'No se encontró la cita relacionada.',
+                'success' => false,
+                'data' => null,
+                'errors' => null
+            ], 400);
+        } else {
+            switch ($appointment[0]->state) {
+                case 'cancelada':
+                    Appointment::find($appointment[0]->id)->delete();
+                    return response()->json([
+                        'status' => 200,
+                        'message' => 'Se eliminó correctamente la cita.',
+                        'success' => true,
+                        'data' => null,
+                        'errors' => null
+                    ], 200);
+                    break;
+                case 'rechazada':
+                    Appointment::find($appointment[0]->id)->delete();
+                    return response()->json([
+                        'status' => 200,
+                        'message' => 'Se eliminó correctamente la cita.',
+                        'success' => true,
+                        'data' => null,
+                        'errors' => null
+                    ], 200);
+                    break;
+                case 'atendida':
+                    Appointment::find($appointment[0]->id)->delete();
+                    return response()->json([
+                        'status' => 200,
+                        'message' => 'Se eliminó correctamente la cita.',
+                        'success' => true,
+                        'data' => null,
+                        'errors' => null
+                    ], 200);
+                    break;
+                default:
+                    # code...
+                    break;
+            }
         }
     }
 }
