@@ -10,6 +10,7 @@ use App\Http\Controllers\Api\Patient\PsychologistInfoMapController;
 use App\Http\Controllers\Api\Patient\EmergencyContactController;
 use App\Http\Controllers\Api\Appointment\AppointmentController;
 use App\Http\Controllers\Api\Psychologist\MedicalHistoryController;
+use App\Http\Controllers\Api\Patient\ProfileController;
 
 
 /*
@@ -92,6 +93,19 @@ Route::prefix('v1.0')->group(function () {
             });
 
             // Route::get('my-medical-history');
+            /*
+            |-----------------------------------------------------------------
+            | Profile para paciente tiene los siguientes Endpoints:
+            |-----------------------------------------------------------------
+            | 1. Mostrar Información de perfil
+            | 2. Actualizar información de perfil
+            | 3. Eliminar Perfil (Todo el usuario)    
+            */
+            Route::prefix('profile')->group(function () {
+                Route::get('show', [ProfileController::class, 'show']);
+                Route::match(['patch', 'post'],'update', [ProfileController::class, 'update']);
+                Route::delete('delete', [ProfileController::class, 'delete']);
+            });
         });
 
         // Grupo de EndPoints para psicólogos.
