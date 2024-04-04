@@ -55,8 +55,7 @@ class AuthController extends Controller
                 return redirect()->route('home');
             }
             return redirect()->route('sign.in')->withErrors(['password' => 'Contraseña: Incorrecta.'])->withInput();
-        } catch (\Throwable $th)
-        {
+        } catch(\Throwable $th) {
             return redirect()->route('sign.in')->withErrors(['email' => 'Correo electrónico: No registrado.'])->withInput();
         }
     }

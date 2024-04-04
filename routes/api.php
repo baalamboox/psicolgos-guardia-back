@@ -46,13 +46,17 @@ Route::prefix('v1.0')->group(function () {
         Route::post('send-verification-code', [RecoverAccountController::class, 'sendVerificationCode']);
         Route::post('check-verification-code', [RecoverAccountController::class, 'checkVerificationCode']);
 
-        // El siguiente EndPoint hace uso de un Middleware creado para verificar si el código de veridicación ha sido verificado.
+        /*
+            El siguiente EndPoint hace uso de un Middleware creado para verificar si el código de veridicación ha sido verificado. 
+        */
         Route::put('reset-password', [RecoverAccountController::class, 'resetPassword'])->middleware('verification.code.is.checked');
     });
 
     Route::middleware('auth:sanctum')->group(function () {
 
-        // EndPoint para cerrar sesión.
+        /* 
+            EndPoint para cerrar sesión.
+        */
         Route::get('auth/sign-out', [AuthController::class, 'signOut']);
 
         /*
@@ -67,7 +71,9 @@ Route::prefix('v1.0')->group(function () {
             Route::put('update', [LocationController::class, 'update']);
         });
 
-        // Grupo de EndPoints para pacientes.
+        /* 
+            Grupo de EndPoints para pacientes. 
+        */
         Route::prefix('patient')->group(function () {
 
             /*
@@ -109,7 +115,9 @@ Route::prefix('v1.0')->group(function () {
             });
         });
 
-        // Grupo de EndPoints para psicólogos.
+        /* 
+            Grupo de EndPoints para psicólogos.
+        */
         Route::prefix('psychologist')->group(function () {
             Route::prefix('appointment')->group(function () {
                 Route::patch('{id}/schedule', [AppointmentController::class, 'schedule']);
@@ -128,9 +136,13 @@ Route::prefix('v1.0')->group(function () {
         });
     });
 
-    // EndPoint para obtener las ubicaciones de Psicólogos por zona.
+    /*
+        EndPoint para obtener las ubicaciones de Psicólogos por zona. 
+    */
     Route::get('location/psychologists', PsychologistLocationsController::class);
 
-    // EndPoint para obtener la información breve del psicólogo.
+    /* 
+        EndPoint para obtener la información breve del psicólogo.
+    */
     Route::get('patient/psychologist-info-map/{userId}', PsychologistInfoMapController::class);
 });

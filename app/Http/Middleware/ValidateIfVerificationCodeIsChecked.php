@@ -18,7 +18,8 @@ class ValidateIfVerificationCodeIsChecked
     {
         if($request->isMethod('put'))
         {
-            try {
+            try 
+            {
                 $codeIsChecked = VerificationCode::where('email', strtolower($request->email))->first()->checked;
                 if($codeIsChecked == '0')
                 {
@@ -32,7 +33,7 @@ class ValidateIfVerificationCodeIsChecked
                         ]
                     ], 400);
                 }
-            } catch (\Throwable $th) {
+            } catch(\Throwable $th) {
                 return response()->json([
                     'status' => 400,
                     'message' => 'Error de código de verificación.',

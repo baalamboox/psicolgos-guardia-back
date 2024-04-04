@@ -14,9 +14,9 @@ class PsychologistProfileController extends Controller
     public function showPsychologist()
     {
         $user = User::where('id', auth()->user()->id)->with('userPersonalData')->first();
-        if ($user->profile_id == 3) 
+        if($user->profile_id == 3) 
         {
-            if($user->userPersonalData->type == 'titulado') 
+            if($user->userPersonalData->type == 'titulado')
             {
                 return response()->json([
                     'status' => 200,
@@ -65,12 +65,14 @@ class PsychologistProfileController extends Controller
             ], 400);
         }
     }
+
     public function updatePsychologist(Request $request) 
     {
         
         if(auth()->user()->profile_id == 3) 
         {
-            switch ($request->method()) {
+            switch($request->method()) 
+            {
                 case 'POST':
                     $user = User::where('id', auth()->user()->id)->with('userPersonalData')->first();
                     $rules = [
@@ -135,7 +137,8 @@ class PsychologistProfileController extends Controller
                             ]
                         ], 400);
                     }
-                    switch ($typeProfessional) {
+                    switch($typeProfessional) 
+                    {
                         case 'titulado':
                             $rules = [
                                 'phone' => 'required|regex:/^[0-9]+$/|min:10|max:10',
@@ -300,6 +303,7 @@ class PsychologistProfileController extends Controller
             ], 400);
         }
     }
+    
     public function deletePsychologist()
     {
         $userDeleted = User::where('id', auth()->user()->id)->first();

@@ -1,6 +1,7 @@
 const notificationIcon = document?.querySelector('#notificationIcon');
 
 const data = () => {
+
     const getThemeFromLocalStorage = () => {
         // if user already changed the theme, use it
         if (window.localStorage.getItem('dark')) {
@@ -12,9 +13,11 @@ const data = () => {
             window.matchMedia('(prefers-color-scheme: dark)').matches
         );
     }
+
     const setThemeToLocalStorage = (value) => {
         window.localStorage.setItem('dark', value)
     }
+    
     return {
         dark: getThemeFromLocalStorage(),
         toggleTheme() {

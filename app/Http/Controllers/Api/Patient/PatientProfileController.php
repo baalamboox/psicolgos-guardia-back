@@ -9,14 +9,13 @@ use Illuminate\Support\Facades\Storage;
 use App\Models\User;
 use App\Models\Appointment;
 
-// 64|axL85czmtOJ8gpGrrdnHxRIxbRjWS5yEm2mzuZmU5b9408ff -> pyscológo
-// 63|jgIfwhyQoB0lh2jzKc4LMcPhHvwExMCLV2yjT05F0341080d -> paciente
 class PatientProfileController extends Controller
 {
+
     public function showPatient()
     {
         $user = User::where('id', auth()->user()->id)->with('userPersonalData')->first();
-        if ($user->profile_id == 2) 
+        if($user->profile_id == 2) 
         {
             return response()->json([
                 'status' => 200,
@@ -43,14 +42,14 @@ class PatientProfileController extends Controller
                 ]
             ], 400);
         }
-
     }
 
     public function updatePatient(Request $request)
     {
         if(auth()->user()->profile_id == 2)
         {
-            switch ($request->method()) {
+            switch($request->method()) 
+            {
                 case 'POST':
                     $user = User::where('id', auth()->user()->id)->with('userPersonalData')->first();
                     $rules = [
@@ -161,6 +160,7 @@ class PatientProfileController extends Controller
             ], 400);
         }
     }
+
     public function deletePatient()
     {   
         $userDeleted = User::where('id', auth()->user()->id)->first();

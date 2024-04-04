@@ -13,6 +13,7 @@ const user = ({src, name, firstSurname}) => html(`
         </div>
     </div>
 `);
+
 const status = ({state}) => state === 'activo' ? html(`
     <a class="flex text-xs gap-1 p-1 align-middle rounded w-25 mx-auto justify-center text-green-600">
         <svg class="w-4 h-4" fill="currentColor" xmlns="http://www.w3.org/2000/svg" viewBox="0 -960 960 960">
@@ -28,6 +29,7 @@ const status = ({state}) => state === 'activo' ? html(`
         Eliminado
     </a>
 `);
+
 const recentUsers = new Grid({
     columns: ['Usuario', 'Rol', 'Estado', 'Fecha'],
     server: {
@@ -48,11 +50,12 @@ const recentUsers = new Grid({
     pagination: true,
     language: {
         'pagination': {
-          'previous': '<',
-          'next': '>',
-          'showing': 'Mostrando',
-          'results': 'registros'
+            'previous': '<',
+            'next': '>',
+            'showing': 'Mostrando',
+            'results': 'registros'
         }
     },
 });
+
 document.querySelector('#recentUsersContainer') && recentUsers.render(document.querySelector('#recentUsersContainer'));

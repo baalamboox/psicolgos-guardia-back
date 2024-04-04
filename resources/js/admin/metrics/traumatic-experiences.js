@@ -1,10 +1,12 @@
 import Chart from 'chart.js/auto';
 
 class TraumaticExperiences {
+
     constructor({data, place}) {
         this.data = data;
         this.place = place;
     }
+
     general() {
         const generalConfig = {
             type: 'bar',
@@ -34,6 +36,7 @@ class TraumaticExperiences {
         };
         return new Chart(this.place, generalConfig);
     }
+
     byAge() {
         const byAgeConfig = {
             type: 'bubble',
@@ -47,6 +50,7 @@ class TraumaticExperiences {
         };
         return new Chart(this.place, byAgeConfig);
     }
+    
     bySex() {
         const bySexConfig = {
             type: 'doughnut',

@@ -110,7 +110,8 @@ class RecoverAccountController extends Controller
                 'errors' => $validator->errors()
             ], 400);
         }
-        try {
+        try 
+        {
             if($request->verification_code != VerificationCode::where('email', strtolower($request->email))->first()->code)
             {
                 return response()->json([
@@ -123,7 +124,7 @@ class RecoverAccountController extends Controller
                     ]
                 ], 400);
             }
-        } catch (\Throwable $th) {
+        } catch(\Throwable $th) {
             return response()->json([
                 'status' => 400,
                 'message' => 'Error de código de verificación.',

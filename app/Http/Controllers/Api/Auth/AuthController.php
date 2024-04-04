@@ -260,8 +260,7 @@ class AuthController extends Controller
                     ]
                 ], 400);
             }
-        } catch (\Throwable $th)
-        {
+        } catch(\Throwable $th) {
             return response()->json([
                 'status' => 400,
                 'message' => 'No existe usuario.',
@@ -372,8 +371,7 @@ class AuthController extends Controller
                     'errors' => null
                 ], 200);
             }
-        } catch (\Throwable $th)
-        {
+        } catch(\Throwable $th) {
             return response()->json([
                 'status' => 400,
                 'message' => 'No existe usuario.',

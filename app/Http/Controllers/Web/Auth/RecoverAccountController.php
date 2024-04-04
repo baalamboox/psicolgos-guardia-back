@@ -15,7 +15,7 @@ use App\Mail\VerificationCodeMail;
 
 class RecoverAccountController extends Controller
 {
-
+    
     public function showViewForgotPassword()
     {
         return view('auth.forgot-password');
@@ -72,8 +72,7 @@ class RecoverAccountController extends Controller
                 return redirect()->route('verification.code');
             }
             return redirect()->route('forgot.password')->withErrors(['email' => 'Correo electrónico: No pertenece a ningún administrador.'])->withInput();
-        } catch (\Throwable $th)
-        {
+        } catch(\Throwable $th) {
             return redirect()->route('forgot.password')->withErrors(['email' => 'Correo electrónico: No registrado.'])->withInput();
         }
     }

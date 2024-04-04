@@ -13,6 +13,7 @@ const profile = ({src}) => html(`
         </div>
     </div>
 `);
+
 const generalData = ({href}) => html(`
     <a href="${href}" class="flex text-xs gap-1 align-middle p-1 rounded w-20 mx-auto justify-center border border-gray-100 bg-gray-100 text-gray-400 border border-gray-300 shadow hover:border-gray-200 hover:bg-gray-200 hover:text-gray-600">
         <svg class="w-4 h-4" fill="currentColor" xmlns="http://www.w3.org/2000/svg" viewBox="0 -960 960 960">
@@ -21,6 +22,7 @@ const generalData = ({href}) => html(`
         Ver
     </a>
 `);
+
 const medicalHistory = ({href}) => html(`
     <a href="${href}" class="flex text-xs gap-1 align-middle p-1 rounded w-20 mx-auto justify-center border border-purple-100 bg-purple-100 text-purple-400 border border-purple-300 shadow hover:border-purple-200 hover:bg-purple-200 hover:text-purple-600">
         <svg class="w-4 h-4" fill="currentColor" xmlns="http://www.w3.org/2000/svg" viewBox="0 -960 960 960">
@@ -29,6 +31,7 @@ const medicalHistory = ({href}) => html(`
         Ver
     </a>
 `);
+
 const status = ({state}) => state === 'activo' ? html(`
     <a class="flex text-xs gap-1 p-1 align-middle rounded w-25 mx-auto justify-center text-green-600">
         <svg class="w-4 h-4" fill="currentColor" xmlns="http://www.w3.org/2000/svg" viewBox="0 -960 960 960">
