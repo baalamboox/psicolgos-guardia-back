@@ -10,7 +10,8 @@ use App\Http\Controllers\Api\Patient\PsychologistInfoMapController;
 use App\Http\Controllers\Api\Patient\EmergencyContactController;
 use App\Http\Controllers\Api\Appointment\AppointmentController;
 use App\Http\Controllers\Api\Psychologist\MedicalHistoryController;
-use App\Http\Controllers\Api\Patient\ProfileController;
+use App\Http\Controllers\Api\Patient\PatientProfileController;
+use App\Http\Controllers\Api\Psychologist\PsychologistProfileController;
 
 
 /*
@@ -102,9 +103,9 @@ Route::prefix('v1.0')->group(function () {
             | 3. Eliminar Perfil (Todo el usuario)    
             */
             Route::prefix('profile')->group(function () {
-                Route::get('show', [ProfileController::class, 'show']);
-                Route::match(['patch', 'post'],'update', [ProfileController::class, 'update']);
-                Route::delete('delete', [ProfileController::class, 'delete']);
+                Route::get('show', [PatientProfileController::class, 'showPatient']);
+                Route::match(['patch', 'post'],'update', [PatientProfileController::class, 'updatePatient']);
+                Route::delete('delete', [PatientProfileController::class, 'deletePatient']);
             });
         });
 
@@ -118,6 +119,11 @@ Route::prefix('v1.0')->group(function () {
             Route::prefix('medical-history')->group(function () {
                 Route::post('{idPatient}/create', [MedicalHistoryController::class, 'create']);
                 Route::get('{idPatient}/show', [MedicalHistoryController::class, 'show']);
+            });
+            Route::prefix('profile')->group(function () {
+                Route::get('show', [PsychologistProfileController::class, 'showPsychologist']);
+                Route::match(['patch', 'post'],'update', [PsychologistProfileController::class, 'updatePsychologist']);
+                Route::delete('delete', [PsychologistProfileController::class, 'deletePsychologist']);
             });
         });
     });

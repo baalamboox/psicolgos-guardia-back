@@ -9,28 +9,15 @@ use Illuminate\Support\Facades\Storage;
 use App\Models\User;
 use App\Models\Appointment;
 
-
-class ProfileController extends Controller
+// 64|axL85czmtOJ8gpGrrdnHxRIxbRjWS5yEm2mzuZmU5b9408ff -> pyscológo
+// 63|jgIfwhyQoB0lh2jzKc4LMcPhHvwExMCLV2yjT05F0341080d -> paciente
+class PatientProfileController extends Controller
 {
-    /*
-        Autenticar el Usuario.
-
-    $$ Operaciones 
-
-    - Mostrar los datos
-    - Actualizar
-    - Eliminar todo el usuario SoftDelete
-
-    Respuesta del servidor
-
-    200 -> Exito
-    400 -> Error
-    
-    */
-    public function show()
+    public function showPatient()
     {
         $user = User::where('id', auth()->user()->id)->with('userPersonalData')->first();
-        if ($user->profile_id == 2) {
+        if ($user->profile_id == 2) 
+        {
             return response()->json([
                 'status' => 200,
                 'message' => 'Se encontrarón los datos de perfil.',
@@ -59,7 +46,7 @@ class ProfileController extends Controller
 
     }
 
-    public function update(Request $request)
+    public function updatePatient(Request $request)
     {
         if(auth()->user()->profile_id == 2)
         {
@@ -86,8 +73,6 @@ class ProfileController extends Controller
                         ], 400);
                     } else {
                         $profilePhoto = $request->file('profile_photo');
-
-                        $eliminar_foto = '/img/profiles/patients/';
                         Storage::deleteDirectory('/public/img/profiles/patients/' . $profilePhoto->storeAs(strtolower(auth()->user()->email)),'patients');
                         $user->profile_photo = 'img/profiles/patients/' . $profilePhoto->storeAs(strtolower(auth()->user()->email), strtolower(str_replace(' ', '', $profilePhoto->getClientOriginalName())), 'patients');
                         $user->save();
@@ -126,7 +111,8 @@ class ProfileController extends Controller
                         'address.max' => 'Dirección: Demasiada larga.',
                     ];
                     $validator = Validator::make($request->all(), $rules, $messanges);
-                    if($validator->fails()){
+                    if($validator->fails())
+                    {
                         return response()->json([
                             'status' => 400,
                             'message' => 'Ocurrio un error de validación de datos.',
@@ -175,7 +161,7 @@ class ProfileController extends Controller
             ], 400);
         }
     }
-    public function delete()
+    public function deletePatient()
     {   
         $userDeleted = User::where('id', auth()->user()->id)->first();
         $userDeleted->emergencyContact->each(function ($contact){
