@@ -10,9 +10,13 @@ use App\Http\Controllers\Api\Patient\PsychologistInfoMapController;
 use App\Http\Controllers\Api\Patient\EmergencyContactController;
 use App\Http\Controllers\Api\Appointment\AppointmentController;
 use App\Http\Controllers\Api\Psychologist\MedicalHistoryController;
+<<<<<<< HEAD
 use App\Http\Controllers\Api\Patient\PatientProfileController;
 use App\Http\Controllers\Api\Psychologist\PsychologistProfileController;
 
+=======
+use App\Http\Controllers\Api\Patient\ShowMedicalHistoryController;
+>>>>>>> baalamboox
 
 /*
 |--------------------------------------------------------------------------
@@ -113,6 +117,7 @@ Route::prefix('v1.0')->group(function () {
                 Route::match(['patch', 'post'],'update', [PatientProfileController::class, 'updatePatient']);
                 Route::delete('delete', [PatientProfileController::class, 'deletePatient']);
             });
+            Route::get('my-medical-history', ShowMedicalHistoryController::class);
         });
 
         /* 
@@ -125,14 +130,21 @@ Route::prefix('v1.0')->group(function () {
                 Route::patch('{id}/attend', [AppointmentController::class, 'attend']);
             });
             Route::prefix('medical-history')->group(function () {
-                Route::post('{idPatient}/create', [MedicalHistoryController::class, 'create']);
-                Route::get('{idPatient}/show', [MedicalHistoryController::class, 'show']);
+                Route::post('{id}/create', [MedicalHistoryController::class, 'create']);
+                Route::get('verify', [MedicalHistoryController::class, 'verify']);
+                Route::get('{id}/show', [MedicalHistoryController::class, 'show']);
+                Route::put('{id}/update', [MedicalHistoryController::class, 'update']);
             });
             Route::prefix('profile')->group(function () {
                 Route::get('show', [PsychologistProfileController::class, 'showPsychologist']);
                 Route::match(['patch', 'post'],'update', [PsychologistProfileController::class, 'updatePsychologist']);
                 Route::delete('delete', [PsychologistProfileController::class, 'deletePsychologist']);
             });
+        });
+
+        Route::prefix('appointment')->group(function () {
+            Route::get('show-by', [AppointmentController::class, 'showBy']);
+            Route::delete('{id}/delete', [AppointmentController::class, 'delete']);
         });
     });
 
