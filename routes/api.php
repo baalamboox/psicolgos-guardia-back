@@ -10,13 +10,9 @@ use App\Http\Controllers\Api\Patient\PsychologistInfoMapController;
 use App\Http\Controllers\Api\Patient\EmergencyContactController;
 use App\Http\Controllers\Api\Appointment\AppointmentController;
 use App\Http\Controllers\Api\Psychologist\MedicalHistoryController;
-<<<<<<< HEAD
 use App\Http\Controllers\Api\Patient\PatientProfileController;
 use App\Http\Controllers\Api\Psychologist\PsychologistProfileController;
-
-=======
 use App\Http\Controllers\Api\Patient\ShowMedicalHistoryController;
->>>>>>> baalamboox
 
 /*
 |--------------------------------------------------------------------------
