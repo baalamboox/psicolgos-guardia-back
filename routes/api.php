@@ -10,7 +10,7 @@ use App\Http\Controllers\Api\Patient\PsychologistInfoMapController;
 use App\Http\Controllers\Api\Patient\EmergencyContactController;
 use App\Http\Controllers\Api\Appointment\AppointmentController;
 use App\Http\Controllers\Api\Psychologist\MedicalHistoryController;
-
+use App\Http\Controllers\Api\Patient\ShowMedicalHistoryController;
 
 /*
 |--------------------------------------------------------------------------
@@ -91,7 +91,7 @@ Route::prefix('v1.0')->group(function () {
                 Route::patch('{id}/cancel', [AppointmentController::class, 'cancel']);
             });
 
-            // Route::get('my-medical-history');
+            Route::get('my-medical-history', ShowMedicalHistoryController::class);
         });
 
         // Grupo de EndPoints para psicólogos.
@@ -102,8 +102,10 @@ Route::prefix('v1.0')->group(function () {
                 Route::patch('{id}/attend', [AppointmentController::class, 'attend']);
             });
             Route::prefix('medical-history')->group(function () {
-                Route::post('{idPatient}/create', [MedicalHistoryController::class, 'create']);
-                Route::get('{idPatient}/show', [MedicalHistoryController::class, 'show']);
+                Route::post('{id}/create', [MedicalHistoryController::class, 'create']);
+                Route::get('verify', [MedicalHistoryController::class, 'verify']);
+                Route::get('{id}/show', [MedicalHistoryController::class, 'show']);
+                Route::put('{id}/update', [MedicalHistoryController::class, 'update']);
             });
         });
 
