@@ -9,6 +9,7 @@ use App\Http\Controllers\Web\Admin\NewAdminController;
 use App\Http\Controllers\Web\Admin\ConfigController;
 use App\Http\Controllers\Web\Admin\Patients\GeneralDataController;
 use App\Http\Controllers\Web\Admin\Patients\MedicalHistoryController;
+use App\Http\Controllers\Web\Admin\MetricsLoginController;
 
 /*
 |--------------------------------------------------------------------------
@@ -61,6 +62,7 @@ Route::prefix('admin')->group(function() {
                 return view('admin.metrics');
             })->name('graphs');
         });
+        Route::get('metrics-login', MetricsLoginController::class);
     });
     Route::get('/forgot-password', [RecoverAccountController::class, 'showViewForgotPassword'])->name('forgot.password');
     Route::get('/verification-code', [RecoverAccountController::class, 'ShowViewVerificationCode'])->middleware('validate.email.in.sesion')->name('verification.code');
