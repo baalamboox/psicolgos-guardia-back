@@ -94,7 +94,7 @@ class PsychologistProfileController extends Controller
                     } else {
                         $profilePhoto = $request->file('profile_photo');
                         Storage::deleteDirectory('/public/img/profiles/psychologists/' . $profilePhoto->storeAs(strtolower(auth()->user()->email)),'psychologists');
-                        $user->profile_photo = 'img/profiles/pyschologists/' . $profilePhoto->storeAs(strtolower(auth()->user()->email), strtolower(str_replace(' ', '', $profilePhoto->getClientOriginalName())), 'psychologists');
+                        $user->profile_photo = 'img/profiles/psychologists/' . $profilePhoto->storeAs(strtolower(auth()->user()->email), strtolower(str_replace(' ', '', $profilePhoto->getClientOriginalName())), 'psychologists');
                         $user->save();
                         return response()->json([
                             'status' => 200,
