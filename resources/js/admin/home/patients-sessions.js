@@ -1,8 +1,9 @@
 import Chart from 'chart.js/auto';
 
-async function getMetrics(){
+async function getMetrics() {
     try {
-        const reponse = await axios.get('http://localhost/admin/metrics-login');
+        const apiSegmentURL = '/admin/metrics-login';
+        const reponse = await axios.get(`${APP_URL + apiSegmentURL  }`);
         let metricsData = reponse.data.data;
         let valuesPatients = Object.values(metricsData);
         let adminsArray = [];
