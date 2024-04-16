@@ -164,17 +164,32 @@ class PatientProfileController extends Controller
     public function deletePatient()
     {   
         $userDeleted = User::where('id', auth()->user()->id)->first();
-        $userDeleted->emergencyContact->each(function ($contact){
-            $contact->delete();
-        });
-        $userDeleted->medicalHistory->delete();
-        $userDeleted->userLocation->delete();
-        $userDeleted->userPersonalData->delete();
+        if($userDeleted->emergencyContact != null)
+        {
+            $userDeleted->emergencyContact->each(function ($contact){
+                $contact->delete();
+            });
+        }
+        if($userDeleted->medicalHistory != null)
+        {
+            $userDeleted->medicalHistory->delete();
+        }
+        if($userDeleted->userLocation != null)
+        {
+            $userDeleted->userLocation->delete();
+        }
+        if($userDeleted->userPersonalData != null)
+        {
+            $userDeleted->userPersonalData->delete();
+        }
         $userType = (auth()->user()->profile_id == '2') ? 'patient' : 'psychologist';
         $appointments = Appointment::where($userType.'_user_id', auth()->user()->id)->get();
-        $appointments->each(function ($appointment){
-            $appointment->delete();
-        });
+        if($appointments != null)
+        {
+            $appointments->each(function ($appointment){
+                $appointment->delete();
+            });
+        }
         $userDeleted->delete();
     }
 }
