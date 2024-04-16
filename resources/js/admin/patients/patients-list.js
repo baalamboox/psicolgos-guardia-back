@@ -51,16 +51,17 @@ const status = ({state}) => state === 'activo' ? html(`
 document.querySelector('#patientsList') && new Grid({
     columns: ['Foto', 'Paciente', 'Datos generales', 'Historial clínico', 'Estado'],
     server: {
-        url: '/api/v1.0/patients/list-all-patients',
-        then: data => data.data.length != 0 ? (
-            data.data.map(patient => [
-                profile({ src: `${ window.location.origin }/${ patient.profile_photo }` }),
-                capitalLetters({ words: `${ patient.user_personal_data.names } ${ patient.user_personal_data.first_surname }` }),
-                generalData({ href: `/admin/patients/general-data/${ patient.id }` }),
-                medicalHistory({ href: `/admin/patients/medical-history/${ patient.id }` }),
-                status({ state: patient.state })
-            ])
-        ) : [containerPatientsList.hidden = true, coverNoPatients.hidden = false],
+        url: 'admin/list-all-patients',
+        // then: data => data.data.length != 0 ? (
+        //     data.data.map(patient => [
+        //         profile({ src: `${ APP_URL }/${ patient.profile_photo }` }),
+        //         capitalLetters({ words: `${ patient.user_personal_data.names } ${ patient.user_personal_data.first_surname }` }),
+        //         generalData({ href: `/admin/patients/general-data/${ patient.id }` }),
+        //         medicalHistory({ href: `/admin/patients/medical-history/${ patient.id }` }),
+        //         status({ state: patient.state })
+        //     ])
+        // ) : [containerPatientsList.hidden = true, coverNoPatients.hidden = false],
+        then: data => console.log('hola')
     },
     pagination: {
         limit: 10
