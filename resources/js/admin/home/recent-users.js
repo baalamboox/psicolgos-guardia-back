@@ -30,13 +30,19 @@ const status = ({state}) => state === 'activo' ? html(`
     </a>
 `);
 
+const recentUsersCover = document?.querySelector('#recentUsersCover');
+const recentUsersContainer = document?.querySelector('#recentUsersContainer');
+
 const recentUsers = new Grid({
     columns: ['Usuario', 'Rol', 'Estado', 'Fecha'],
     server: {
-        url: `/api/v1.0/recent-users`,
-        then: data => data.data.map(users => [
+        url: `/admin/recent-users`,
+        then: data => data.data.length == 0 ? [
+            recentUsersCover.hidden = false,
+            recentUsersContainer.hidden = true
+        ] : data.data.map(users => [
             user({
-                src: `${ window.location.origin }/${ users.profile_photo }`,
+                src: `${ APP_URL }/${ users.profile_photo }`,
                 name: `${ capitalLetters({ words: users.user_personal_data.names }) }`,
                 firstSurname: `${ capitalLetters({ words: users.user_personal_data.first_surname }) }`,
             }),
@@ -45,7 +51,8 @@ const recentUsers = new Grid({
                 state: `${ users.state }`,
             }),
             `${ new Date(users.created_at).toISOString().slice(0, 10) }`,
-        ]),
+            recentUsersContainer.hidden = false
+        ]) 
     },
     pagination: true,
     language: {
@@ -58,4 +65,4 @@ const recentUsers = new Grid({
     },
 });
 
-document.querySelector('#recentUsersContainer') && recentUsers.render(document.querySelector('#recentUsersContainer'));
+recentUsers.render(document.querySelector('#recentUsersContainer'));

@@ -16,10 +16,10 @@ class HomeController extends Controller
         $request->session()->put('profile_photo', $profile_photo);
         $totalPatients = User::where('profile_id', 2)->count();
         $activePatients = User::where(['state' => 'activo', 'profile_id' => 2])->count();
-        $deletedPatients = User::where(['state' => 'eliminado', 'profile_id' => 2])->count();
+        $deletedPatients = User::onlyTrashed()->where('profile_id', 2)->count();
         $totalPsychologists = User::where('profile_id', 3)->count();
         $activePsychologists = User::where(['state' => 'activo', 'profile_id' => 3])->count();
-        $deletedPsychologists = User::where(['state' => 'eliminado', 'profile_id' => 3])->count();
+        $deletedPsychologists = User::onlyTrashed()->where('profile_id', 3)->count();
         return view('home', [
             'totalPatients' => $totalPatients,
             'activePatients' => $activePatients,
@@ -35,11 +35,12 @@ class HomeController extends Controller
         $recentUsers = User::where('profile_id', '!=', 1)->whereDate('created_at', date('Y-m-d'))->with('userPersonalData')->get();
         return response()->json([
             'status' => 200,
-            'message' => 'Estos son todos los usuarios recientes encontrados.',
+            'message' => 'Estos son todos los usuarios más recientes encontrados.',
             'success' => true,
             'data' => $recentUsers,
             'errors' => null
         ], 200);
+        
     }
 
     public function logins()

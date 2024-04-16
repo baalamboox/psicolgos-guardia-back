@@ -5,7 +5,7 @@ async function getMetrics() {
         const apiSegmentURL = '/admin/metrics-login';
         const reponse = await axios.get(`${APP_URL + apiSegmentURL  }`);
         let metricsData = reponse.data.data;
-        let valuesPatients = Object.values(metricsData);
+        let valuesPatients = Object.values(metricsData).reverse();
         let adminsArray = [];
         let psychologistArray = [];
         let patientsArray = [];
@@ -20,7 +20,7 @@ async function getMetrics() {
         const patientsSessionsConfig = {
             type: 'line',
             data: {
-                labels: Object.keys(metricsData),
+                labels: Object.keys(metricsData).reverse(),
                 datasets: [
                     {
                         label: 'Pacientes',

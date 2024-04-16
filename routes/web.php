@@ -63,6 +63,7 @@ Route::prefix('admin')->group(function() {
             })->name('graphs');
         });
         Route::get('metrics-login', MetricsLoginController::class);
+        Route::get('recent-users', [HomeController::class, 'recentUsers']);
     });
     Route::get('/forgot-password', [RecoverAccountController::class, 'showViewForgotPassword'])->name('forgot.password');
     Route::get('/verification-code', [RecoverAccountController::class, 'ShowViewVerificationCode'])->middleware('validate.email.in.sesion')->name('verification.code');

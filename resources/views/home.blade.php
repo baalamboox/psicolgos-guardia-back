@@ -3,7 +3,7 @@
 @section('main')
     <h2 class="my-6 text-2xl font-semibold text-gray-700 dark:text-gray-200">Inicio</h2>
     <h3 class="my-6 text-xl font-semibold text-gray-700 dark:text-gray-200">Pacientes</h3>
-    <div class="grid gap-6 mb-8 md:grid-cols-2 xl:grid-cols-4">
+    <div class="grid gap-6 mb-8 md:grid-cols-2 xl:grid-cols-3 ">
         <div class="flex items-center p-4 bg-white rounded-lg shadow-xs dark:bg-gray-800">
             <div class="p-3 mr-4 text-orange-500 bg-orange-100 rounded-full dark:text-orange-100 dark:bg-orange-500">
                 <svg class="w-5 h-5" fill="currentColor" xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 -960 960 960" width="24">
@@ -15,7 +15,7 @@
                 <p class="text-lg font-semibold text-gray-700 dark:text-gray-200">{{ $totalPatients }}</p>
             </div>
         </div>
-        <div class="flex items-center p-4 bg-white rounded-lg shadow-xs dark:bg-gray-800">
+        {{-- <div class="flex items-center p-4 bg-white rounded-lg shadow-xs dark:bg-gray-800">
             <div class="p-3 mr-4 text-purple-500 bg-purple-100 rounded-full dark:text-purple-100 dark:bg-purple-500">
                 <svg class="w-5 h-5" fill="currentColor" xmlns="http://www.w3.org/2000/svg" viewBox="0 -960 960 960">
                     <path d="M197-197q-54-55-85.5-127.5T80-480q0-84 31.5-156.5T197-763l57 57q-44 44-69 102t-25 124q0 67 25 125t69 101l-57 57Zm113-113q-32-33-51-76.5T240-480q0-51 19-94.5t51-75.5l57 57q-22 22-34.5 51T320-480q0 33 12.5 62t34.5 51l-57 57Zm170-90q-33 0-56.5-23.5T400-480q0-33 23.5-56.5T480-560q33 0 56.5 23.5T560-480q0 33-23.5 56.5T480-400Zm170 90-57-57q22-22 34.5-51t12.5-62q0-33-12.5-62T593-593l57-57q32 32 51 75.5t19 94.5q0 50-19 93.5T650-310Zm113 113-57-57q44-44 69-102t25-124q0-67-25-125t-69-101l57-57q54 54 85.5 126.5T880-480q0 83-31.5 155.5T763-197Z" />
@@ -25,8 +25,8 @@
                 <p class="mb-2 text-sm font-medium text-gray-600 dark:text-gray-400">En línea</p>
                 <p class="text-lg font-semibold text-gray-700 dark:text-gray-200">0</p>
             </div>
-        </div>
-        <div class="flex items-center p-4 bg-white rounded-lg shadow-xs dark:bg-gray-800">
+        </div> --}}
+        {{-- <div class="flex items-center p-4 bg-white rounded-lg shadow-xs dark:bg-gray-800">
             <div class="p-3 mr-4 text-gray-500 bg-gray-100 rounded-full dark:text-gray-100 dark:bg-gray-500">
                 <svg class="w-5 h-5" fill="currentColor" xmlns="http://www.w3.org/2000/svg" viewBox="0 -960 960 960">
                     <path d="M791-55 325-521q-2 10-3.5 20t-1.5 21q0 33 12.5 62t34.5 51l-57 57q-32-33-51-76.5T240-480q0-28 6-54t17-49l-59-59q-21 36-32.5 76.5T160-480q0 67 25 125t69 101l-57 57q-54-55-85.5-127.5T80-480q0-62 17.5-117T146-700l-91-91 57-57 736 736-57 57Zm23-205-58-58q21-36 32.5-76.5T800-480q0-67-25-125t-69-101l57-57q54 54 85.5 126.5T880-480q0 61-17.5 116.5T814-260ZM697-377l-62-62q2-10 3.5-20t1.5-21q0-33-12.5-62T593-593l57-57q32 32 51 75.5t19 94.5q0 28-6 54t-17 49Z" />
@@ -36,7 +36,7 @@
                 <p class="mb-2 text-sm font-medium text-gray-600 dark:text-gray-400">Fuera de línea</p>
                 <p class="text-lg font-semibold text-gray-700 dark:text-gray-200">0</p>
             </div>
-        </div>
+        </div> --}}
         <div class="flex items-center p-4 bg-white rounded-lg shadow-xs dark:bg-gray-800">
             <div class="p-3 mr-4 text-green-500 bg-green-100 rounded-full dark:text-green-100 dark:bg-green-500">
                 <svg class="w-5 h-5" fill="currentColor" xmlns="http://www.w3.org/2000/svg" viewBox="0 -960 960 960">
@@ -61,7 +61,7 @@
         </div>
     </div>
     <h3 class="my-6 text-xl font-semibold text-gray-700 dark:text-gray-200">Psicólogos</h3>
-    <div class="grid gap-6 mb-8 md:grid-cols-2 xl:grid-cols-4">
+    <div class="grid gap-6 mb-8 md:grid-cols-2 xl:grid-cols-3">
         <div class="flex items-center p-4 bg-white rounded-lg shadow-xs dark:bg-gray-800">
             <div class="p-3 mr-4 text-blue-500 bg-blue-100 rounded-full dark:text-blue-100 dark:bg-blue-500">
                 <svg class="w-5 h-5" fill="currentColor" xmlns="http://www.w3.org/2000/svg" viewBox="0 -960 960 960">
@@ -73,7 +73,7 @@
                 <p class="text-lg font-semibold text-gray-700 dark:text-gray-200">{{ $totalPsychologists }}</p>
             </div>
         </div>
-        <div class="flex items-center p-4 bg-white rounded-lg shadow-xs dark:bg-gray-800">
+        {{-- <div class="flex items-center p-4 bg-white rounded-lg shadow-xs dark:bg-gray-800">
             <div class="p-3 mr-4 text-purple-500 bg-purple-100 rounded-full dark:text-purple-100 dark:bg-purple-500">
                 <svg class="w-5 h-5" fill="currentColor" xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 -960 960 960" width="24">
                     <path d="M0-240v-63q0-43 44-70t116-27q13 0 25 .5t23 2.5q-14 21-21 44t-7 48v65H0Zm240 0v-65q0-32 17.5-58.5T307-410q32-20 76.5-30t96.5-10q53 0 97.5 10t76.5 30q32 20 49 46.5t17 58.5v65H240Zm540 0v-65q0-26-6.5-49T754-397q11-2 22.5-2.5t23.5-.5q72 0 116 26.5t44 70.5v63H780Zm-455-80h311q-10-20-55.5-35T480-370q-55 0-100.5 15T325-320ZM160-440q-33 0-56.5-23.5T80-520q0-34 23.5-57t56.5-23q34 0 57 23t23 57q0 33-23 56.5T160-440Zm640 0q-33 0-56.5-23.5T720-520q0-34 23.5-57t56.5-23q34 0 57 23t23 57q0 33-23 56.5T800-440Zm-320-40q-50 0-85-35t-35-85q0-51 35-85.5t85-34.5q51 0 85.5 34.5T600-600q0 50-34.5 85T480-480Zm0-80q17 0 28.5-11.5T520-600q0-17-11.5-28.5T480-640q-17 0-28.5 11.5T440-600q0 17 11.5 28.5T480-560Zm1 240Zm-1-280Z" />
@@ -83,8 +83,8 @@
                 <p class="mb-2 text-sm font-medium text-gray-600 dark:text-gray-400">En línea</p>
                 <p class="text-lg font-semibold text-gray-700 dark:text-gray-200">0</p>
             </div>
-        </div>
-        <div class="flex items-center p-4 bg-white rounded-lg shadow-xs dark:bg-gray-800">
+        </div> --}}
+        {{-- <div class="flex items-center p-4 bg-white rounded-lg shadow-xs dark:bg-gray-800">
             <div class="p-3 mr-4 text-gray-500 bg-gray-100 rounded-full dark:text-gray-100 dark:bg-gray-500">
                 <svg class="w-5 h-5" fill="currentColor" xmlns="http://www.w3.org/2000/svg" viewBox="0 -960 960 960">
                     <path d="M791-55 325-521q-2 10-3.5 20t-1.5 21q0 33 12.5 62t34.5 51l-57 57q-32-33-51-76.5T240-480q0-28 6-54t17-49l-59-59q-21 36-32.5 76.5T160-480q0 67 25 125t69 101l-57 57q-54-55-85.5-127.5T80-480q0-62 17.5-117T146-700l-91-91 57-57 736 736-57 57Zm23-205-58-58q21-36 32.5-76.5T800-480q0-67-25-125t-69-101l57-57q54 54 85.5 126.5T880-480q0 61-17.5 116.5T814-260ZM697-377l-62-62q2-10 3.5-20t1.5-21q0-33-12.5-62T593-593l57-57q32 32 51 75.5t19 94.5q0 28-6 54t-17 49Z" />
@@ -94,7 +94,7 @@
                 <p class="mb-2 text-sm font-medium text-gray-600 dark:text-gray-400">Fuera de línea</p>
                 <p class="text-lg font-semibold text-gray-700 dark:text-gray-200">0</p>
             </div>
-        </div>
+        </div> --}}
         <div class="flex items-center p-4 bg-white rounded-lg shadow-xs dark:bg-gray-800">
             <div class="p-3 mr-4 text-green-500 bg-green-100 rounded-full dark:text-green-100 dark:bg-green-500">
                 <svg class="w-5 h-5" fill="currentColor" xmlns="http://www.w3.org/2000/svg" viewBox="0 -960 960 960">
@@ -120,7 +120,10 @@
     </div>
     <h3 class="my-6 text-xl font-semibold text-gray-700 dark:text-gray-200">Usuarios recientes</h3>
     <div class="min-w-0">
-        <div class="mb-8" id="recentUsersContainer"></div>
+        <div class="mb-8" id="recentUsersCover" hidden>
+            <img src="https://images.pexels.com/photos/20696756/pexels-photo-20696756/free-photo-of-madera-agua-animal-hierba.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" alt="" loading="lazy">
+        </div>
+        <div class="mb-8" id="recentUsersContainer" hidden></div>
     </div>
     <h3 class="my-6 text-xl font-semibold text-gray-700 dark:text-gray-200">Inicios de sesión</h3>
     <div class="min-w-0 p-4 bg-white rounded-lg shadow-xs dark:bg-gray-800">
