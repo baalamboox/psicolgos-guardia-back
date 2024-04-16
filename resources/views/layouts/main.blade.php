@@ -10,6 +10,7 @@
             <script>
                 var isAuthenticated = true;
                 var notificationSound = new Audio("{{ asset('sounds/sfx-cartoons10.mp3') }}");
+                var APP_URL = '{{env('APP_URL')}}'
             </script>
         @else
             <script>

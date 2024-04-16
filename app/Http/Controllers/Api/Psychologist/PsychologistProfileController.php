@@ -96,7 +96,7 @@ class PsychologistProfileController extends Controller
                     } else {
                         $profilePhoto = $request->file('profile_photo');
                         Storage::deleteDirectory('/public/img/profiles/psychologists/' . $profilePhoto->storeAs(strtolower(auth()->user()->email)),'psychologists');
-                        $user->profile_photo = 'img/profiles/pyschologists/' . $profilePhoto->storeAs(strtolower(auth()->user()->email), strtolower(str_replace(' ', '', $profilePhoto->getClientOriginalName())), 'psychologists');
+                        $user->profile_photo = 'img/profiles/psychologists/' . $profilePhoto->storeAs(strtolower(auth()->user()->email), strtolower(str_replace(' ', '', $profilePhoto->getClientOriginalName())), 'psychologists');
                         $user->save();
                         return response()->json([
                             'status' => 200,
@@ -307,13 +307,22 @@ class PsychologistProfileController extends Controller
     public function deletePsychologist()
     {
         $userDeleted = User::where('id', auth()->user()->id)->first();
-        $userDeleted->userLocation->delete();
-        $userDeleted->userPersonalData->delete();
+        if($userDeleted->userLocation != null)
+        {
+            $userDeleted->userLocation->delete();
+        }
+        if($userDeleted->userPersonalData != null)
+        {
+            $userDeleted->userPersonalData->delete();
+        }
         $userType = (auth()->user()->profile_id == '3') ? 'patient' : 'psychologist';
         $appointments = Appointment::where($userType.'_user_id', auth()->user()->id)->get();
-        $appointments->each(function ($appointment){
-            $appointment->delete();
-        });
+        if($appointments != null)
+        {
+            $appointments->each(function ($appointment){
+                $appointment->delete();
+            });
+        }
         $userDeleted->delete();
     }
 }
