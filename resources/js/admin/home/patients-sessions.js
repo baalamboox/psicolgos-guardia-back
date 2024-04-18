@@ -1,5 +1,7 @@
 import Chart from 'chart.js/auto';
 
+const patientsSessionsContainer = document?.querySelector('#patientsSessionsContainer');
+
 async function getMetrics() {
     try {
         const apiSegmentURL = '/admin/metrics-login';
@@ -7,13 +9,13 @@ async function getMetrics() {
         let metricsData = reponse.data.data;
         let valuesPatients = Object.values(metricsData).reverse();
         let adminsArray = [];
-        let psychologistArray = [];
+        let psychologistsArray = [];
         let patientsArray = [];
 
         for (let i = 0; i < valuesPatients.length; i++) 
         {
             adminsArray[i] = valuesPatients[i].admin;
-            psychologistArray[i] = valuesPatients[i].psychologist;
+            psychologistsArray[i] = valuesPatients[i].psychologist;
             patientsArray[i] = valuesPatients[i].patient;
         }
         
@@ -34,7 +36,7 @@ async function getMetrics() {
                         fill: false,
                         backgroundColor: '#7e3af2',
                         borderColor: '#7e3af2',
-                        data: psychologistArray,
+                        data: psychologistsArray,
                     },
                     {
                         label: 'Administradores',
@@ -76,11 +78,10 @@ async function getMetrics() {
                 },
             },
         };
-        document.querySelector('#patientsSessionsContainer') && new Chart(document.querySelector('#patientsSessionsContainer'), patientsSessionsConfig);
+        patientsSessionsContainer && new Chart(patientsSessionsContainer, patientsSessionsConfig);
     } catch (error) {
         console.log(error);
     }
 }
+
 getMetrics();
-
-

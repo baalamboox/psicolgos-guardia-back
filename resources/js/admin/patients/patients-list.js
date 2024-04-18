@@ -4,6 +4,7 @@ import 'gridjs/dist/theme/mermaid.css';
 
 const coverNoPatients = document?.querySelector('#coverNoPatients');
 const containerPatientsList = document?.querySelector('#containerPatientsList');
+const patientsList = document?.querySelector('#patientsList');
 
 const profile = ({src}) => html(`
     <div class="flex items-center text-sm">
@@ -48,20 +49,19 @@ const status = ({state}) => state === 'activo' ? html(`
     </a>
 `);
 
-document.querySelector('#patientsList') && new Grid({
+patientsList && new Grid({
     columns: ['Foto', 'Paciente', 'Datos generales', 'Historial clínico', 'Estado'],
     server: {
-        url: 'admin/list-all-patients',
-        // then: data => data.data.length != 0 ? (
-        //     data.data.map(patient => [
-        //         profile({ src: `${ APP_URL }/${ patient.profile_photo }` }),
-        //         capitalLetters({ words: `${ patient.user_personal_data.names } ${ patient.user_personal_data.first_surname }` }),
-        //         generalData({ href: `/admin/patients/general-data/${ patient.id }` }),
-        //         medicalHistory({ href: `/admin/patients/medical-history/${ patient.id }` }),
-        //         status({ state: patient.state })
-        //     ])
-        // ) : [containerPatientsList.hidden = true, coverNoPatients.hidden = false],
-        then: data => console.log('hola')
+        url:`${APP_URL}/admin/list-all-patients`,
+        then: data => data.data.length != 0 ? (
+            data.data.map(patient => [
+                profile({ src: `${ APP_URL }/${ patient.profile_photo }` }),
+                capitalLetters({ words: `${ patient.user_personal_data.names } ${ patient.user_personal_data.first_surname }` }),
+                generalData({ href: `${APP_URL}/admin/patients/general-data/${ patient.id }` }),
+                medicalHistory({ href: `${APP_URL}/admin/patients/medical-history/${ patient.id }` }),
+                status({ state: patient.state })
+            ])
+        ) : [containerPatientsList.hidden = true, coverNoPatients.hidden = false],
     },
     pagination: {
         limit: 10
@@ -78,4 +78,4 @@ document.querySelector('#patientsList') && new Grid({
             'results': () => 'pacientes',
         }
     }
-}).render(document.querySelector('#patientsList'));
+}).render(patientsList);

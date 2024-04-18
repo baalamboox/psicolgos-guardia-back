@@ -118,10 +118,11 @@
             </div>
         </div>
     </div>
-    <h3 class="my-6 text-xl font-semibold text-gray-700 dark:text-gray-200">Usuarios recientes</h3>
+    <h3 class="my-6 text-xl font-semibold text-gray-700 dark:text-gray-200">Pacientes y Psicólogos recientes</h3>
     <div class="min-w-0">
         <div class="mb-8" id="recentUsersCover" hidden>
-            <img src="https://images.pexels.com/photos/20696756/pexels-photo-20696756/free-photo-of-madera-agua-animal-hierba.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" alt="" loading="lazy">
+            <img src="{{ asset('img/backgrounds/no-data-yet.svg') }}" alt="No hay datos aún" height="" loading="lazy">
+            <p class="text-center mt-5 text-gray-400">No hay datos aún para mostrar</p>
         </div>
         <div class="mb-8" id="recentUsersContainer" hidden></div>
     </div>

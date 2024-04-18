@@ -65,4 +65,4 @@ const recentUsers = new Grid({
     },
 });
 
-recentUsers.render(document.querySelector('#recentUsersContainer'));
+recentUsersContainer && recentUsers.render(recentUsersContainer);

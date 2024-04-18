@@ -114,11 +114,11 @@
                             </span>
                         </label>
                         @endif
-                        <a href="/perfil/eliminar" class="block w-full px-4 py-2 mt-8 text-sm font-medium leading-5 text-center text-white transition-colors duration-150 bg-purple-600 border border-transparent rounded-lg active:bg-purple-600 hover:bg-purple-700 focus:outline-none focus:shadow-outline-purple">
-                            <svg class="w-5 h-5 inline" fill="currentColor" xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 -960 960 960" width="24">
-                                <path d="M280-120q-33 0-56.5-23.5T200-200v-520h-40v-80h200v-40h240v40h200v80h-40v520q0 33-23.5 56.5T680-120H280Zm400-600H280v520h400v-520ZM360-280h80v-360h-80v360Zm160 0h80v-360h-80v360ZM280-720v520-520Z" />
+                        <a href="#activity" class="block w-full px-4 py-2 mt-8 text-sm font-medium leading-5 text-center text-white transition-colors duration-150 bg-purple-600 border border-transparent rounded-lg active:bg-purple-600 hover:bg-purple-700 focus:outline-none focus:shadow-outline-purple">
+                            <svg class="w-5 h-5 inline" fill="currentColor" width="24" height="24" xmlns="http://www.w3.org/2000/svg" viewBox="0 -960 960 960">
+                                <path d="M80-590v-190q0-24 18-42t42-18h680q24 0 42 18t18 42v190h-60v-190H140v190H80Zm60 350q-24 0-42-18t-18-42v-230h60v230h680v-230h60v230q0 24-18 42t-42 18H140ZM40-120v-60h880v60H40Zm440-420ZM80-530v-60h240q8.161 0 15.581 4Q343-582 347-574l55 112 131-231q4-8 11.5-11.5t15.619-3.5q8.119 0 15.5 3.5T587-693l50.553 103H880v60H619q-8.25 0-15.75-4T592-546l-34-69-131 229q-3.723 8-11.17 12t-15.639 4q-8.191 0-15.691-4T373-386l-72-144H80Z"/>
                             </svg>
-                            Eliminar
+                            Ver actividad
                         </a>
                     </div>
                 </div>
@@ -129,7 +129,7 @@
     <div class="min-w-0 p-4 mb-8 bg-white rounded-lg shadow-xs dark:bg-gray-800">
         <table id="emergencyContacts"></table>
     </div>
-    <h3 class="my-6 text-xl font-semibold text-gray-700 dark:text-gray-200">Actividad</h3>
+    <h3 class="my-6 text-xl font-semibold text-gray-700 dark:text-gray-200" id="activity">Actividad</h3>
     <div class="min-w-0 p-8 bg-white rounded-lg shadow-xs dark:bg-gray-800"">
         <ol class="relative border-l border-gray-200 dark:border-gray-700">
         @foreach($activity as $index => $getUserLog)
