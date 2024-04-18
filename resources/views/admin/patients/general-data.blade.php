@@ -125,10 +125,13 @@
             </div>
         </div>
     </div>
+    @if($patient->profile_id == 2)
     <h3 class="my-6 text-xl font-semibold text-gray-700 dark:text-gray-200">Contactos de emergencia</h3>
     <div class="min-w-0 p-4 mb-8 bg-white rounded-lg shadow-xs dark:bg-gray-800">
         <table id="emergencyContacts"></table>
     </div>
+    @endif
+
     <h3 class="my-6 text-xl font-semibold text-gray-700 dark:text-gray-200" id="activity">Actividad</h3>
     <div class="min-w-0 p-8 bg-white rounded-lg shadow-xs dark:bg-gray-800"">
         <ol class="relative border-l border-gray-200 dark:border-gray-700">

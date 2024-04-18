@@ -48,7 +48,7 @@ const status = ({state}) => state === 'activo' ? html(`
 `);
 
 psychologistsList && new Grid({
-    columns: ['Foto', 'Psicólogo', 'Datos generales', 'Historiales clínicos', 'Estado'],
+    columns: ['Foto', 'Psicólogo', 'Datos generales', 'Estado'],
     server: {
         url: `${APP_URL}/admin/list-all-psychologists`,
         then: data => data.data.length != 0 ? (
@@ -56,7 +56,6 @@ psychologistsList && new Grid({
                 profile({ src: `${ APP_URL }/${ psychologist.profile_photo }` }),
                 capitalLetters({ words: `${ psychologist.user_personal_data.names } ${ psychologist.user_personal_data.first_surname }` }),
                 generalData({ href: `${APP_URL}/admin/psychologists/general-data/${ psychologist.id }` }),
-                medicalHistories({ href: `${APP_URL}/admin/psychologists/medical-history/${ psychologist.id }` }),
                 status({ state: psychologist.state })
             ])
         ) : [containerPsychologistsList.hidden = true, coverNoPsychologists.hidden = false],
