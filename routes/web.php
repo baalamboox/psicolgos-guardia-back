@@ -12,6 +12,7 @@ use App\Http\Controllers\Web\Admin\Patients\MedicalHistoryController;
 use App\Http\Controllers\Web\Admin\MetricsLoginController;
 use App\Http\Controllers\Web\Admin\Patients\ListAllPatientsController;
 use App\Http\Controllers\Web\Admin\Psychologists\ListAllPsychologistsController;
+use App\Http\Controllers\Web\Admin\Patients\EmergencyContactsController;
 
 /*
 |--------------------------------------------------------------------------
@@ -68,6 +69,7 @@ Route::prefix('admin')->group(function() {
         Route::get('recent-users', [HomeController::class, 'recentUsers']);
         Route::get('list-all-patients', ListAllPatientsController::class);
         Route::get('list-all-psychologists', ListAllPsychologistsController::class);
+        Route::get('list-all-contacts-patients/{id}', EmergencyContactsController::class);
     });
     Route::get('/forgot-password', [RecoverAccountController::class, 'showViewForgotPassword'])->name('forgot.password');
     Route::get('/verification-code', [RecoverAccountController::class, 'ShowViewVerificationCode'])->middleware('validate.email.in.sesion')->name('verification.code');

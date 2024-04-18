@@ -64,10 +64,16 @@ const headerWhatsApp= () => html(`
     </span>
 `);
 
-document.querySelector('#emergencyContacts') && new Grid({
+const url = window.location.href;
+const idArray = url.split('/');
+const id = idArray[idArray.length - 1];
+
+document.querySelector('#emergencyContacts') && new Grid({ 
     columns: [headerResponsable(), headerParent(), headerAddress(), headerPhone(), headerWhatsApp()],
-    data: [
-        ['Samuel Rodríguez Montaño', 'Padre', 'Av. Reforma 201, San Juan Tepenahuac, 12100, Milpa Alta, CDMX', '55 32 98 20 57', '55 32 98 20 57'],
-        ['Laura Sandoval Rosales', 'Madre', 'Av. Reforma 201, San Juan Tepenahuac, 12100, Milpa Alta, CDMX', '55 32 98 20 57', '55 32 98 20 57']
-    ],
+    server: {
+        url:`${APP_URL}/admin/list-all-contacts-patients/${id}`,
+        then : data =>{
+            return data.emergency_contact.map((arrayEmergencyContact) => [arrayEmergencyContact.names + " " + arrayEmergencyContact.first_surname + " " + arrayEmergencyContact.second_surname, arrayEmergencyContact.relationship, arrayEmergencyContact.address, arrayEmergencyContact.phone, arrayEmergencyContact.whatsapp])
+        },
+    }
 }).render(document.querySelector('#emergencyContacts'));
