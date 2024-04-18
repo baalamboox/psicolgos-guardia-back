@@ -121,8 +121,10 @@
     <h3 class="my-6 text-xl font-semibold text-gray-700 dark:text-gray-200">Pacientes y Psicólogos recientes</h3>
     <div class="min-w-0">
         <div class="mb-8" id="recentUsersCover" hidden>
-            <img src="{{ asset('img/backgrounds/no-data-yet.svg') }}" alt="No hay datos aún" height="" loading="lazy">
-            <p class="text-center mt-5 text-gray-400">No hay datos aún para mostrar</p>
+            <div class="text-center my-10">
+                <img src="{{ asset('img/backgrounds/no-data-yet.svg') }}" alt="" class="mx-auto" width="500" />
+                <h3 class="font-light text-2xl mt-10 dark:text-white">¡Ups! No hay historial clínico aún.</h3>
+            </div>
         </div>
         <div class="mb-8" id="recentUsersContainer" hidden></div>
     </div>

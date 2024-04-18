@@ -13,7 +13,7 @@ class MedicalHistoryController extends Controller
      */
     public function __invoke(Request $request, int $id)
     {
-        $medicalHistory = User::where('id', $id)->with('medicalHistory')->with('userPersonalData')->get();
+        $medicalHistory = User::where('id', $id)->where('profile_id', 2)->with('medicalHistory')->with('userPersonalData')->get();
         return view('admin.patients.medical-history', ['data' => $medicalHistory]);
     }
 }
