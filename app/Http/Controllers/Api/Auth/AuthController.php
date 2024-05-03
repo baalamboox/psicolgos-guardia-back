@@ -119,7 +119,7 @@ class AuthController extends Controller
                     'curp' => 'required|alpha_num:ascii|min:18|max:18',
                     'type' => 'required|regex:/^[a-zA-ZáéíóúÁÉÍÓÚñÑ\s]+$/|max:255',
                     'professional_license' => 'regex:/^[a-zA-Z0-9-]+$/|min:7|max:10',
-                    'title' => 'regex:/^[a-zA-ZáéíóúÁÉÍÓÚñÑ.\s]+$/'
+                    'professional_title' => 'regex:/^[a-zA-ZáéíóúÁÉÍÓÚñÑ.\s]+$/'
                 ];
                 $psychologistMessages = [
                     'email.required' => 'Correo electrónico: Requerido.',
@@ -158,7 +158,7 @@ class AuthController extends Controller
                     'professional_license.regex' => 'Cédula profesional: Solo puede contener números, guiones o letras.',
                     'professional_license.min' => 'Cédula profesional: Debe tener mínimo 7 caracteres.',
                     'professional_license.max' => 'Cédula profesional: Debe tener máximo 10 caracteres.',
-                    'title.regex' => 'Título: Solo puede contener letras, espacios y puntos.'
+                    'professional_title.regex' => 'Título: Solo puede contener letras, espacios y puntos.'
                 ];
                 $psychologistValidator = Validator::make($request->all(), $psychologistRules, $psychologistMessages);
                 if($psychologistValidator->fails())
@@ -182,6 +182,33 @@ class AuthController extends Controller
                             'profile_photo' => ['Foto de perfil: No existe.']
                         ]
                     ], 400);
+                }
+                if($request->input('type') == 'titulado')
+                {
+                    if($request->input('professional_license') == '')
+                    {
+                        return response()->json([
+                            'status' => 400,
+                            'message' => 'Error al crear psicólogo.',
+                            'success' => false,
+                            'data' => null,
+                            'errors' => [
+                                'professional_license' => ['Cédula profesional: Requerida.']
+                            ]
+                        ], 200);
+                    }
+                    if($request->input('professional_title') == '')
+                    {
+                        return response()->json([
+                            'status' => 400,
+                            'message' => 'Error al crear psicólogo.',
+                            'success' => false,
+                            'data' => null,
+                            'errors' => [
+                                'professional_title' => ['Título profesional: Requerido.']
+                            ]
+                        ], 200);
+                    }
                 }
                 $profile_photo = $request->file('profile_photo');
                 $profile = Profile::find($request->profile);

@@ -5,8 +5,8 @@ const patientsSessionsContainer = document?.querySelector('#patientsSessionsCont
 async function getMetrics() {
     try {
         const apiSegmentURL = '/admin/metrics-login';
-        const reponse = await axios.get(`${APP_URL + apiSegmentURL  }`);
-        let metricsData = reponse.data.data;
+        const response = await axios.get(`${APP_URL + apiSegmentURL  }`);
+        let metricsData = response.data.data;
         let valuesPatients = Object.values(metricsData).reverse();
         let adminsArray = [];
         let psychologistsArray = [];

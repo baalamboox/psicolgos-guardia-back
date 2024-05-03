@@ -191,5 +191,12 @@ class PatientProfileController extends Controller
             });
         }
         $userDeleted->delete();
+        return response()->json([
+            'status' => 200,
+            'message' => 'Usuario eliminado correctamente.',
+            'success' => true,
+            'data' => null,
+            'errors' => null
+        ], 200);
     }
 }

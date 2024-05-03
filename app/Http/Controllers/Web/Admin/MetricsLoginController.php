@@ -3,13 +3,10 @@
 namespace App\Http\Controllers\Web\Admin;
 
 use App\Http\Controllers\Controller;
-
-use App\Models\User;
-use App\Models\UserLog;
 use Illuminate\Support\Facades\DB;
 use Carbon\Carbon;
-
-
+use App\Models\User;
+use App\Models\UserLog;
 
 class MetricsLoginController extends Controller
 {

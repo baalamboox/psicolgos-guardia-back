@@ -9,7 +9,7 @@ const patientsList = document?.querySelector('#patientsList');
 const profile = ({src}) => html(`
     <div class="flex items-center text-sm">
         <div class="relative mx-auto w-10 h-10 mr-3 rounded-full shadow-lg">
-            <img src="${src}" alt="⚠️ Error de carga" class="object-cover w-full h-full rounded-full" loading="lazy" />
+            <img src="${src}" alt="" class="object-cover w-full h-full rounded-full" loading="lazy" />
             <div class="absolute inset-0 rounded-full shadow-inner" aria-hidden="true"></div>
         </div>
     </div>

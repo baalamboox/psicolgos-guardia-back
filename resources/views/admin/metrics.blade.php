@@ -7,7 +7,7 @@
         <h4 class="mb-4 font-semibold text-gray-800 dark:text-gray-300">Día a día</h4>
         <canvas id="medicalHistory"></canvas>
     </div>
-    <h3 class="my-6 text-xl font-semibold text-gray-700 dark:text-gray-200">Experiencias traumáticas más comunes</h3>
+    {{-- <h3 class="my-6 text-xl font-semibold text-gray-700 dark:text-gray-200">Experiencias traumáticas más comunes</h3>
     <div class="min-w-0 p-4 mb-8 bg-white rounded-lg shadow-xs dark:bg-gray-800">
         <h4 class="mb-4 font-semibold text-gray-800 dark:text-gray-300">Abuso sexual</h4>
         <div class="grid gap-6 mb-8 md:grid-cols-2 xl:grid-cols-3">
@@ -189,9 +189,12 @@
                 <canvas id="traumaticMedicalEventsBySex"></canvas>
             </div>
         </div>
-    </div>
+    </div> --}}
     <h3 class="my-6 text-xl font-semibold text-gray-700 dark:text-gray-200">Total de pacientes por rango de edad</h3>
     <div class="min-w-0 p-8 mb-8 bg-white rounded-lg shadow-xs dark:bg-gray-800">
-        <canvas class="w-10 h-10" id="patientsByAgeRange"></canvas>
+        <div class="mx-auto" style="width: 500px">
+            <canvas id="patientsByAgeRange"></canvas>
+        </div>
+        
     </div>
 @endsection

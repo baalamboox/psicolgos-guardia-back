@@ -404,7 +404,15 @@ class AppointmentController extends Controller
                     ], 200);
                     break;
                 default:
-                    # code...
+                    return response()->json([
+                        'status' => 400,
+                        'message' => 'Ocurrió un error al eliminar la cita.',
+                        'success' => false,
+                        'data' => null,
+                        'errors' => [
+                            'appointment' => ['Cita: Debe estar cancelada, rechazada o atendida para poder ser eliminada.']
+                        ]
+                    ], 400);
                     break;
             }
         }

@@ -273,7 +273,7 @@ class PsychologistProfileController extends Controller
                                 'success' => false,
                                 'data' => null,
                                 'errors' => [
-                                    'Tipo de petición:' => 'Solo puedes colocar una opción: "Titulado", "Pasante" ó "Coach.'
+                                    'Tipo:' => 'Solo puedes colocar una opción: Titulado, Pasante ó Coach.'
                                 ]
                             ], 400);
                             break;
@@ -324,5 +324,12 @@ class PsychologistProfileController extends Controller
             });
         }
         $userDeleted->delete();
+        return response()->json([
+            'status' => 200,
+            'message' => 'Usuario eliminado correctamente.',
+            'success' => true,
+            'data' => null,
+            'errors' => null
+        ], 200);
     }
 }

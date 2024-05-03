@@ -8,7 +8,7 @@ const psychologistsList = document?.querySelector('#psychologistsList');
 
 const profile = ({src}) => html(`
     <div class="relative mx-auto w-10 h-10 mr-3 rounded-full shadow-lg">
-        <img src="${src}" alt="⚠️ Error de carga" class="object-cover w-full h-full rounded-full" loading="lazy" />
+        <img src="${src}" alt="" class="object-cover w-full h-full rounded-full" loading="lazy" />
         <div class="absolute inset-0 rounded-full shadow-inner" aria-hidden="true"></div>
     </div>
 `);
@@ -48,14 +48,15 @@ const status = ({state}) => state === 'activo' ? html(`
 `);
 
 psychologistsList && new Grid({
-    columns: ['Foto', 'Psicólogo', 'Datos generales', 'Estado'],
+    columns: ['Foto', 'Psicólogo', 'Datos generales', 'Historiales clínicos', 'Estado'],
     server: {
         url: `${APP_URL}/admin/list-all-psychologists`,
         then: data => data.data.length != 0 ? (
             data.data.map(psychologist => [
                 profile({ src: `${ APP_URL }/${ psychologist.profile_photo }` }),
                 capitalLetters({ words: `${ psychologist.user_personal_data.names } ${ psychologist.user_personal_data.first_surname }` }),
-                generalData({ href: `${APP_URL}/admin/psychologists/general-data/${ psychologist.id }` }),
+                generalData({ href: `${ APP_URL }/admin/psychologists/general-data/${ psychologist.id }` }),
+                medicalHistories({ href: `${ APP_URL }/admin/psychologist/${ psychologist.id }/medical-histories` }),
                 status({ state: psychologist.state })
             ])
         ) : [containerPsychologistsList.hidden = true, coverNoPsychologists.hidden = false],
